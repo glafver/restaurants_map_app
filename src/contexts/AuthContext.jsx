@@ -76,7 +76,7 @@ const AuthContextProvider = ({ children }) => {
 		let photoURL = auth.currentUser.photoURL
 
 		if (photo) {
-			const fileRef = ref(storage, `photos/${auth.currentUser.email}/${photo.name}`)
+			const fileRef = ref(storage, `profile_photos/${auth.currentUser.email}/${photo.name}`)
 
 			const uploadResult = await uploadBytes(fileRef, photo)
 
