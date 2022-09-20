@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import {
 	createUserWithEmailAndPassword,
+	sendPasswordResetEmail,
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
+	updateEmail,
+	updatePassword,
 	updateProfile,
 } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
@@ -57,6 +60,18 @@ const AuthContextProvider = ({ children }) => {
 		return true
 	}
 
+	const resetPassword = (email) => {
+		return sendPasswordResetEmail(auth, email)
+	}
+
+	const setEmail = (email) => {
+		return updateEmail(currentUser, email)
+	}
+
+	const setPassword = (newPassword) => {
+		return updatePassword(currentUser, newPassword)
+	}
+
 	const setDisplayNameAndPhoto = async (displayName, photo) => {
 		let photoURL = auth.currentUser.photoURL
 
@@ -92,10 +107,13 @@ const AuthContextProvider = ({ children }) => {
 		login,
 		logout,
 		reloadUser,
+		resetPassword,
 		setDisplayNameAndPhoto,
+		setEmail,
+		setPassword,
 		userName,
 		userEmail,
-		userPhotoUrl,
+		userPhotoUrl
 	}
 
 	return (

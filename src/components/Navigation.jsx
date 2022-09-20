@@ -17,7 +17,7 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ms-auto">
-						<Nav.Link as={NavLink} end to="/">Home</Nav.Link>
+						{/* <Nav.Link as={NavLink} end to="/">Home</Nav.Link> */}
 						{currentUser
 							? <NavDropdown title={
 								<><Image
@@ -27,8 +27,9 @@ const Navigation = () => {
 									fluid
 									roundedCircle
 								/> <span>{userName}</span></>
-
 							}>
+								<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
+								<NavDropdown.Divider />
 								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
 							</NavDropdown>
 							: <Nav.Link as={NavLink} to="/login">Login</Nav.Link>}
