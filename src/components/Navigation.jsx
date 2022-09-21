@@ -7,7 +7,7 @@ import { useAuthContext } from '../contexts/AuthContext'
 
 const Navigation = () => {
 
-	const { currentUser, userName, userPhotoUrl } = useAuthContext()
+	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext()
 
 	return (
 		<Navbar bg="dark" variant="dark" expand="md">
@@ -33,6 +33,14 @@ const Navigation = () => {
 								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
 							</NavDropdown>
 							: <Nav.Link as={NavLink} to="/login">Login</Nav.Link>}
+
+						{isAdmin &&
+							<NavDropdown title="Admin">
+								<NavLink to="/users" className="dropdown-item">Users</NavLink>
+								<NavDropdown.Divider />
+								<NavLink to="/restaurants" className="dropdown-item">Restaurants</NavLink>
+							</NavDropdown>
+						}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

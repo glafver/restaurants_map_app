@@ -9,7 +9,7 @@ import {
 	updatePassword,
 	updateProfile,
 } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import { auth, db, storage } from '../firebase'
 import SyncLoader from 'react-spinners/SyncLoader'
@@ -26,6 +26,7 @@ const AuthContextProvider = ({ children }) => {
 	const [userEmail, setUserEmail] = useState(null)
 	const [userPhotoUrl, setUserPhotoUrl] = useState(null)
 	const [loading, setLoading] = useState(true)
+	const [isAdmin, setIsAdmin] = useState(false)
 
 	const signup = async (email, password, name, photo) => {
 
@@ -40,7 +41,10 @@ const AuthContextProvider = ({ children }) => {
 			name,
 			email,
 			photoURL: auth.currentUser.photoURL,
+			isAdmin: false
 		})
+
+		await auth.setCustomUserClaims(auth.currentUser.uid, { admin: true })
 	}
 
 	const login = (email, password) => {
@@ -90,12 +94,20 @@ const AuthContextProvider = ({ children }) => {
 	}
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			setCurrentUser(user)
 			setUserName(user?.displayName)
 			setUserEmail(user?.email)
 			setUserPhotoUrl(user?.photoURL)
 			setLoading(false)
+
+			if (user) {
+				const docRef = doc(db, 'users', auth.currentUser.uid)
+				const docSnap = await getDoc(docRef)
+				let role = docSnap.data().isAdmin
+				setIsAdmin(role)
+			} else { setIsAdmin(false) }
+
 		})
 
 		return unsubscribe
@@ -113,7 +125,8 @@ const AuthContextProvider = ({ children }) => {
 		setPassword,
 		userName,
 		userEmail,
-		userPhotoUrl
+		userPhotoUrl,
+		isAdmin
 	}
 
 	return (
