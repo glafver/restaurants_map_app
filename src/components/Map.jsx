@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 
@@ -10,6 +10,11 @@ const Map = () => {
   const position = usePosition();
   const [marker, setMarker] = useState(false);
   const api_key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+  });
 
   const containerStyle = {
     width: '100%',
@@ -26,10 +31,8 @@ const Map = () => {
   }, [position.latitude, position.longitude, position.error, marker]);
 
   return (
-    <LoadScript
-      googleMapsApiKey={api_key}
-    >
-      <GoogleMap
+  <>
+      {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
         defaultCenter={{ lat: 55.606, lng: 13.021 }}
         center={currentPosition}
@@ -39,8 +42,8 @@ const Map = () => {
       
         { /* Child components, such as markers, info windows, etc. */ }
         
-      </GoogleMap>
-    </LoadScript>
+      </GoogleMap>}
+      </>
   )
 }
 
