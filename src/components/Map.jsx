@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, Autocomplete } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 
@@ -41,7 +41,7 @@ const Map = () => {
      {marker && <Marker position={currentPosition} icon={MarkerIcon}/> }
       
         { /* Child components, such as markers, info windows, etc. */ }
-        
+      <Autocomplete />
       </GoogleMap>}
       </>
   )
