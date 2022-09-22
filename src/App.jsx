@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
+import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage";
 import "./assets/scss/App.scss";
 
 function App() {
