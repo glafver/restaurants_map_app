@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
 
-
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
   const [currentZoom, setCurrentZoom] = useState(2);
   const position = usePosition();
-  const [marker, setMarker] = useState(false);
   const [ libraries ] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
   const [myLocation, setMyLocation] = useState(false);
-
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -41,7 +38,7 @@ const Map = () => {
     top: '10px',
     right: '55px',
   }
-  const onLoad = ref => setSearchBox(ref);
+  const onSearchLoad = ref => setSearchBox(ref);
 
   const onPlacesChanged = () => {
     setMyLocation(false)
@@ -51,13 +48,15 @@ const Map = () => {
     })
   }
 
+
   const locationButton = document.createElement("button");
   locationButton.textContent = "Go to Your Location";
   locationButton.classList.add("custom-map-control-button");
 
-  const handleOnLoad = map => {
+  const handleMapOnLoad = map => {
     map.controls[google.maps.ControlPosition.BOTTOM].push(locationButton);
-  };
+  }
+    
 
   locationButton.addEventListener("click", () => {
     setMyLocation(true)
@@ -65,34 +64,31 @@ const Map = () => {
  
   useEffect(()=> {
     if(myLocation){
-      console.log('current', currentPosition)
       setCurrentPosition({ lat: position.latitude, lng: position.longitude });
     }
   }, [myLocation])
 
   useEffect(() => {
-    console.log(position);
     if (position.latitude && position.longitude && !position.error) {
         setCurrentPosition({ lat: position.latitude, lng: position.longitude });
         setCurrentZoom(14);
-        setMarker(true)
     }
-  }, [position.latitude, position.longitude, position.error, marker]);
+  }, [position.latitude, position.longitude, position.error]);
+
 
   return (
   <>
       {!isLoaded && <LoadingSpinner/>}
       {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
-        defaultCenter={{ lat: 55.606, lng: 13.021 }}
         center={currentPosition}
         zoom={currentZoom}
-        onLoad={map => handleOnLoad(map)}
+        onLoad={map => handleMapOnLoad(map)}
       >       
-     {marker && <Marker position={currentPosition} icon={MarkerIcon}/> }
+     {currentPosition && <Marker position={currentPosition} icon={MarkerIcon}/> }
  
         { /* Child components, such as markers, info windows, etc. */ }
-        <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+        <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
             <input
               type='text'
               placeholder='Search location'
