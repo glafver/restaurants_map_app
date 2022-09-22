@@ -30,7 +30,7 @@ const SuggestForm = () => {
 						<Form.Label>Name of Restaurant</Form.Label>
 						<Form.Control
 							type="text"
-							{...register("title", {
+							{...register("name", {
 								required: "Please enter the name of the Restaurant.",
 								minLength: {
 									value: 3,
@@ -53,7 +53,6 @@ const SuggestForm = () => {
 						<Form.Control
 							className="pb-5"
 							type="text"
-							required
 							placeholder="Tell us about the restaurant (type of food, price etc)"
 						/>
 						{errors.title && <div>{errors.title.message}</div>}
