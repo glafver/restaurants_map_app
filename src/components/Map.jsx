@@ -41,7 +41,7 @@ const Map = () => {
      {marker && <Marker position={currentPosition} icon={MarkerIcon}/> }
       
         { /* Child components, such as markers, info windows, etc. */ }
-      <Autocomplete />
+      
       </GoogleMap>}
       </>
   )
