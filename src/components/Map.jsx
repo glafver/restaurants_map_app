@@ -12,6 +12,8 @@ const Map = () => {
   const [marker, setMarker] = useState(false);
   const [ libraries ] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
+  const [myLocation, setMyLocation] = useState(false);
+
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -37,19 +39,36 @@ const Map = () => {
     textOverflow: `ellipses`,
     position: 'absolute',
     top: '10px',
-    right: '10px',
+    right: '55px',
   }
   const onLoad = ref => setSearchBox(ref);
 
   const onPlacesChanged = () => {
-    console.log('places', searchBox.getPlaces())
+    setMyLocation(false)
     const places = searchBox.getPlaces();
     places.forEach(place => {
       setCurrentPosition(place.geometry.location)
     })
   }
 
+  const locationButton = document.createElement("button");
+  locationButton.textContent = "Go to Your Location";
+  locationButton.classList.add("custom-map-control-button");
 
+  const handleOnLoad = map => {
+    map.controls[google.maps.ControlPosition.BOTTOM].push(locationButton);
+  };
+
+  locationButton.addEventListener("click", () => {
+    setMyLocation(true)
+  });
+ 
+  useEffect(()=> {
+    if(myLocation){
+      console.log('current', currentPosition)
+      setCurrentPosition({ lat: position.latitude, lng: position.longitude });
+    }
+  }, [myLocation])
 
   useEffect(() => {
     console.log(position);
@@ -68,11 +87,12 @@ const Map = () => {
         defaultCenter={{ lat: 55.606, lng: 13.021 }}
         center={currentPosition}
         zoom={currentZoom}
+        onLoad={map => handleOnLoad(map)}
       >       
      {marker && <Marker position={currentPosition} icon={MarkerIcon}/> }
  
         { /* Child components, such as markers, info windows, etc. */ }
-        <StandaloneSearchBox   onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+        <StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
             <input
               type='text'
               placeholder='Search location'
