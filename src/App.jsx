@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import './assets/scss/App.scss'
 import Navigation from './components/Navigation'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
@@ -10,10 +11,9 @@ import UpdateProfilePage from './pages/UpdateProfilePage'
 import UsersPage from './pages/UsersPage'
 import RequireAuth from './components/RequireAuth'
 import RequireAdminAuth from './components/RequireAdminAuth'
-import './assets/scss/App.scss'
-import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage";
-import "./assets/scss/App.scss";
-import RestaurantPage from "./pages/RestaurantPage";
+import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage"
+import RestaurantPage from "./pages/RestaurantPage"
+import CreateRestaurantPage from './pages/CreateRestaurantPage'
 
 function App() {
 	return (
@@ -32,6 +32,12 @@ function App() {
 				<Route path="/users" element={
 					<RequireAdminAuth>
 						<UsersPage />
+					</RequireAdminAuth>
+				} />
+
+				<Route path="/create_restaurant" element={
+					<RequireAdminAuth>
+						<CreateRestaurantPage />
 					</RequireAdminAuth>
 				} />
 

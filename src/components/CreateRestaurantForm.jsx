@@ -1,31 +1,31 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import { useForm } from "react-hook-form";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase/index";
-const SuggestForm = () => {
+import React from "react"
+import Form from "react-bootstrap/Form"
+import Card from "react-bootstrap/Card"
+import Button from "react-bootstrap/Button"
+import { useForm } from "react-hook-form"
+import { collection, addDoc } from "firebase/firestore"
+import { db } from "../firebase/index"
+
+const CreateRestaurantForm = () => {
 	const {
 		formState: { errors },
 		handleSubmit,
 		register,
 	} = useForm();
 
-	const onSuggestion = async (data) => {
-		// Add new document to collection
+	const onHandleSubmit = async (data) => {
 
-		await addDoc(collection(db, "suggestions"), {
+		await addDoc(collection(db, "restaurants"), {
 			...data,
 		});
-		console.log("Suggestion added");
+		console.log("Restaurant created")
 	};
 
 	return (
 		<Card>
 			<Card.Body>
-				<Card.Title className="mb-3">Suggest a new restaurant</Card.Title>
-				<Form onSubmit={handleSubmit(onSuggestion)} noValidate>
+				<Card.Title className="mb-3">Create a new restaurant</Card.Title>
+				<Form onSubmit={handleSubmit(onHandleSubmit)} noValidate>
 					<Form.Group id="name" className="mb-3">
 						<Form.Label>Name of Restaurant</Form.Label>
 						<Form.Control
@@ -64,4 +64,4 @@ const SuggestForm = () => {
 	);
 };
 
-export default SuggestForm;
+export default CreateRestaurantForm
