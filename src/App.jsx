@@ -11,6 +11,9 @@ import UsersPage from './pages/UsersPage'
 import RequireAuth from './components/RequireAuth'
 import RequireAdminAuth from './components/RequireAdminAuth'
 import './assets/scss/App.scss'
+import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage";
+import "./assets/scss/App.scss";
+import RestaurantPage from "./pages/RestaurantPage";
 
 function App() {
 	return (
@@ -37,9 +40,11 @@ function App() {
 						<UpdateProfilePage />
 					</RequireAuth>
 				} />
+				<Route path="/restaurant/id" element={<RestaurantPage />} />
+				<Route path="/suggest" element={<SuggestNewRestaurantPage />} />
 			</Routes>
 		</div>
-	)
+	);
 }
 
 export default App

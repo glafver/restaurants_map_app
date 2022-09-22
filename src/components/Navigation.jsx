@@ -12,7 +12,9 @@ const Navigation = () => {
 	return (
 		<Navbar bg="dark" variant="dark" expand="md">
 			<Container>
-				<Navbar.Brand as={Link} to="/">React Template</Navbar.Brand>
+				<Navbar.Brand as={Link} to="/">
+					React Template
+				</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
@@ -41,11 +43,18 @@ const Navigation = () => {
 								<NavLink to="/restaurants" className="dropdown-item">Restaurants</NavLink>
 							</NavDropdown>
 						}
+
+						<Nav.Link as={NavLink} to="/suggest">
+							Suggest
+						</Nav.Link>
+						<Nav.Link as={NavLink} to="/restaurant/id">
+							Restaurant
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
-	)
-}
+	);
+};
 
 export default Navigation
