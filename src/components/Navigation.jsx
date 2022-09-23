@@ -21,21 +21,29 @@ const Navigation = () => {
 					<Nav className="ms-auto">
 						<Nav.Link as={NavLink} to="/restaurants">Restaurants</Nav.Link>
 						{currentUser
-							? <NavDropdown title={
-								<><Image
-									src={userPhotoUrl || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
-									height={30}
-									width={30}
-									fluid
-									roundedCircle
-								/> <span>{userName}</span></>
-							}>
-								<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
-								<NavDropdown.Divider />
-								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
-							</NavDropdown>
-							: <Nav.Link as={NavLink} to="/login">Login</Nav.Link>}
-						<Nav.Link as={NavLink} to="/suggest">Suggest</Nav.Link>
+							?
+							<>
+								<Nav.Link as={NavLink} to="/suggest">Suggest</Nav.Link>
+								<NavDropdown title={
+									<><Image
+										src={userPhotoUrl || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
+										height={30}
+										width={30}
+										fluid
+										roundedCircle
+									/> <span>{userName}</span></>
+								}>
+									<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
+									<NavDropdown.Divider />
+									<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
+								</NavDropdown>
+							</>
+
+							:
+							<Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+
+						}
+
 
 						{isAdmin &&
 							<NavDropdown title="Admin">

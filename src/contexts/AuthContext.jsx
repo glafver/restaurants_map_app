@@ -132,8 +132,8 @@ const AuthContextProvider = ({ children }) => {
 	return (
 		<AuthContext.Provider value={contextValues}>
 			{loading ? (
-				<div id="initial-loader">
-					<SyncLoader color={'red'} size={50} />
+				<div id="initial-loader" className='m-auto'>
+					<SyncLoader color={'red'} size={10} />
 				</div>
 			) : (
 				children
