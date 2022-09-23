@@ -5,8 +5,10 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import useRestaurant from "../hooks/useRestaurant";
 
 const RestaurantPage = () => {
+
 	return (
 		<Container className="py-3 center-y">
 			<Row>
