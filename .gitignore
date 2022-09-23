@@ -6,12 +6,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> wiki-feat-map
 node_modules
 dist
 dist-ssr
 *.local
+<<<<<<< HEAD
 
+=======
+.env
+ 
+>>>>>>> wiki-feat-map
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -23,4 +32,7 @@ dist-ssr
 *.sln
 *.sw?
 
+<<<<<<< HEAD
 .env
+=======
+>>>>>>> wiki-feat-map

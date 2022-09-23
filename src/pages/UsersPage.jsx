@@ -7,7 +7,7 @@ const UsersPage = () => {
 
     const { data } = useUsers()
 
-    console.log(data)
+    // console.log(data)
 
     const columns = useMemo(() => {
         return [
