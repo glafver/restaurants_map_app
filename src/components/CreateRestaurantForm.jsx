@@ -7,8 +7,12 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { useState, useRef } from "react";
 
 const CreateRestaurantForm = () => {
+
+	const autocompleteRef = useRef()
 	const {
 		formState: { errors },
 		handleSubmit,
@@ -22,6 +26,14 @@ const CreateRestaurantForm = () => {
 		// console.log("Restaurant added");
 		toast.success("Restaurant added!")
 	};
+
+	const [value, setValue] = useState(null);
+
+	const handlePlace = (place) => {
+		console.log(place)
+	}
+
+	console.log(value)
 
 	return (
 		<>
@@ -103,6 +115,10 @@ const CreateRestaurantForm = () => {
 								<option value="3">Three</option>
 							</Form.Select>
 						</Form.Group>
+						<GooglePlacesAutocomplete ref={autocompleteRef} selectProps={{
+							value,
+							onChange: (place) => { handlePlace(place) },
+						}} />
 
 						<Button type="submit">Submit</Button>
 					</Form>
