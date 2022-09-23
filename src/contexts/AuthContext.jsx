@@ -12,7 +12,7 @@ import {
 import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import { auth, db, storage } from '../firebase'
-import SyncLoader from 'react-spinners/SyncLoader'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const AuthContext = createContext()
 
@@ -132,9 +132,7 @@ const AuthContextProvider = ({ children }) => {
 	return (
 		<AuthContext.Provider value={contextValues}>
 			{loading ? (
-				<div id="initial-loader" className='m-auto'>
-					<SyncLoader color={'red'} size={10} />
-				</div>
+				<LoadingSpinner />
 			) : (
 				children
 			)}

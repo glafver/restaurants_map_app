@@ -5,7 +5,7 @@ import useRestaurants from '../hooks/useRestaurants'
 const RestaurantsList = () => {
 
     const { data } = useRestaurants()
-    console.log(data)
+    // console.log(data)
 
     return (
 
