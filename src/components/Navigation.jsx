@@ -19,7 +19,7 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ms-auto">
-						{/* <Nav.Link as={NavLink} end to="/">Home</Nav.Link> */}
+						<Nav.Link as={NavLink} to="/restaurants">Restaurants</Nav.Link>
 						{currentUser
 							? <NavDropdown title={
 								<><Image
@@ -35,22 +35,19 @@ const Navigation = () => {
 								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
 							</NavDropdown>
 							: <Nav.Link as={NavLink} to="/login">Login</Nav.Link>}
+						<Nav.Link as={NavLink} to="/suggest">Suggest</Nav.Link>
 
 						{isAdmin &&
 							<NavDropdown title="Admin">
 								<NavLink to="/users" className="dropdown-item">Users</NavLink>
 								<NavDropdown.Divider />
 								<NavLink to="/create_restaurant" className="dropdown-item">Create restaurant</NavLink>
-								<NavLink to="/restaurants" className="dropdown-item">Restaurants</NavLink>
 							</NavDropdown>
 						}
 
-						<Nav.Link as={NavLink} to="/suggest">
-							Suggest
-						</Nav.Link>
-						<Nav.Link as={NavLink} to="/restaurant/id">
+						{/* <Nav.Link as={NavLink} to="/restaurant/id">
 							Restaurant
-						</Nav.Link>
+						</Nav.Link> */}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

@@ -12,7 +12,8 @@ import UsersPage from './pages/UsersPage'
 import RequireAuth from './components/RequireAuth'
 import RequireAdminAuth from './components/RequireAdminAuth'
 import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage"
-import RestaurantPage from "./pages/RestaurantPage"
+import RestaurantsPage from "./pages/RestaurantsPage"
+import RestaurantPage from './pages/RestaurantPage'
 import CreateRestaurantPage from './pages/CreateRestaurantPage'
 
 function App() {
@@ -24,30 +25,22 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="*" element={<NotFound />} />
 
+				{/* opened routes */}
 				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
+				<Route path="/restaurants" element={<RestaurantsPage />} />
+				<Route path="/restaurant/:id" element={<RestaurantPage />} />
 
-				<Route path="/users" element={
-					<RequireAdminAuth>
-						<UsersPage />
-					</RequireAdminAuth>
-				} />
+				{/* routes for logged in users */}
+				<Route path="/update-profile" element={<RequireAuth><UpdateProfilePage /></RequireAuth>} />
+				<Route path="/suggest" element={<RequireAuth><SuggestNewRestaurantPage /></RequireAuth>} />
 
-				<Route path="/create_restaurant" element={
-					<RequireAdminAuth>
-						<CreateRestaurantPage />
-					</RequireAdminAuth>
-				} />
+				{/* routes only for admins */}
+				<Route path="/users" element={<RequireAdminAuth><UsersPage /></RequireAdminAuth>} />
+				<Route path="/create_restaurant" element={<RequireAdminAuth><CreateRestaurantPage /></RequireAdminAuth>} />
 
-				<Route path="/update-profile" element={
-					<RequireAuth>
-						<UpdateProfilePage />
-					</RequireAuth>
-				} />
-				<Route path="/restaurant/id" element={<RestaurantPage />} />
-				<Route path="/suggest" element={<SuggestNewRestaurantPage />} />
 			</Routes>
 		</div>
 	);
