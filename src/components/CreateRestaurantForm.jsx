@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
-
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 const CreateRestaurantForm = () => {
 	const {
 		formState: { errors },
@@ -22,6 +22,13 @@ const CreateRestaurantForm = () => {
 		// console.log("Restaurant added");
 		toast.success("Restaurant added!")
 	};
+
+	const handleAddress = (label)=>{
+		geocodeByAddress(label)
+	   .then(results => getLatLng(results[0]))
+	  .then(({ lat, lng }) =>
+		console.log('Successfully got latitude and longitude', { lat, lng })
+	  );}
 
 	return (
 		<>
@@ -103,6 +110,14 @@ const CreateRestaurantForm = () => {
 								<option value="3">Three</option>
 							</Form.Select>
 						</Form.Group>
+						<GooglePlacesAutocomplete
+      						apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
+							  selectProps={{
+								placeholder: 'Address',
+								name:"address",
+								onChange:(place) => {handleAddress(place.label);}
+								}}
+    					/>
 
 						<Button type="submit">Submit</Button>
 					</Form>
