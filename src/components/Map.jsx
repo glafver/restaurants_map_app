@@ -3,6 +3,10 @@ import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-g
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { collection, orderBy, query, where } from 'firebase/firestore'
+import { useFirestoreQueryData } from '@react-query-firebase/firestore'
+import { db } from '../firebase'
+import Markers from './Markers';
 
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
@@ -11,6 +15,16 @@ const Map = () => {
   const [libraries] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
   const [myLocation, setMyLocation] = useState(false);
+
+
+	const queryRef = query(
+		collection(db, 'restaurants'),
+		orderBy('geolocation')
+	)
+	const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
+		idField: 'id',
+		subscribe: true,
+	})
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -86,6 +100,8 @@ const Map = () => {
         onLoad={map => handleMapOnLoad(map)}
       >
         {currentPosition && <Marker position={currentPosition} icon={MarkerIcon} />}
+        {isLoading && (<p>Loading data...</p>)}
+        {!isLoading && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
