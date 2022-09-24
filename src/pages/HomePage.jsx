@@ -9,7 +9,7 @@ const HomePage = () => {
 	return (
 		<Container className="py-3">
 			<h1>Welcome {isAdmin && 'admin'}!</h1>
-			<Map />
+			{/* <Map /> */}
 		</Container>
 	)
 }
