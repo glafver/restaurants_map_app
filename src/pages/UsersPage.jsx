@@ -3,15 +3,14 @@ import Container from 'react-bootstrap/Container'
 import SimpleTable from '../components/SimpleTable'
 import useUsers from '../hooks/useUsers'
 import { Image, Button } from 'react-bootstrap'
+import useMakeAdmin from '../hooks/useMakeAdmin'
 
 const UsersPage = () => {
 
     const { data } = useUsers()
 
-    console.log(data)
-
-    const makeAdmin = (tableProps) => {
-        console.log(tableProps.row.original.id, 'user id')
+    const makeAdmin = async (tableProps) => {
+        useMakeAdmin(tableProps.row.original.id)
     }
 
     const columns = useMemo(() => {
@@ -40,8 +39,9 @@ const UsersPage = () => {
             {
                 accessor: 'isAdmin',
                 Cell: tableProps => (
-                    !tableProps.row.original.isAdmin &&
-                    < Button onClick={() => { makeAdmin(tableProps) }} > Make Admin </Button>
+                    !tableProps.row.original.isAdmin ?
+                        < Button onClick={() => { makeAdmin(tableProps) }} > Make Admin </Button>
+                        : <i>(admin)</i>
                 )
             }
 

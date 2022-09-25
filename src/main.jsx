@@ -8,7 +8,9 @@ import App from './App'
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			refetchOnWindowFocus: false
+			refetchOnWindowFocus: false,
+			staleTime: 1000 * 60 * 2,
+			cacheTime: 1000 * 60 * 60 * 4
 		}
 	}
 })
