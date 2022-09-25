@@ -51,6 +51,13 @@ const AuthContextProvider = ({ children }) => {
 		return signInWithEmailAndPassword(auth, email, password)
 	}
 
+	const isUserAdmin = async () => {
+		const docRef = doc(db, 'users', auth.currentUser.uid)
+		const docSnap = await getDoc(docRef)
+		let role = docSnap.data().isAdmin
+		setIsAdmin(role)
+	}
+
 	const logout = () => {
 		return signOut(auth)
 	}
@@ -89,29 +96,30 @@ const AuthContextProvider = ({ children }) => {
 
 		return updateProfile(auth.currentUser, {
 			displayName,
-			photoURL,
+			photoURL
 		})
 	}
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
+
 			setCurrentUser(user)
+
+			const docRef = doc(db, 'users', auth.currentUser.uid)
+			const docSnap = await getDoc(docRef)
+			let role = docSnap.data().isAdmin
+			setIsAdmin(role)
+
 			setUserName(user?.displayName)
 			setUserEmail(user?.email)
 			setUserPhotoUrl(user?.photoURL)
 			setLoading(false)
 
-			if (user) {
-				const docRef = doc(db, 'users', auth.currentUser.uid)
-				const docSnap = await getDoc(docRef)
-				let role = docSnap.data().isAdmin
-				setIsAdmin(role)
-			} else { setIsAdmin(false) }
-
 		})
 
 		return unsubscribe
 	}, [])
+
 
 	const contextValues = {
 		currentUser,
