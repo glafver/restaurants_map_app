@@ -15,6 +15,7 @@ import SuggestNewRestaurantPage from "./pages/SuggestNewRestaurantPage"
 import RestaurantsPage from "./pages/RestaurantsPage"
 import RestaurantPage from './pages/RestaurantPage'
 import CreateRestaurantPage from './pages/CreateRestaurantPage'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
 	return (
@@ -42,6 +43,8 @@ function App() {
 				<Route path="/create_restaurant" element={<RequireAdminAuth><CreateRestaurantPage /></RequireAdminAuth>} />
 
 			</Routes>
+
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 }

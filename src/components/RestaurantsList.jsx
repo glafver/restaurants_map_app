@@ -5,7 +5,7 @@ import useRestaurants from '../hooks/useRestaurants'
 const RestaurantsList = () => {
 
     const { data } = useRestaurants()
-    console.log(data)
+    // console.log(data)
 
     return (
 
@@ -17,8 +17,9 @@ const RestaurantsList = () => {
                             <Card.Body>
                                 <Card.Title>{restaurant.name}</Card.Title>
                                 <Card.Text>
-                                    <Button variant="secondary" as={Link} to={`/restaurant/${restaurant.id}`}>More about restaurant...</Button>
+                                    {restaurant.description}
                                 </Card.Text>
+                                <Button variant="secondary" as={Link} to={`/restaurant/${restaurant.id}`}>More about restaurant...</Button>
                             </Card.Body>
                         </Card>
                     </Col>

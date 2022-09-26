@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 const RestaurantPage = () => {
+
 	return (
 		<Container className="py-3 center-y">
 			<Row>

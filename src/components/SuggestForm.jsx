@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
+import { toast } from "react-toastify";
 
 const SuggestForm = () => {
 	const {
@@ -18,7 +19,8 @@ const SuggestForm = () => {
 		await addDoc(collection(db, "suggestions"), {
 			...data,
 		});
-		console.log("Suggestion added");
+		// console.log("Suggestion added");
+		toast.success("Suggestion added!");
 	};
 
 	return (
@@ -92,9 +94,9 @@ const SuggestForm = () => {
 								required: "This field cant be empty",
 							})}
 						>
-							<option value="1">Fine dining</option>
-							<option value="2">Fast-food restaurant</option>
-							<option value="3">Three</option>
+							<option value="Fine dining">Fine dining</option>
+							<option value="Fast-food restaurant">Fast-food restaurant</option>
+							<option value="Café">Café</option>
 						</Form.Select>
 					</Form.Group>
 
