@@ -13,14 +13,15 @@ const SuggestForm = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
+		reset
 	} = useForm();
 
 	const onSuggestion = async (data) => {
 		await addDoc(collection(db, "suggestions"), {
 			...data,
 		});
-		// console.log("Suggestion added");
 		toast.success("Suggestion added!");
+		reset()
 	};
 
 	return (

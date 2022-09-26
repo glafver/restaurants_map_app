@@ -3,7 +3,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
@@ -20,26 +20,28 @@ const CreateRestaurantForm = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
+		reset
 	} = useForm();
 
 	const onCreate = async (data) => {
-		if(geolocation !== null){
+		if (geolocation !== null) {
 			data.geolocation = geolocation;
 		}
 		await addDoc(collection(db, "restaurants"), {
 			...data,
 		});
-		// console.log("Restaurant added");
 		toast.success("Restaurant added!")
 		setGeolocation(null)
+		reset()
 	};
-	
-	const handleAddress = (label)=>{
+
+	const handleAddress = (label) => {
 		geocodeByAddress(label)
-	   .then(results => getLatLng(results[0]))
-	  .then(({ lat, lng }) =>
-	    setGeolocation({ lat: lat, lng: lng })
-	  );}
+			.then(results => getLatLng(results[0]))
+			.then(({ lat, lng }) =>
+				setGeolocation({ lat: lat, lng: lng })
+			);
+	}
 
 	return (
 		<>
@@ -65,14 +67,14 @@ const CreateRestaurantForm = () => {
 						<Form.Group controlId="geolocation" className="mb-3">
 							<Form.Label>Search address</Form.Label>
 							<GooglePlacesAutocomplete
-      						apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
-							  selectProps={{
-								placeholder: 'Search address',
-								name:"address",
-								onChange:(place) => {handleAddress(place.label);},
-								onLoadFailed: (error) => {console.log(error)}
-							  }}
-    					 />
+								apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
+								selectProps={{
+									placeholder: 'Search address',
+									name: "address",
+									onChange: (place) => { handleAddress(place.label); },
+									onLoadFailed: (error) => { console.log(error) }
+								}}
+							/>
 						</Form.Group>
 
 						<Form.Group controlId="adress" className="mb-3">
@@ -133,8 +135,8 @@ const CreateRestaurantForm = () => {
 								<option value="3">Three</option>
 							</Form.Select>
 						</Form.Group>
-					
-						
+
+
 
 						<Button type="submit">Submit</Button>
 					</Form>
