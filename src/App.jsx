@@ -16,6 +16,7 @@ import RestaurantsPage from "./pages/RestaurantsPage"
 import RestaurantPage from './pages/RestaurantPage'
 import CreateRestaurantPage from './pages/CreateRestaurantPage'
 import { ToastContainer } from 'react-toastify'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 function App() {
 	return (
@@ -45,6 +46,7 @@ function App() {
 			</Routes>
 
 			<ToastContainer autoClose={3000} />
+			<ReactQueryDevtools position='bottom-left' />
 		</div>
 	);
 }
