@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox} from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
@@ -7,6 +7,7 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
 import { db } from '../firebase'
 import Markers from './Markers';
+
 
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
@@ -16,7 +17,7 @@ const Map = () => {
   const [searchBox, setSearchBox] = useState(null);
   const [myPosition, setMyPosition] = useState();
   const [isMyLocation, setIsMyLocation] = useState(false);
-
+ 
 	const queryRef = query(
 		collection(db, 'restaurants'),
 		orderBy('geolocation')
@@ -101,7 +102,9 @@ const Map = () => {
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
       >
+        
         {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
+
         {restaurants && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
