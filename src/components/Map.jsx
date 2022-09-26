@@ -3,14 +3,14 @@ import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-g
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
-import { collection, orderBy, query, where } from 'firebase/firestore'
+import { collection, orderBy, query } from 'firebase/firestore'
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
 import { db } from '../firebase'
 import Markers from './Markers';
 
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
-  const [currentZoom, setCurrentZoom] = useState(2);
+  const [currentZoom, setCurrentZoom] = useState(12);
   const position = usePosition();
   const [libraries] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
@@ -21,7 +21,7 @@ const Map = () => {
 		collection(db, 'restaurants'),
 		orderBy('geolocation')
 	)
-	const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
+	const { data: restaurants } = useFirestoreQueryData(['restaurants'], queryRef, {
 		idField: 'id',
 		subscribe: true,
 	})
@@ -71,21 +71,30 @@ const Map = () => {
     map.controls[google.maps.ControlPosition.BOTTOM].push(locationButton);
   }
 
-
   locationButton.addEventListener("click", () => {
-    setMyLocation(true)
+    if(position.latitude){
+      setMyLocation(true)
+    }
+    else{
+      console.log(position.error)
+      setMyLocation(false)
+    }
+   
   });
 
   useEffect(() => {
-    if (myLocation) {
+    if (myLocation && position.latitude !== null) {
       setCurrentPosition({ lat: position.latitude, lng: position.longitude });
     }
   }, [myLocation])
 
   useEffect(() => {
     if (position.latitude && position.longitude && !position.error) {
-      setCurrentPosition({ lat: position.latitude, lng: position.longitude });
-      setCurrentZoom(14);
+      if(position.latitude !== null){
+        setCurrentPosition({ lat: position.latitude, lng: position.longitude });
+        setCurrentZoom(14);
+      }
+      
     }
   }, [position.latitude, position.longitude, position.error]);
 
@@ -95,13 +104,13 @@ const Map = () => {
       {!isLoaded && <LoadingSpinner />}
       {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
-        center={currentPosition}
+        // defaultcenter={{lat: 55.606,lng: 13.021}}
+        center={currentPosition ? currentPosition : {lat: 55.606,lng: 13.021}}
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
       >
-        {currentPosition && <Marker position={currentPosition} icon={MarkerIcon} />}
-        {isLoading && (<p>Loading data...</p>)}
-        {!isLoading && <Markers restaurants={restaurants}/>}
+        {myLocation && <Marker position={currentPosition} icon={MarkerIcon} />}
+        {restaurants && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
