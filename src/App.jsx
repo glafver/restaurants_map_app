@@ -16,6 +16,7 @@ import RestaurantsPage from "./pages/RestaurantsPage"
 import RestaurantPage from './pages/RestaurantPage'
 import CreateRestaurantPage from './pages/CreateRestaurantPage'
 import { ToastContainer } from 'react-toastify'
+import SuggestedRestaurantsPage from './pages/SuggestedRestaurantsPage'
 
 function App() {
 	return (
@@ -40,6 +41,7 @@ function App() {
 
 				{/* routes only for admins */}
 				<Route path="/users" element={<RequireAdminAuth><UsersPage /></RequireAdminAuth>} />
+				<Route path="/suggestions" element={<RequireAdminAuth><SuggestedRestaurantsPage /></RequireAdminAuth>} />
 				<Route path="/create_restaurant" element={<RequireAdminAuth><CreateRestaurantPage /></RequireAdminAuth>} />
 
 			</Routes>
