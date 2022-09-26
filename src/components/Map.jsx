@@ -14,8 +14,8 @@ const Map = () => {
   const position = usePosition();
   const [libraries] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
-  const [myLocation, setMyLocation] = useState(false);
-
+  const [myPosition, setMyPosition] = useState();
+  const [isMyLocation, setIsMyLocation] = useState(false);
 
 	const queryRef = query(
 		collection(db, 'restaurants'),
@@ -55,10 +55,11 @@ const Map = () => {
   const onSearchLoad = ref => setSearchBox(ref);
 
   const onPlacesChanged = () => {
-    setMyLocation(false)
+    setIsMyLocation(false)
     const places = searchBox.getPlaces();
     places.forEach(place => {
       setCurrentPosition(place.geometry.location)
+      setCurrentZoom(12)
     })
   }
 
@@ -72,31 +73,23 @@ const Map = () => {
   }
 
   locationButton.addEventListener("click", () => {
-    if(position.latitude){
-      setMyLocation(true)
-    }
-    else{
+    if(position.error){
+      setIsMyLocation(false)
       console.log(position.error)
-      setMyLocation(false)
     }
-   
+    else {
+      setIsMyLocation(true)
+    }
+     
   });
 
   useEffect(() => {
-    if (myLocation && position.latitude !== null) {
-      setCurrentPosition({ lat: position.latitude, lng: position.longitude });
+    if(isMyLocation && position.latitude){
+      setMyPosition({ lat: position.latitude, lng: position.longitude });
+      setCurrentPosition({ lat: position.latitude, lng: position.longitude })
+      setCurrentZoom(14)
     }
-  }, [myLocation])
-
-  useEffect(() => {
-    if (position.latitude && position.longitude && !position.error) {
-      if(position.latitude !== null){
-        setCurrentPosition({ lat: position.latitude, lng: position.longitude });
-        setCurrentZoom(14);
-      }
-      
-    }
-  }, [position.latitude, position.longitude, position.error]);
+  }, [isMyLocation])
 
 
   return (
@@ -104,12 +97,11 @@ const Map = () => {
       {!isLoaded && <LoadingSpinner />}
       {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
-        // defaultcenter={{lat: 55.606,lng: 13.021}}
         center={currentPosition ? currentPosition : {lat: 55.606,lng: 13.021}}
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
       >
-        {myLocation && <Marker position={currentPosition} icon={MarkerIcon} />}
+        {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
         {restaurants && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
