@@ -4,6 +4,10 @@ import useSuggestions from '../hooks/useSuggestions'
 const SuggestedRestaurantsList = () => {
 
     const { data } = useSuggestions()
+
+	const handleClick = () => {
+		console.log("Will take you to a review site")
+	}
     // console.log(data)
 
     return (
@@ -18,6 +22,7 @@ const SuggestedRestaurantsList = () => {
                                 <Card.Text>
                                     {suggestion.description}
                                 </Card.Text>
+								<Button variant="secondary" onClick={handleClick} >Review</Button>
                             </Card.Body>
                         </Card>
                     </Col>
