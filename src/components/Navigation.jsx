@@ -50,6 +50,8 @@ const Navigation = () => {
 								<NavLink to="/users" className="dropdown-item">Users</NavLink>
 								<NavDropdown.Divider />
 								<NavLink to="/create_restaurant" className="dropdown-item">Create restaurant</NavLink>
+								<NavLink to="/suggestions" className="dropdown-item">Suggestions</NavLink>
+								
 							</NavDropdown>
 						}
 
