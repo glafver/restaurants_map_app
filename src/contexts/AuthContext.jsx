@@ -9,7 +9,7 @@ import {
 	updatePassword,
 	updateProfile,
 } from 'firebase/auth'
-import { doc, setDoc, getDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import { auth, db, storage } from '../firebase'
 import LoadingSpinner from '../components/LoadingSpinner'
@@ -32,10 +32,6 @@ const AuthContextProvider = ({ children }) => {
 
 		await createUserWithEmailAndPassword(auth, email, password)
 
-		await setDisplayNameAndPhoto(name, photo)
-
-		await reloadUser()
-
 		const docRef = doc(db, 'users', auth.currentUser.uid)
 		await setDoc(docRef, {
 			name,
@@ -44,18 +40,14 @@ const AuthContextProvider = ({ children }) => {
 			isAdmin: false
 		})
 
-		await auth.setCustomUserClaims(auth.currentUser.uid, { admin: true })
+		await setDisplayNameAndPhoto(name, photo)
+
+		await reloadUser()
+
 	}
 
 	const login = (email, password) => {
 		return signInWithEmailAndPassword(auth, email, password)
-	}
-
-	const isUserAdmin = async () => {
-		const docRef = doc(db, 'users', auth.currentUser.uid)
-		const docSnap = await getDoc(docRef)
-		let role = docSnap.data().isAdmin
-		setIsAdmin(role)
 	}
 
 	const logout = () => {
@@ -92,6 +84,11 @@ const AuthContextProvider = ({ children }) => {
 			const uploadResult = await uploadBytes(fileRef, photo)
 
 			photoURL = await getDownloadURL(uploadResult.ref)
+
+			const docRef = doc(db, 'users', auth.currentUser.uid)
+			await updateDoc(docRef, {
+				photoURL: photoURL
+			})
 		}
 
 		return updateProfile(auth.currentUser, {
@@ -105,10 +102,14 @@ const AuthContextProvider = ({ children }) => {
 
 			setCurrentUser(user)
 
-			const docRef = doc(db, 'users', auth.currentUser.uid)
-			const docSnap = await getDoc(docRef)
-			let role = docSnap.data().isAdmin
-			setIsAdmin(role)
+			if (user) {
+				const docRef = doc(db, 'users', user.uid)
+				const docSnap = await getDoc(docRef)
+				let role = docSnap.data().isAdmin
+				setIsAdmin(role)
+			} else {
+				setIsAdmin(false)
+			}
 
 			setUserName(user?.displayName)
 			setUserEmail(user?.email)
