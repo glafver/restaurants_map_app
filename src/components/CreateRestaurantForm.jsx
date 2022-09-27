@@ -3,43 +3,52 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import { useState } from "react";
 
-
-
 const CreateRestaurantForm = () => {
 
-	const [geolocation, setGeolocation] = useState(null);
+	const [value, setValue] = useState(null);
 
 	const {
 		formState: { errors },
 		handleSubmit,
 		register,
+		reset
 	} = useForm();
 
 	const onCreate = async (data) => {
-		if(geolocation !== null){
-			data.geolocation = geolocation;
+		if (!value) {
+			throw Error('Please choose the address')
+			return
 		}
-		await addDoc(collection(db, "restaurants"), {
-			...data,
-		});
-		// console.log("Restaurant added");
+
+		data.adress = value.label
+		let geoCode = await geocodeByAddress(value.label)
+		data.geolocation = await getLatLng(geoCode[0])
+
+		// await addDoc(collection(db, "restaurants"), {
+		// 	...data,
+		// });
+
+		// console.log("Restaurant added", data);
 		toast.success("Restaurant added!")
-		setGeolocation(null)
+		setValue(null)
+		reset()
 	};
-	
-	const handleAddress = (label)=>{
-		geocodeByAddress(label)
-	   .then(results => getLatLng(results[0]))
-	  .then(({ lat, lng }) =>
-	    setGeolocation({ lat: lat, lng: lng })
-	  );}
+
+	// const handleAddress = (label) => {
+	// 	console.log(label)
+	// 	geocodeByAddress(label)
+	// 		.then(results => getLatLng(results[0]))
+	// 		.then(({ lat, lng }) =>
+	// 			setGeolocation({ lat: lat, lng: lng })
+	// 		);
+	// }
 
 	return (
 		<>
@@ -63,19 +72,21 @@ const CreateRestaurantForm = () => {
 
 						{/* Geolocation field */}
 						<Form.Group controlId="geolocation" className="mb-3">
-							<Form.Label>Search address</Form.Label>
+							<Form.Label>Address</Form.Label>
 							<GooglePlacesAutocomplete
-      						apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
-							  selectProps={{
-								placeholder: 'Search address',
-								name:"address",
-								onChange:(place) => {handleAddress(place.label);},
-								onLoadFailed: (error) => {console.log(error)}
-							  }}
-    					 />
+								apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
+								selectProps={{
+									value,
+									placeholder: 'Search address',
+									name: "address",
+									// autoFocus: autocompleteFocus,
+									onChange: setValue,
+									onLoadFailed: (error) => { console.log(error) }
+								}}
+							/>
 						</Form.Group>
 
-						<Form.Group controlId="adress" className="mb-3">
+						{/* <Form.Group controlId="adress" className="mb-3">
 							<Form.Label>Adress</Form.Label>
 							<Form.Control
 								type="text"
@@ -83,8 +94,9 @@ const CreateRestaurantForm = () => {
 									required: "Please enter the adress of the Restaurant",
 								})}
 							/>
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="city">
+						</Form.Group> */}
+
+						{/* <Form.Group className="mb-3" controlId="city">
 							<Form.Label>City</Form.Label>
 							<Form.Control
 								{...register("city", {
@@ -94,7 +106,7 @@ const CreateRestaurantForm = () => {
 								required
 							/>
 							{errors.title && <div>{errors.title.message}</div>}
-						</Form.Group>
+						</Form.Group> */}
 
 						<Form.Group controlId="description" className="mb-3">
 							<Form.Label>Description</Form.Label>
@@ -133,8 +145,6 @@ const CreateRestaurantForm = () => {
 								<option value="3">Three</option>
 							</Form.Select>
 						</Form.Group>
-					
-						
 
 						<Button type="submit">Submit</Button>
 					</Form>
