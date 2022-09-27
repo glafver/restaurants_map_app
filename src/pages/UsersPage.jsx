@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
-import SimpleTable from '../components/SimpleTable'
 import SortableTable from '../components/SortableTable'
 import useUsers from '../hooks/useUsers'
 import { Image, Button } from 'react-bootstrap'

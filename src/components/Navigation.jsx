@@ -20,42 +20,51 @@ const Navigation = () => {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ms-auto">
 						<Nav.Link as={NavLink} to="/restaurants">Restaurants</Nav.Link>
-						{currentUser
-							?
+						{!currentUser && !isAdmin &&
+							<>
+								<Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
+							</>
+						}
+						{currentUser && !isAdmin &&
 							<>
 								<Nav.Link as={NavLink} to="/suggest">Suggest</Nav.Link>
 								<NavDropdown title={
-									<><Image
-										src={userPhotoUrl || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
-										height={30}
-										width={30}
-										fluid
-										roundedCircle
-									/> <span>{userName}</span></>
+									<>
+										<Image
+											src={userPhotoUrl || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
+											height={30}
+											width={30}
+											fluid
+											roundedCircle
+										/> <span>{userName}</span></>
 								}>
 									<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
 									<NavDropdown.Divider />
 									<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
 								</NavDropdown>
 							</>
-
-							:
-							<Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-
 						}
 
 
 						{isAdmin &&
-							<NavDropdown title="Admin">
+							<NavDropdown title={<><Image
+								src={userPhotoUrl || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
+								height={30}
+								width={30}
+								fluid
+								roundedCircle
+							/> <span>{userName}</span></>}>
 								<NavLink to="/users" className="dropdown-item">Users</NavLink>
 								<NavDropdown.Divider />
 								<NavLink to="/create_restaurant" className="dropdown-item">Create restaurant</NavLink>
+								<NavLink to="/suggestions" className="dropdown-item">Suggestions</NavLink>
+								<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
+								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
+								
 							</NavDropdown>
 						}
 
-						{/* <Nav.Link as={NavLink} to="/restaurant/id">
-							Restaurant
-						</Nav.Link> */}
+					
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
