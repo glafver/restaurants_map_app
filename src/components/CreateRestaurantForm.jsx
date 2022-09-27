@@ -1,5 +1,4 @@
 import React from "react";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -8,142 +7,177 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
+import 'react-phone-number-input/style.css'
 
 const CreateRestaurantForm = () => {
 
-	const [value, setValue] = useState(null);
+	const [addressValue, setAddressValue] = useState(null)
+	const [addressError, setAddressError] = useState(null)
 
 	const {
 		formState: { errors },
 		handleSubmit,
 		register,
+		control,
 		reset
 	} = useForm();
 
 	const onCreate = async (data) => {
-		if (!value) {
-			throw Error('Please choose the address')
+
+		console.log('lol')
+		if (!addressValue) {
+			const input = document.getElementById('react-select-5-input')
+				|| document.getElementById('react-select-3-input')
+			input.focus()
+			setAddressError('Please choose the address.')
 			return
 		}
 
-		data.adress = value.label
-		let geoCode = await geocodeByAddress(value.label)
+		data.adress = addressValue.label
+		let geoCode = await geocodeByAddress(addressValue.label)
 		data.geolocation = await getLatLng(geoCode[0])
 
-		// await addDoc(collection(db, "restaurants"), {
-		// 	...data,
-		// });
+		console.log(data)
 
-		// console.log("Restaurant added", data);
+		await addDoc(collection(db, "restaurants"), {
+			...data,
+		});
+
 		toast.success("Restaurant added!")
-		setValue(null)
+		setAddressValue(null)
 		reset()
 	};
 
-	// const handleAddress = (label) => {
-	// 	console.log(label)
-	// 	geocodeByAddress(label)
-	// 		.then(results => getLatLng(results[0]))
-	// 		.then(({ lat, lng }) =>
-	// 			setGeolocation({ lat: lat, lng: lng })
-	// 		);
-	// }
+	useEffect(() => {
+		setAddressError(null)
+	}, [addressValue])
+
 
 	return (
 		<>
 			<Card>
 				<Card.Body>
 					<Card.Title className="mb-3">Create a new restaurant</Card.Title>
+
 					<Form onSubmit={handleSubmit(onCreate)} noValidate>
+
 						<Form.Group controlId="name" className="mb-3">
-							<Form.Label>Name</Form.Label>
+							<Form.Label>Name *</Form.Label>
 							<Form.Control
 								type="text"
 								{...register("name", {
-									required: "Please enter the name of the Restaurant.",
-									minLength: {
-										value: 3,
-										message: "A Restaurant needs at least 3 characters",
-									},
+									required: "Please enter the name of the Restaurant."
 								})}
 							/>
+							{errors.name && <div>{errors.name.message}</div>}
 						</Form.Group>
 
 						{/* Geolocation field */}
 						<Form.Group controlId="geolocation" className="mb-3">
-							<Form.Label>Address</Form.Label>
+							<Form.Label>Address *</Form.Label>
 							<GooglePlacesAutocomplete
-								apiKey="AIzaSyABc1lvmKQckaroC5FaiEu3tjvT9hASqsQ"
+								apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
 								selectProps={{
-									value,
+									value: addressValue,
 									placeholder: 'Search address',
 									name: "address",
-									// autoFocus: autocompleteFocus,
-									onChange: setValue,
+									onChange: setAddressValue,
 									onLoadFailed: (error) => { console.log(error) }
 								}}
 							/>
+							{addressError && <div>{addressError}</div>}
 						</Form.Group>
 
-						{/* <Form.Group controlId="adress" className="mb-3">
-							<Form.Label>Adress</Form.Label>
-							<Form.Control
-								type="text"
-								{...register("adress", {
-									required: "Please enter the adress of the Restaurant",
-								})}
-							/>
-						</Form.Group> */}
-
-						{/* <Form.Group className="mb-3" controlId="city">
-							<Form.Label>City</Form.Label>
-							<Form.Control
-								{...register("city", {
-									required: "Please enter the City Location",
-								})}
-								type="text"
-								required
-							/>
-							{errors.title && <div>{errors.title.message}</div>}
-						</Form.Group> */}
-
 						<Form.Group controlId="description" className="mb-3">
-							<Form.Label>Description</Form.Label>
+							<Form.Label>Description *</Form.Label>
 							<Form.Control
 								className="pb-5"
 								type="text"
 								{...register("description", {
-									required: "This field cant be empty",
+									required: "Please fill in the description."
 								})}
-								placeholder="Tell us about the Restaurant"
 							/>
-						</Form.Group>
-						<Form.Group controlId="cuisine" className="mb-3">
-							<Form.Label>Cuisine</Form.Label>
-							<Form.Control
-								className=""
-								{...register("cuisine", {
-									required: "Req field",
-								})}
-								type="text"
-								required
-							/>
-							{errors.title && <div>{errors.title.message}</div>}
+							{errors.description && <div>{errors.description.message}</div>}
 						</Form.Group>
 
-						<Form.Label>Type</Form.Label>
+						<Form.Group controlId="cuisine" className="mb-3">
+							<Form.Label>Cuisine *</Form.Label>
+
+							<Form.Select
+								className=""
+								{...register("cuisine", {
+									required: "Please choose cuisine."
+								})}
+							>
+								<option></option>
+								<option value="swedish">Swedish</option>
+								<option value="italian">Italian</option>
+								<option value="french">French</option>
+								<option value="polish">Polish</option>
+								<option value="russian">Russian</option>
+								<option value="serbian">Serbian</option>
+								<option value="japanese">Japanese</option>
+								<option value="chinese">Chinese</option>
+								<option value="thai">Thai</option>
+								<option value="indian">Indian</option>
+								<option value="vietnamese">Vietnamese</option>
+								<option value="american">American</option>
+								<option value="arabic">Arabic</option>
+								<option value="european">European</option>
+								<option value="other">Other</option>
+							</Form.Select>
+							{errors.cuisine && <div>{errors.cuisine.message}</div>}
+						</Form.Group>
+
 						<Form.Group controlId="type" className="mb-3">
+							<Form.Label>Type *</Form.Label>
 							<Form.Select
 								className=""
 								{...register("type", {
-									required: "This field cant be empty",
+									required: "Please choose type of place."
 								})}
 							>
-								<option value="1">Fine dining</option>
-								<option value="2">Fast-food restaurant</option>
-								<option value="3">Three</option>
+								<option></option>
+								<option value="fine_dining">Fine dining</option>
+								<option value="fast_food">Fast-food restaurant</option>
+								<option value="cafe">Café</option>
+								<option value="other">Other</option>
 							</Form.Select>
+							{errors.type && <div>{errors.type.message}</div>}
+						</Form.Group>
+
+						<Form.Group controlId="tel" className="mb-3">
+							<Form.Label>Telephone</Form.Label>
+							<PhoneInputWithCountry
+								name="tel"
+								control={control}
+								rules={{ required: false }} />
+						</Form.Group>
+
+						<Form.Group controlId="web_site" className="mb-3">
+							<Form.Label>Web site</Form.Label>
+							<Form.Control
+								type="text"
+								{...register("web_site")}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="fb" className="mb-3">
+							<Form.Label>Facebook</Form.Label>
+							<Form.Control
+								type="text"
+								{...register("fb")}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="insta" className="mb-3">
+							<Form.Label>Instagram</Form.Label>
+							<Form.Control
+								type="text"
+								{...register("insta")}
+							/>
 						</Form.Group>
 
 						<Button type="submit">Submit</Button>
