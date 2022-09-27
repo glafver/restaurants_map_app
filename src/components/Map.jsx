@@ -13,7 +13,7 @@ const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
   const [currentZoom, setCurrentZoom] = useState(12);
   const position = usePosition();
-  const [libraries] = useState(['places']);
+  const [libraries] = useState(['places', 'geometry']);
   const [searchBox, setSearchBox] = useState(null);
   const [myPosition, setMyPosition] = useState();
   const [isMyLocation, setIsMyLocation] = useState(false);
