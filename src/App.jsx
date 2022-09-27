@@ -17,6 +17,7 @@ import RestaurantPage from './pages/RestaurantPage'
 import CreateRestaurantPage from './pages/CreateRestaurantPage'
 import { ToastContainer } from 'react-toastify'
 import SuggestedRestaurantsPage from './pages/SuggestedRestaurantsPage'
+import SuggestedRestaurantPage from './pages/SuggestedRestaurantPage'
 
 function App() {
 	return (
@@ -33,7 +34,7 @@ function App() {
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
 				<Route path="/restaurants" element={<RestaurantsPage />} />
-				<Route path="/restaurant/:id" element={<RestaurantPage />} />
+				<Route path="/restaurants/:id" element={<RestaurantPage />} />
 
 				{/* routes for logged in users */}
 				<Route path="/update-profile" element={<RequireAuth><UpdateProfilePage /></RequireAuth>} />
@@ -42,6 +43,7 @@ function App() {
 				{/* routes only for admins */}
 				<Route path="/users" element={<RequireAdminAuth><UsersPage /></RequireAdminAuth>} />
 				<Route path="/suggestions" element={<RequireAdminAuth><SuggestedRestaurantsPage /></RequireAdminAuth>} />
+				<Route path="/suggestions/:id" element={<RequireAdminAuth><SuggestedRestaurantPage /></RequireAdminAuth>} />
 				<Route path="/create_restaurant" element={<RequireAdminAuth><CreateRestaurantPage /></RequireAdminAuth>} />
 
 			</Routes>

@@ -1,14 +1,14 @@
 import { Card, Row, Col, Button } from 'react-bootstrap'
-import useSuggestions from '../hooks/useSuggestions'
+import useGetSuggestions from '../hooks/useGetSuggestions'
+
+import { Link } from 'react-router-dom'
 
 const SuggestedRestaurantsList = () => {
 
-    const { data } = useSuggestions()
+    // Get data from suggestions hook
+    const { data } = useGetSuggestions()
 
-	const handleClick = () => {
-		console.log("Will take you to a review site")
-	}
-    // console.log(data)
+
 
     return (
 
@@ -22,7 +22,7 @@ const SuggestedRestaurantsList = () => {
                                 <Card.Text>
                                     {suggestion.description}
                                 </Card.Text>
-								<Button variant="secondary" onClick={handleClick} >Review</Button>
+								<Button variant="secondary" as={Link} to={`/suggestions/${suggestion.id}`} >Review</Button>
                             </Card.Body>
                         </Card>
                     </Col>
