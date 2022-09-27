@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox} from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
-import { collection, orderBy, query, where } from 'firebase/firestore'
+import { collection, orderBy, query } from 'firebase/firestore'
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
 import { db } from '../firebase'
 import Markers from './Markers';
 
+
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState();
-  const [currentZoom, setCurrentZoom] = useState(2);
+  const [currentZoom, setCurrentZoom] = useState(12);
   const position = usePosition();
   const [libraries] = useState(['places']);
   const [searchBox, setSearchBox] = useState(null);
-  const [myLocation, setMyLocation] = useState(false);
-
-
+  const [myPosition, setMyPosition] = useState();
+  const [isMyLocation, setIsMyLocation] = useState(false);
+ 
 	const queryRef = query(
 		collection(db, 'restaurants'),
 		orderBy('geolocation')
@@ -37,28 +38,14 @@ const Map = () => {
     height: '500px'
   };
 
-  const inputStyle = {
-    boxSizing: `border-box`,
-    border: `1px solid transparent`,
-    width: `240px`,
-    height: `32px`,
-    padding: `0 12px`,
-    borderRadius: `3px`,
-    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-    fontSize: `14px`,
-    outline: `none`,
-    textOverflow: `ellipses`,
-    position: 'absolute',
-    top: '10px',
-    right: '55px',
-  }
   const onSearchLoad = ref => setSearchBox(ref);
 
   const onPlacesChanged = () => {
-    setMyLocation(false)
+    setIsMyLocation(false)
     const places = searchBox.getPlaces();
     places.forEach(place => {
       setCurrentPosition(place.geometry.location)
+      setCurrentZoom(12)
     })
   }
 
@@ -71,23 +58,24 @@ const Map = () => {
     map.controls[google.maps.ControlPosition.BOTTOM].push(locationButton);
   }
 
-
   locationButton.addEventListener("click", () => {
-    setMyLocation(true)
+    if(position.error){
+      setIsMyLocation(false)
+      console.log(position.error)
+    }
+    else {
+      setIsMyLocation(true)
+    }
+     
   });
 
   useEffect(() => {
-    if (myLocation) {
-      setCurrentPosition({ lat: position.latitude, lng: position.longitude });
+    if(isMyLocation && position.latitude){
+      setMyPosition({ lat: position.latitude, lng: position.longitude });
+      setCurrentPosition({ lat: position.latitude, lng: position.longitude })
+      setCurrentZoom(14)
     }
-  }, [myLocation])
-
-  useEffect(() => {
-    if (position.latitude && position.longitude && !position.error) {
-      setCurrentPosition({ lat: position.latitude, lng: position.longitude });
-      setCurrentZoom(14);
-    }
-  }, [position.latitude, position.longitude, position.error]);
+  }, [isMyLocation])
 
 
   return (
@@ -95,12 +83,13 @@ const Map = () => {
       {!isLoaded && <LoadingSpinner />}
       {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
-        center={currentPosition}
+        center={currentPosition ? currentPosition : {lat: 55.606,lng: 13.021}}
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
       >
-        {currentPosition && <Marker position={currentPosition} icon={MarkerIcon} />}
-        {isLoading && (<p>Loading data...</p>)}
+        
+        {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
+
         {!isLoading && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
@@ -108,7 +97,7 @@ const Map = () => {
           <input
             type='text'
             placeholder='Search location'
-            style={inputStyle}
+            className='search-box'
           />
         </StandaloneSearchBox>
       </GoogleMap>}
