@@ -22,7 +22,7 @@ const Map = () => {
 		collection(db, 'restaurants'),
 		orderBy('geolocation')
 	)
-	const { data: restaurants } = useFirestoreQueryData(['restaurants'], queryRef, {
+	const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
 		idField: 'id',
 		subscribe: true,
 	})
@@ -38,21 +38,6 @@ const Map = () => {
     height: '500px'
   };
 
-  const inputStyle = {
-    boxSizing: `border-box`,
-    border: `1px solid transparent`,
-    width: `240px`,
-    height: `32px`,
-    padding: `0 12px`,
-    borderRadius: `3px`,
-    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-    fontSize: `14px`,
-    outline: `none`,
-    textOverflow: `ellipses`,
-    position: 'absolute',
-    top: '10px',
-    right: '55px',
-  }
   const onSearchLoad = ref => setSearchBox(ref);
 
   const onPlacesChanged = () => {
@@ -105,14 +90,14 @@ const Map = () => {
         
         {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
 
-        {restaurants && <Markers restaurants={restaurants}/>}
+        {!isLoading && <Markers restaurants={restaurants}/>}
 
         { /* Child components, such as markers, info windows, etc. */}
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
           <input
             type='text'
             placeholder='Search location'
-            style={inputStyle}
+            className='search-box'
           />
         </StandaloneSearchBox>
       </GoogleMap>}
