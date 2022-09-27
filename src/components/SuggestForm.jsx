@@ -26,11 +26,8 @@ const SuggestForm = () => {
 
 	const onCreate = async (data) => {
 
-		console.log('lol')
 		if (!addressValue) {
-			const input = document.getElementById('react-select-5-input')
-				|| document.getElementById('react-select-3-input')
-			input.focus()
+			document.querySelectorAll('[id^=react-select-]')[0].focus()
 			setAddressError('Please choose the address.')
 			return
 		}
@@ -41,9 +38,9 @@ const SuggestForm = () => {
 
 		console.log(data)
 
-		// await addDoc(collection(db, "suggestions"), {
-		// 	...data,
-		// });
+		await addDoc(collection(db, "suggestions"), {
+			...data,
+		});
 
 		toast.success("Restaurant suggestion added!")
 		setAddressValue(null)
