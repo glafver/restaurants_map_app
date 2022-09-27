@@ -1,28 +1,47 @@
 import React from "react";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from 'react-router-dom'
+import useGetSuggestion from "../hooks/useGetSuggestion"
 
-const SuggestForm = () => {
+import  ButtonGroup  from "react-bootstrap/ButtonGroup";
+
+const SuggestedRestaurant = () => {
+	const { id } = useParams()
+	const { data: suggestion, loading } = useGetSuggestion(id)
+	const navigate = useNavigate()
+
+	
+
 	const {
 		formState: { errors },
 		handleSubmit,
 		register,
 	} = useForm();
 
-	const onSuggestion = async (data) => {
-		await addDoc(collection(db, "suggestions"), {
-			...data,
+	const onSuggestion = async (newData) => {
+		await addDoc(collection(db, "restaurants"), {
+			...newData,
 		});
-		// console.log("Suggestion added");
-		toast.success("Suggestion added!");
+	
+		toast.success("Restaurant Accepted!");
 	};
 
+	const deleteSuggestion = async () => {
+		const ref = doc(db, 'suggestions', id)
+		await deleteDoc(ref)
+
+		toast.success('Discarded')
+
+		// redirect user to todos list
+		navigate('/', { replace: true })
+	}
+	
 	return (
 		<Card>
 			<Card.Body>
@@ -32,6 +51,7 @@ const SuggestForm = () => {
 						<Form.Label>Name</Form.Label>
 						<Form.Control
 							type="text"
+							value={suggestion.name}
 							{...register("name", {
 								required: "Please enter the name of the Restaurant.",
 								minLength: {
@@ -45,6 +65,7 @@ const SuggestForm = () => {
 						<Form.Label>Adress</Form.Label>
 						<Form.Control
 							type="text"
+							value={suggestion.adress}
 							{...register("adress", {
 								required: "Please enter the adress of the Restaurant",
 							})}
@@ -56,6 +77,7 @@ const SuggestForm = () => {
 							{...register("city", {
 								required: "Please enter the City Location",
 							})}
+							value={suggestion.adress}
 							type="text"
 							required
 						/>
@@ -67,6 +89,7 @@ const SuggestForm = () => {
 						<Form.Control
 							className="pb-5"
 							type="text"
+							value={suggestion.description}
 							{...register("description", {
 								required: "This field cant be empty",
 							})}
@@ -81,6 +104,7 @@ const SuggestForm = () => {
 								required: "Req field",
 							})}
 							type="text"
+							value={suggestion.cuisine}
 							required
 						/>
 						{errors.title && <div>{errors.title.message}</div>}
@@ -90,6 +114,7 @@ const SuggestForm = () => {
 					<Form.Group controlId="type" className="mb-3">
 						<Form.Select
 							className=""
+							value={suggestion.type}
 							{...register("type", {
 								required: "This field cant be empty",
 							})}
@@ -103,10 +128,11 @@ const SuggestForm = () => {
 					</Form.Group>
 
 					<Form.Label>Offers</Form.Label>
-					<Form.Group controlId="type" className="mb-3">
+					<Form.Group controlId="offers" className="mb-3">
 						<Form.Select
 							className=""
-							{...register("type", {
+							value={suggestion.offers}
+							{...register("offers", {
 								required: "This field cant be empty",
 							})}
 						>
@@ -120,11 +146,14 @@ const SuggestForm = () => {
 
 					
 
-					<Button type="submit">Submit</Button>
+					<ButtonGroup className="d-flex">
+						<Button type="submit">Accept</Button>
+						<Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
+					</ButtonGroup>
 				</Form>
 			</Card.Body>
 		</Card>
 	);
 };
 
-export default SuggestForm;
+export default SuggestedRestaurant;
