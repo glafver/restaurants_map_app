@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import useRestaurants from '../hooks/useRestaurants'
+import { useSearchParams } from 'react-router-dom'
 
 const FilterContext = createContext()
 
@@ -9,14 +10,45 @@ const useFilterContext = () => {
 
 const FilterContextProvider = ({ children }) => {
 
-    const [filters, setFilters] = useState()
     const [restaurants, setRestaurants] = useState(null)
+    const [searchParams, setSearchParams] = useSearchParams()
 
-    // let cuisine = searchParams.get('cuisine')
-    // let type = searchParams.get('type')
-    // let sort = searchParams.get('sort')
+    let params = {
+        cuisine: searchParams.get('cuisine'),
+        type: searchParams.get('type'),
+        sort: searchParams.get('sort')
+    }
 
     let { data } = useRestaurants()
+
+    let filterData = (data, filtersValues) => {
+
+        let restaurants = data
+
+        if (filtersValues.cuisine) {
+            restaurants = restaurants.filter(rest => {
+                return rest.cuisine === filtersValues.cuisine
+            })
+        }
+
+        if (filtersValues.type) {
+            restaurants = restaurants.filter(rest => {
+                return rest.type === filtersValues.type
+            })
+        }
+
+        if (filtersValues.sort) {
+            if (filtersValues.sort === 'asc') {
+                restaurants.sort((a, b) => a.name.localeCompare(b.name))
+            }
+            if (filtersValues.sort === 'dec') {
+                restaurants.sort((a, b) => b.name.localeCompare(a.name))
+            }
+        }
+
+        return restaurants
+
+    }
 
     useEffect(() => {
 
@@ -24,43 +56,10 @@ const FilterContextProvider = ({ children }) => {
             return
         }
 
-        if (!filters) {
-            setRestaurants(data)
-            return
-        }
-
-        let filterRestaurants = data
-
-        if (filters.cuisine) {
-            filterRestaurants = filterRestaurants.filter(rest => {
-                return rest.cuisine === filters.cuisine
-            })
-        }
-
-        if (filters.type) {
-            filterRestaurants = filterRestaurants.filter(rest => {
-                return rest.type === filters.type
-            })
-        }
-
-        if (filters.sort) {
-            if (filters.sort === 'asc') {
-                filterRestaurants.sort((a, b) => a.name.localeCompare(b.name))
-            }
-            if (filters.sort === 'dec') {
-                filterRestaurants.sort((a, b) => b.name.localeCompare(a.name))
-            }
-        }
-
-        setRestaurants(filterRestaurants)
-    }, [filters])
-
-    useEffect(() => {
-        setRestaurants(data)
-    }, [data])
+        setRestaurants(filterData(data, params))
+    }, [data, searchParams])
 
     const contextValues = {
-        filters, setFilters,
         restaurants, setRestaurants
     }
 

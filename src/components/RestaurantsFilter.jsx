@@ -1,9 +1,11 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 import { Button, Form } from 'react-bootstrap'
-import { useFilterContext } from '../contexts/FilterContext'
+import { useSearchParams } from 'react-router-dom'
 
 const RestaurantsFilter = () => {
+
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const {
         handleSubmit,
@@ -11,15 +13,17 @@ const RestaurantsFilter = () => {
         reset
     } = useForm();
 
-    const { filters, setFilters } = useFilterContext()
-
-    const filterData = (filterValues) => {
-        setFilters(filterValues)
+    const filterData = (filters) => {
+        setSearchParams(filters)
     }
 
     const resetFilters = () => {
         reset()
-        setFilters(null)
+
+        searchParams.delete('cuisine', 'type', 'sort')
+        searchParams.delete('type')
+        searchParams.delete('sort')
+        setSearchParams(searchParams)
     }
 
     return (
@@ -28,7 +32,7 @@ const RestaurantsFilter = () => {
                 <Form onSubmit={handleSubmit(filterData)} className='d-flex justify-content-around my-4'>
                     <Form.Group>
                         <Form.Select {...register("cuisine")}>
-                            <option value="">{filters && filters.cuisine || 'Filter by cuisine'}</option>
+                            <option value="">{'Filter by cuisine'}</option>
                             <option value="swedish">Swedish</option>
                             <option value="italian">Italian</option>
                             <option value="french">French</option>
@@ -50,7 +54,7 @@ const RestaurantsFilter = () => {
 
                     <Form.Group >
                         <Form.Select {...register("type")}>
-                            <option value="">{filters && filters.type || 'Filter by type'}</option>
+                            <option value="">{'Filter by type'}</option>
                             <option value="fine_dining">Fine dining</option>
                             <option value="fast_food">Fast-food restaurant</option>
                             <option value="cafe">Café</option>
@@ -60,7 +64,7 @@ const RestaurantsFilter = () => {
 
                     <Form.Group >
                         <Form.Select {...register('sort')}>
-                            <option value="">{filters && filters.sort || 'Sort by name'}</option>
+                            <option value="">{'Sort by name'}</option>
                             <option value="acs">🔼</option>
                             <option value="dec">🔽</option>
                         </Form.Select>
