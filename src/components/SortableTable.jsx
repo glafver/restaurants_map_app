@@ -1,23 +1,32 @@
-import { useTable } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 import Table from 'react-bootstrap/Table'
 
-const SimpleTable = ({ columns, data }) => {
+const SortableTable = ({ columns, data }) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
 		headerGroups,
 		rows,
 		prepareRow,
-	} = useTable({ columns, data })
+	} = useTable({ columns, data }, useSortBy)
 
 	return (
-		<Table {...getTableProps()}>
+		<Table hover {...getTableProps()}>
 			<thead>
 				{headerGroups.map(headerGroup => (
 					<tr {...headerGroup.getHeaderGroupProps()}>
 						{headerGroup.headers.map(column => (
-							<th {...column.getHeaderProps()}>
+							<th {...column.getHeaderProps(column.getSortByToggleProps())}>
 								{column.render('Header')}
+								{' '}
+								<span>
+									{column.isSorted
+										? column.isSortedDesc
+											? '🔽'
+											: '🔼'
+										: ''
+									}
+								</span>
 							</th>
 						))}
 					</tr>
@@ -42,4 +51,4 @@ const SimpleTable = ({ columns, data }) => {
 	)
 }
 
-export default SimpleTable
+export default SortableTable
