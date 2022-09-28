@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AuthContextProvider from './contexts/AuthContext'
+import FilterContext from './contexts/FilterContext'
 import App from './App'
 
 const queryClient = new QueryClient({
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
 				<AuthContextProvider>
-					<App />
+					<FilterContext>
+						<App />
+					</FilterContext>
 				</AuthContextProvider>
 			</BrowserRouter>
 		</QueryClientProvider>

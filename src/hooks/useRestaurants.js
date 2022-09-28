@@ -6,12 +6,12 @@ const useRestaurants = () => {
 
 	const queryRef = query(collection(db, 'restaurants'))
 
-	const usersQuery = useFirestoreQueryData(['restaurants'], queryRef, {
+	const restaurantQuery = useFirestoreQueryData(['restaurants'], queryRef, {
 		idField: 'id',
 		subscribe: true,
 	})
 
-	return usersQuery
+	return restaurantQuery
 }
 
 export default useRestaurants

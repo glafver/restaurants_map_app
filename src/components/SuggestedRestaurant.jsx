@@ -9,14 +9,14 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from 'react-router-dom'
 import useGetSuggestion from "../hooks/useGetSuggestion"
 
-import  ButtonGroup  from "react-bootstrap/ButtonGroup";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const SuggestedRestaurant = () => {
 	const { id } = useParams()
 	const { data: suggestion, loading } = useGetSuggestion(id)
 	const navigate = useNavigate()
 
-	
+
 
 	const {
 		formState: { errors },
@@ -28,7 +28,7 @@ const SuggestedRestaurant = () => {
 		await addDoc(collection(db, "restaurants"), {
 			...newData,
 		});
-	
+
 		toast.success("Restaurant Accepted!");
 	};
 
@@ -41,7 +41,7 @@ const SuggestedRestaurant = () => {
 		// redirect user to todos list
 		navigate('/', { replace: true })
 	}
-	
+
 	return (
 		<Card>
 			<Card.Body>
@@ -123,7 +123,7 @@ const SuggestedRestaurant = () => {
 							<option value="Restaurant">Restaurant</option>
 							<option value="Fast-food restaurant">Fast-food restaurant</option>
 							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>							
+							<option value="Foodtruck">Foodtruck</option>
 						</Form.Select>
 					</Form.Group>
 
@@ -140,11 +140,11 @@ const SuggestedRestaurant = () => {
 							<option value="Restaurant">Restaurant</option>
 							<option value="Fast-food restaurant">Fast-food restaurant</option>
 							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>							
+							<option value="Foodtruck">Foodtruck</option>
 						</Form.Select>
 					</Form.Group>
 
-					
+
 
 					<ButtonGroup className="d-flex">
 						<Button type="submit">Accept</Button>
