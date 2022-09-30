@@ -4,17 +4,58 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import { useState, useEffect } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import 'react-phone-number-input/style.css'
+import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
+import { db, storage } from '../firebase'
+
+
+
+
 
 const CreateRestaurantForm = () => {
 
+
 	const [addressValue, setAddressValue] = useState(null)
 	const [addressError, setAddressError] = useState(null)
+	
+	const [image, setImage] = useState(false)
+	const [url, setUrl] = useState(false)
+
+
+
+
+	
+
+
+	const handleFileChange = (e) => {
+		if (!e.target.files.length) {
+			setPhoto(null)
+			return
+		}
+	
+		setImage(e.target.files[0])
+	}
+
+	const adminUploadPhoto = () => {
+		const imageRef = ref(storage, `restaurant_photos/${image.name}`);
+		uploadBytes(imageRef, image).then(() => {
+			getDownloadURL(imageRef).then((url) => {
+				setUrl(url)
+			}).catch(error => {
+				console.log(error.message, image )
+			})
+			setImage(null)
+		}).catch(error => {
+			console.log(error.message)
+		})
+	
+	}
+	
+	
 
 	const {
 		formState: { errors },
@@ -46,6 +87,8 @@ const CreateRestaurantForm = () => {
 		setAddressValue(null)
 		reset()
 	};
+
+	
 
 	useEffect(() => {
 		setAddressError(null)
@@ -176,8 +219,12 @@ const CreateRestaurantForm = () => {
 								{...register("insta")}
 							/>
 						</Form.Group>
+						<Form.Group id="photo" className="mb-3">
+									<Form.Label>Photo</Form.Label>
+									<Form.Control type="file" onChange={handleFileChange}/>
+						</Form.Group>
 
-						<Button type="submit">Submit</Button>
+						<Button onClick={adminUploadPhoto} type="submit">Submit</Button>
 					</Form>
 				</Card.Body>
 			</Card>

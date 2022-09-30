@@ -97,6 +97,20 @@ const AuthContextProvider = ({ children }) => {
 		})
 	}
 
+	const setRestaurantPhoto = async (photo) => {
+		
+		const fileRef = ref(storage, `restaurant_photos/${photo}`)
+
+		const uploadResult = await uploadBytes(fileRef, photo)
+
+		const restaurantPhotoURL = await getDownloadURL(uploadResult.ref)
+
+		const docRef = doc(db, 'users', auth.currentUser.uid)
+		await updateDoc(docRef, {
+			restaurantPhotoURL: restaurantPhotoURL
+		})
+}
+
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 
@@ -121,6 +135,7 @@ const AuthContextProvider = ({ children }) => {
 		return unsubscribe
 	}, [])
 
+	
 
 	const contextValues = {
 		currentUser,
@@ -132,6 +147,7 @@ const AuthContextProvider = ({ children }) => {
 		setDisplayNameAndPhoto,
 		setEmail,
 		setPassword,
+		setRestaurantPhoto,
 		userName,
 		userEmail,
 		userPhotoUrl,
