@@ -250,10 +250,7 @@ const SuggestedRestaurant = () => {
 								{...register("insta")}
 							/>
 						</Form.Group>
-						<Form.Group id="photo" className="mb-3">
-									<Form.Label>Photo</Form.Label>
-									<Form.Control type="file" onChange={handleFileChange}/>
-						</Form.Group>
+						
 
 						
 					</Form>
