@@ -18,8 +18,10 @@ const RestaurantsFilter = () => {
     }
 
     const resetFilters = () => {
+        // reset form
         reset()
 
+        // reset serchParams
         searchParams.delete('cuisine', 'type', 'sort')
         searchParams.delete('type')
         searchParams.delete('sort')
@@ -32,7 +34,7 @@ const RestaurantsFilter = () => {
                 <Form onSubmit={handleSubmit(filterData)} className='d-flex justify-content-around my-4'>
                     <Form.Group>
                         <Form.Select {...register("cuisine")}>
-                            <option value="">{'Filter by cuisine'}</option>
+                            <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
                             <option value="swedish">Swedish</option>
                             <option value="italian">Italian</option>
                             <option value="french">French</option>
@@ -54,7 +56,7 @@ const RestaurantsFilter = () => {
 
                     <Form.Group >
                         <Form.Select {...register("type")}>
-                            <option value="">{'Filter by type'}</option>
+                            <option value="">{searchParams.get('type') || 'Filter by type'}</option>
                             <option value="fine_dining">Fine dining</option>
                             <option value="fast_food">Fast-food restaurant</option>
                             <option value="cafe">Café</option>

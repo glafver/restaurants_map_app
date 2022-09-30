@@ -1,11 +1,11 @@
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import RestaurantsFilter from './RestaurantsFilter'
-import { useFilterContext } from '../contexts/FilterContext'
+import useRestaurants from '../hooks/useRestaurants'
 
 const RestaurantsList = () => {
 
-    const { restaurants } = useFilterContext()
+    const restaurants = useRestaurants()
 
     return (
 
