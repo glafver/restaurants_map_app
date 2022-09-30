@@ -14,6 +14,10 @@ const RestaurantsFilter = () => {
     } = useForm();
 
     const filterData = (filters) => {
+        // check if we have new filters or set the previous filters
+        filters.cuisine ? filters.cuisine : searchParams.get('cuisine') ? filters.cuisine = searchParams.get('cuisine') : ''
+        filters.type ? filters.type : searchParams.get('type') ? filters.type = searchParams.get('type') : ''
+        filters.sort ? filters.sort : searchParams.get('sort') ? filters.sort = searchParams.get('sort') : ''
         setSearchParams(filters)
     }
 
