@@ -56,15 +56,17 @@ const Navigation = () => {
 							/> <span>{userName}</span></>}>
 								<NavLink to="/users" className="dropdown-item">Users</NavLink>
 								<NavDropdown.Divider />
+								<NavLink to="/edit_restaurants" className="dropdown-item">Edit restaurants</NavLink>
 								<NavLink to="/create_restaurant" className="dropdown-item">Create restaurant</NavLink>
 								<NavLink to="/suggestions" className="dropdown-item">Suggestions</NavLink>
+								<NavDropdown.Divider />
 								<NavLink to="/update-profile" className="dropdown-item">Update Profile</NavLink>
 								<NavLink to="/logout" className="dropdown-item">Log Out</NavLink>
-								
+
 							</NavDropdown>
 						}
 
-					
+
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
