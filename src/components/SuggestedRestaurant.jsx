@@ -5,20 +5,21 @@ import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from 'react-router-dom'
 import useGetSuggestion from "../hooks/useGetSuggestion"
-
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const SuggestedRestaurant = () => {
 	const { id } = useParams()
 	const { data: suggestion, loading } = useGetSuggestion(id)
 	const navigate = useNavigate()
-
-
+	const [addressValue, setAddressValue] = useState(null)
 
 	const {
+		control,
 		formState: { errors },
 		handleSubmit,
 		register,
@@ -29,7 +30,7 @@ const SuggestedRestaurant = () => {
 			...newData,
 		});
 
-		toast.success("Restaurant Accepted!");
+		toast.success("New Restaurant added!");
 	};
 
 	const deleteSuggestion = async () => {
@@ -42,10 +43,15 @@ const SuggestedRestaurant = () => {
 		navigate('/', { replace: true })
 	}
 
+
+
+	console.log("TELEFONEN", suggestion.tel)
+
+
 	return (
 		<Card>
 			<Card.Body>
-				<Card.Title className="mb-3">Suggest a new restaurant</Card.Title>
+				<Card.Title className="mb-3">{suggestion.name}</Card.Title>
 				<Form onSubmit={handleSubmit(onSuggestion)} noValidate>
 					<Form.Group controlId="name" className="mb-3">
 						<Form.Label>Name</Form.Label>
@@ -142,6 +148,43 @@ const SuggestedRestaurant = () => {
 							<option value="Kiosk/Grill">Kiosk/Grill</option>
 							<option value="Foodtruck">Foodtruck</option>
 						</Form.Select>
+					</Form.Group>
+
+					<Form.Group controlId="tel" className="mb-3" >
+						<Form.Label>Telephone</Form.Label>
+						<PhoneInputWithCountry
+							name="tel"
+							control={control}
+							rules={{ required: false }}
+
+						/>
+					</Form.Group>
+
+					<Form.Group controlId="web_site" className="mb-3">
+						<Form.Label>Web site</Form.Label>
+						<Form.Control
+							value={suggestion.web_site}
+							type="text"
+							{...register("web_site")}
+						/>
+					</Form.Group>
+
+					<Form.Group controlId="fb" className="mb-3">
+						<Form.Label>Facebook</Form.Label>
+						<Form.Control
+							value={suggestion.fb}
+							type="text"
+							{...register("fb")}
+						/>
+					</Form.Group>
+
+					<Form.Group controlId="insta" className="mb-3">
+						<Form.Label>Instagram</Form.Label>
+						<Form.Control
+							value={suggestion.insta}
+							type="text"
+							{...register("insta")}
+						/>
 					</Form.Group>
 
 
