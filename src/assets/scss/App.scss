@@ -1,6 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'react-toastify/scss/main';
 @import 'toastify';
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Rubik+Dirt&display=swap');
 
 .custom-map-control-button {
   background-color: #fff;
@@ -62,5 +63,33 @@
 }
 
 .restaurant-card {
+  cursor: pointer;
+  background-color: rgb(31, 31, 31);
   border: 0;
+  color: rgb(194, 245, 226);
+  font-family: 'Crimson Text', serif;
+  border-radius: 0;
+}
+.restaurant-card-title{
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: 22px;
+}
+
+.navbar {
+  background-color: rgb(14, 67, 48);
+}
+
+.nav-brand {
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 25px;
+}
+.nav-links {
+  font-family: 'Crimson Text', serif;
+  color: white;
+  font-size: 20px;
+}
+
+.card-restaurant-info {
+  margin-bottom: 0;
 }

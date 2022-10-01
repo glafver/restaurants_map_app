@@ -23,7 +23,7 @@ const HomePage = () => {
 		<div className="">
 			<Row>
 			{!isLoading && <Col className="pe-0" sm={3}><ListRestaurants restaurants={restaurants}/></Col> }
-			{/* <Col className="ps-0" sm={9}><Map /></Col> */}
+			<Col className="ps-0" sm={9}><Map /></Col>
 			</Row>
 			
 		</div>

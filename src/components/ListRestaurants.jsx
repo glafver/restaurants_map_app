@@ -34,16 +34,17 @@ const ListRestaurants = ({ restaurants }) => {
 
    <CardGroup className='restaurants-list overflow-scroll'>
         {restaurants.map((restaurant, index) => (
-      <Card key={index} className='restaurant-card' onMouseOver={() => showData()}>
+      <Card key={index} className='restaurant-card' onClick={() => showData()}>
         <Card.Img variant="top" src={RestaurantImage} />
         <Card.Body>
-          <Card.Title>{restaurant.name}</Card.Title>
+          <Card.Title className='restaurant-card-title'>{restaurant.name}</Card.Title>
           <Card.Text>
-            {restaurant.description}
+          <p className='card-restaurant-info'><span className='restaurant-info-bold'>Adress: </span>{restaurant.adress}</p>
+          <p className='card-restaurant-info'><span className='restaurant-info-bold'>Cuisine: </span>{restaurant.cuisine}</p>
           </Card.Text>
         </Card.Body>
-       {linearDistance && <Card.Footer>
-          <p>Distance: {distances[index]} m</p>
+       {linearDistance && <Card.Footer >
+          Distance: {distances[index]} m
         </Card.Footer>}
       </Card>
         ))}
