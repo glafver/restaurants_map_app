@@ -1,5 +1,6 @@
 import Logo from '../assets/images/Logo.png'
 import { Link } from 'react-router-dom'
+import LinkToRestaurants from '../assets/images/link-to-restaurants.png'
 
 
 const HomePage = () => {
@@ -7,7 +8,7 @@ const HomePage = () => {
 	return (
 		<div className="homepage">
 			<img src={Logo} alt="logo" className='logo'/><br/>
-			<Link className='link-to-map' to={'/map'}>Show restaurants near me</Link>
+			<Link to={'/map'}><img className='link-to-map'  src={LinkToRestaurants} alt='link'/></Link>
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'react-toastify/scss/main';
 @import 'toastify';
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Rubik+Dirt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
 
 .custom-map-control-button {
   background-color: #fff;
@@ -66,12 +66,12 @@
   cursor: pointer;
   background-color: rgb(31, 31, 31);
   border: 0;
-  color: rgb(235, 221, 211);
-  font-family: 'Crimson Text', serif;
-  border-radius: 0;
+  color: rgb(254, 192, 84);
+  font-family: 'Cormorant Garamond', serif;
+    border-radius: 0;
 }
 .restaurant-card-title{
-  font-family: 'Crimson Text', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 22px;
 }
@@ -79,18 +79,20 @@
 .navbar {
   background-color: rgb(14, 67, 48);
 }
-
-.nav-brand {
-  font-family: 'Rubik Dirt', cursive;
-  font-size: 25px;
-  color: rgb(235, 221, 211);
+.brand-title {
+  width: 60%;
 }
 .nav-links {
-  font-family: 'Crimson Text', serif;
-  color: white;
+  font-family: 'Cormorant Garamond', serif;;
   font-size: 20px;
 }
+.nav-color {
+  color: rgb(254, 192, 84) !important;
+}
 
+.dropdown-toggle::after {
+  color: rgb(254, 192, 84) !important;
+}
 .card-restaurant-info {
   margin-bottom: 0;
 }
@@ -109,14 +111,9 @@
 }
 
 .link-to-map {
-  text-transform: uppercase;
-  color: rgb(235, 221, 211);
-  text-decoration: none;
-  font-family: 'Crimson Text', serif;
-  font-size: 18px;
-  letter-spacing: 2px;
+ width: 30%;
 }
 
 .link-to-map:hover {
-  color: rgb(235, 221, 211);
+  color: rgb(254, 192, 84);
 }
