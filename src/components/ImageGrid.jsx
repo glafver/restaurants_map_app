@@ -1,18 +1,23 @@
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import ImageCard from './ImageCard'
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 const ImageGrid = ({ photos }) => {
+
+	const columnsCountBreakPoints = { 350: 1, 750: 2, 900: 3 };
 	console.log(photos)
 
 	return (
-		<Row xs={1} sm={2} md={3} lg={4} className='m-3 justify-content-center' >
-			{photos && photos.map(photo => (
-				<Col key={photo.id} className="d-flex mb-4">
-					<ImageCard photo={photo} />
-				</Col>
-			))}
-		</Row>
+		<>
+			{photos &&
+				<ResponsiveMasonry columnsCountBreakPoints={columnsCountBreakPoints} className="m-4">
+					<Masonry gutter={4}>
+						{photos.map((photo) => (
+							<img src={photo.url} />
+						))}
+					</Masonry>
+				</ResponsiveMasonry>
+			}
+
+		</>
 	)
 }
 
