@@ -50,7 +50,7 @@ const UploadPhotos = ({ restaurant_id }) => {
 				</Button>
 
 				{/* Upload Progress Bar */}
-				{uploadPhotos.progress !== null || uploadPhotos.progress == 100 && (
+				{uploadPhotos.progress !== null && (
 					<ProgressBar
 						variant='success'
 						animated

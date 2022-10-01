@@ -38,6 +38,7 @@ const RestaurantPage = () => {
 	}, [data.geolocation])
 
 	return (
+
 		<Container className="py-3 center-y">
 			<Row>
 				<Col md={{ span: 6 }}>

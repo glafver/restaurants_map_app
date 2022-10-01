@@ -9,7 +9,7 @@ const usePhotos = (id) => {
 
 	const queryRef = query(collectionRef, where('restaurant_id', '==', id), where('approved', '==', true))
 
-	const photosQuery = useFirestoreQueryData(['restaurants_images'], queryRef, {
+	const photosQuery = useFirestoreQueryData(['restaurants_images', { restaurant: id }], queryRef, {
 		idField: 'id',
 		subscribe: true,
 	})

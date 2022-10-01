@@ -92,7 +92,6 @@ const Map = () => {
 
         {!isLoading && <Markers restaurants={restaurants} />}
 
-        { /* Child components, such as markers, info windows, etc. */}
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
           <input
             type='text'
