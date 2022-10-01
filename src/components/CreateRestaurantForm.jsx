@@ -153,6 +153,15 @@ const CreateRestaurantForm = () => {
 								rules={{ required: false }} />
 						</Form.Group>
 
+						<Form.Group controlId="e_mail" className="mb-3">
+							<Form.Label>E-mail</Form.Label>
+							<Form.Control
+								defaultValue={restaurant.e_mail}
+								type="text"
+								{...register("e_mail")}
+							/>
+						</Form.Group>
+
 						<Form.Group controlId="web_site" className="mb-3">
 							<Form.Label>Web site</Form.Label>
 							<Form.Control

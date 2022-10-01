@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox} from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import MarkerIcon from '../assets/icons/marker.png'
 import LoadingSpinner from '../components/LoadingSpinner'
@@ -17,15 +17,15 @@ const Map = () => {
   const [searchBox, setSearchBox] = useState(null);
   const [myPosition, setMyPosition] = useState();
   const [isMyLocation, setIsMyLocation] = useState(false);
- 
-	const queryRef = query(
-		collection(db, 'restaurants'),
-		orderBy('geolocation')
-	)
-	const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
-		idField: 'id',
-		subscribe: true,
-	})
+
+  const queryRef = query(
+    collection(db, 'restaurants'),
+    orderBy('geolocation')
+  )
+  const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
+    idField: 'id',
+    subscribe: true,
+  })
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -59,18 +59,18 @@ const Map = () => {
   }
 
   locationButton.addEventListener("click", () => {
-    if(position.error){
+    if (position.error) {
       setIsMyLocation(false)
       console.log(position.error)
     }
     else {
       setIsMyLocation(true)
     }
-     
+
   });
 
   useEffect(() => {
-    if(isMyLocation && position.latitude){
+    if (isMyLocation && position.latitude) {
       setMyPosition({ lat: position.latitude, lng: position.longitude });
       setCurrentPosition({ lat: position.latitude, lng: position.longitude })
       setCurrentZoom(14)
@@ -83,14 +83,14 @@ const Map = () => {
       {!isLoaded && <LoadingSpinner />}
       {isLoaded && <GoogleMap
         mapContainerStyle={containerStyle}
-        center={currentPosition ? currentPosition : {lat: 55.606,lng: 13.021}}
+        center={currentPosition ? currentPosition : { lat: 55.606, lng: 13.021 }}
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
       >
-        
+
         {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
 
-        {!isLoading && <Markers restaurants={restaurants}/>}
+        {!isLoading && <Markers restaurants={restaurants} />}
 
         { /* Child components, such as markers, info windows, etc. */}
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>

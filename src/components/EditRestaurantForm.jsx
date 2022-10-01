@@ -40,7 +40,8 @@ const EditRestaurantForm = ({ restaurant }) => {
             web_site: data.web_site,
             insta: data.insta,
             fb: data.fb,
-            tel: data.tel
+            tel: data.tel,
+            e_mail: data.e_mail
         }
 
         const docRef = doc(db, 'restaurants', restaurant.id)
@@ -139,6 +140,15 @@ const EditRestaurantForm = ({ restaurant }) => {
                                 placeholder={restaurant.tel}
                                 name="tel"
                                 rules={{ required: false }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="e_mail" className="mb-3">
+                            <Form.Label>E-mail</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.e_mail}
+                                type="text"
+                                {...register("e_mail")}
                             />
                         </Form.Group>
 
