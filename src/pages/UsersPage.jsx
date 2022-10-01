@@ -17,7 +17,7 @@ const UsersPage = () => {
         return [
             {
                 Header: 'Photo',
-                accessor: 'PlayerImageURL',
+                accessor: 'photoURL',
                 sortType: (a) => {
                     if (!a.original.photoURL) {
                         return 1
@@ -29,7 +29,6 @@ const UsersPage = () => {
                         src={tableProps.row.original.photoURL || 'https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg'}
                         width={60}
                         roundedCircle
-                        alt='Player'
                     />
                 )
             },
@@ -60,7 +59,6 @@ const UsersPage = () => {
 
     return (
         <Container className="py-3">
-            {/* {data && <SimpleTable columns={columns} data={data} />} */}
             {data && <SortableTable columns={columns} data={data} />}
         </Container>
     )

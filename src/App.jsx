@@ -19,6 +19,8 @@ import { ToastContainer } from 'react-toastify'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import SuggestedRestaurantsPage from './pages/SuggestedRestaurantsPage'
 import SuggestedRestaurantPage from './pages/SuggestedRestaurantPage'
+import EditRestaurantsPage from './pages/EditRestaurantsPage'
+import EditRestaurantPage from './pages/EditRestaurantPage'
 
 function App() {
 	return (
@@ -46,6 +48,8 @@ function App() {
 				<Route path="/suggestions" element={<RequireAdminAuth><SuggestedRestaurantsPage /></RequireAdminAuth>} />
 				<Route path="/suggestions/:id" element={<RequireAdminAuth><SuggestedRestaurantPage /></RequireAdminAuth>} />
 				<Route path="/create_restaurant" element={<RequireAdminAuth><CreateRestaurantPage /></RequireAdminAuth>} />
+				<Route path="/edit_restaurants" element={<RequireAdminAuth><EditRestaurantsPage /></RequireAdminAuth>} />
+				<Route path="/edit_restaurants/:id" element={<RequireAdminAuth><EditRestaurantPage /></RequireAdminAuth>} />
 
 			</Routes>
 

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from 'react-router-dom'
 import useGetSuggestion from "../hooks/useGetSuggestion"
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
-import  ButtonGroup  from "react-bootstrap/ButtonGroup";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 const SuggestedRestaurant = () => {
 	const { id } = useParams()
@@ -29,7 +29,7 @@ const SuggestedRestaurant = () => {
 		await addDoc(collection(db, "restaurants"), {
 			...newData,
 		});
-	
+
 		toast.success("New Restaurant added!");
 	};
 
@@ -43,11 +43,11 @@ const SuggestedRestaurant = () => {
 		navigate('/', { replace: true })
 	}
 
-	
 
-	console.log("TELEFONEN",suggestion.tel)
 
-	
+	console.log("TELEFONEN", suggestion.tel)
+
+
 	return (
 		<Card>
 			<Card.Body>
@@ -129,7 +129,7 @@ const SuggestedRestaurant = () => {
 							<option value="Restaurant">Restaurant</option>
 							<option value="Fast-food restaurant">Fast-food restaurant</option>
 							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>							
+							<option value="Foodtruck">Foodtruck</option>
 						</Form.Select>
 					</Form.Group>
 
@@ -146,48 +146,48 @@ const SuggestedRestaurant = () => {
 							<option value="Restaurant">Restaurant</option>
 							<option value="Fast-food restaurant">Fast-food restaurant</option>
 							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>							
+							<option value="Foodtruck">Foodtruck</option>
 						</Form.Select>
 					</Form.Group>
 
 					<Form.Group controlId="tel" className="mb-3" >
-							<Form.Label>Telephone</Form.Label>
-							<PhoneInputWithCountry
-								name="tel"
-								control={control}
-								rules={{ required: false }}
-								
-								 />
-						</Form.Group>
+						<Form.Label>Telephone</Form.Label>
+						<PhoneInputWithCountry
+							name="tel"
+							control={control}
+							rules={{ required: false }}
 
-						<Form.Group controlId="web_site" className="mb-3">
-							<Form.Label>Web site</Form.Label>
-							<Form.Control
-								value={suggestion.web_site}
-								type="text"
-								{...register("web_site")}
-							/>
-						</Form.Group>
+						/>
+					</Form.Group>
 
-						<Form.Group controlId="fb" className="mb-3">
-							<Form.Label>Facebook</Form.Label>
-							<Form.Control
-								value={suggestion.fb}
-								type="text"
-								{...register("fb")}
-							/>
-						</Form.Group>
+					<Form.Group controlId="web_site" className="mb-3">
+						<Form.Label>Web site</Form.Label>
+						<Form.Control
+							value={suggestion.web_site}
+							type="text"
+							{...register("web_site")}
+						/>
+					</Form.Group>
 
-						<Form.Group controlId="insta" className="mb-3">
-							<Form.Label>Instagram</Form.Label>
-							<Form.Control
-								value={suggestion.insta}
-								type="text"
-								{...register("insta")}
-							/>
-						</Form.Group>
+					<Form.Group controlId="fb" className="mb-3">
+						<Form.Label>Facebook</Form.Label>
+						<Form.Control
+							value={suggestion.fb}
+							type="text"
+							{...register("fb")}
+						/>
+					</Form.Group>
 
-					
+					<Form.Group controlId="insta" className="mb-3">
+						<Form.Label>Instagram</Form.Label>
+						<Form.Control
+							value={suggestion.insta}
+							type="text"
+							{...register("insta")}
+						/>
+					</Form.Group>
+
+
 
 					<ButtonGroup className="d-flex">
 						<Button type="submit">Accept</Button>

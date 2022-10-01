@@ -1,17 +1,18 @@
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import RestaurantsFilter from './RestaurantsFilter'
 import useRestaurants from '../hooks/useRestaurants'
 
 const RestaurantsList = () => {
 
-    const { data } = useRestaurants()
-    // console.log(data)
+    const restaurants = useRestaurants()
 
     return (
 
         <>
             <Row>
-                {data && data.map(restaurant => (
+                <RestaurantsFilter />
+                {restaurants && restaurants.map(restaurant => (
                     <Col lg={3} md={4} sm={6} key={restaurant.id}>
                         <Card className="mb-4">
                             <Card.Body>

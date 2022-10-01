@@ -20,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
 				<AuthContextProvider>
+
 					<App />
+
 				</AuthContextProvider>
 			</BrowserRouter>
 		</QueryClientProvider>
