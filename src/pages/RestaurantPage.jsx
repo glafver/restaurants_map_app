@@ -11,7 +11,7 @@ import { Table } from "react-bootstrap";
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import usePosition from "../hooks/usePosition";
-// import { getDistance } from 'geolib'
+import { getDistance } from 'geolib'
 
 const RestaurantPage = () => {
 
@@ -24,16 +24,11 @@ const RestaurantPage = () => {
 	useEffect(() => {
 
 		if (position.latitude && data.geolocation.lat) {
-			// let distance = getDistance(
-			// 	{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
-			// 	{ latitude: position.latitude, longitude: position.latitude }
-			// )
-
-			const pos1 = new google.maps.LatLng(data.geolocation.lat, data.geolocation.lat);
-			const pos2 = new google.maps.LatLng(position.latitude, position.latitude);
-			const distance = google.maps.geometry.spherical.computeDistanceBetween(pos1, pos2);
-			// console.log(distance)
-			setLinearDistance(distance.toFixed(2))
+			let distance = getDistance(
+				{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
+				{ latitude: position.latitude, longitude: position.latitude }
+			)
+			setLinearDistance(distance)
 		}
 	}, [data.geolocation])
 
