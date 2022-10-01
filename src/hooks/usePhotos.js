@@ -3,7 +3,7 @@ import { collection, query, where } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const usePhotos = (id) => {
-	console.log(id)
+	// console.log(id)
 
 	const collectionRef = collection(db, 'restaurants_images')
 

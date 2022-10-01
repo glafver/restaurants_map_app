@@ -16,12 +16,10 @@ const useUploadPhotos = () => {
 
 	const upload = async (image, restaurant_id) => {
 
-		console.log(image, restaurant_id)
-
 		setError(null)
 		setIsError(null)
 		setIsSuccess(null)
-		setIsUploading(null)
+		setIsUploading(true)
 
 		try {
 
@@ -71,12 +69,6 @@ const useUploadPhotos = () => {
 			setIsUploading(false)
 		}
 	}
-
-	console.log(error,
-		isError,
-		isSuccess,
-		isUploading,
-		progress,)
 
 	return {
 		error,
