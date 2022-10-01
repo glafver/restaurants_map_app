@@ -39,13 +39,38 @@
 
 
 .restaurant-info-window {
-    background: white;
-		border: 1px solid #ccc;
-		padding: 15px
+  font-family: 'Cormorant Garamond', serif;
+  background-color: rgb(50, 86, 73);
+  color: rgb(254, 192, 84);
+	padding: 15px
+}
+.gm-style .gm-style-iw-c{
+padding: 0 !important;
+}
+.gm-style-iw-d {
+  overflow: hidden !important;
+}
+.gm-style-iw-tc::after {
+  background: rgb(50, 86, 73) !important;
+}
+.direction-link {
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
+.gm-ui-hover-effect {
+  width: 40px !important;
+  height: 40px !important;
+  opacity: none !important;
+}
+.restaurant-title {
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-style: italic;
+}
 .restaurant-info {
   margin-bottom: 5px;
+  font-size: 16px;
 }
 .restaurant-info-bold {
   font-weight: 500;
@@ -85,7 +110,7 @@
   width: 60%;
 }
 .nav-links {
-  font-family: 'Cormorant Garamond', serif;;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
 }
 .nav-color {
@@ -130,4 +155,3 @@
 .card-icons {
   padding-right: 5px;
 }
-
