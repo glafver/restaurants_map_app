@@ -13,6 +13,8 @@ import usePosition from "../hooks/usePosition";
 import { getDistance } from 'geolib'
 import { useAuthContext } from "../contexts/AuthContext";
 import UploadPhotos from "../components/UploadPhotos";
+import ImageGrid from "../components/ImageGrid";
+import usePhotos from "../hooks/usePhotos";
 
 const RestaurantPage = () => {
 
@@ -20,6 +22,7 @@ const RestaurantPage = () => {
 	const { id } = useParams()
 	const { data } = useRestaurant(id)
 	const position = usePosition()
+	const { data: photos } = usePhotos(id)
 
 	const { currentUser } = useAuthContext()
 
@@ -94,20 +97,11 @@ const RestaurantPage = () => {
 					<RestaurantMap restaurantGeolocation={data.geolocation} />
 				</Col>
 			</Row>
-			<Row>
-				<Col md={{ span: 3 }} className="text-center">
+			<Row className="justiify-content-center">
+				<Col md={{ span: 12 }} >
+					<ImageGrid photos={photos} />
 					{currentUser &&
-
-						<>
-
-							<UploadPhotos restaurant_id={id} />
-
-
-							{/* <div className={`${!showUpload ? 'd-none' : ''}`}>
-							<UploadImageDropzone />
-							<hr className="my-3" />
-						</div> */}
-						</>
+						<UploadPhotos restaurant_id={id} />
 					}
 				</Col>
 			</Row>

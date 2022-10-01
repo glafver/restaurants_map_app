@@ -43,7 +43,7 @@ const UploadPhotos = ({ restaurant_id }) => {
 
 	return (
 		<>
-			<div {...getRootProps()} id="dropzone-wrapper" >
+			<div {...getRootProps()} id="dropzone-wrapper" className='text-center' >
 				<input {...getInputProps()} />
 				<Button variant="primary" className="m-3" onClick={() => { setInfo(null) }}>
 					Upload photos
