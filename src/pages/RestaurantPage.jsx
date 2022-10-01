@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import RestaurantMap from "../components/RestaurantMap";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { useParams } from "react-router-dom";
 import useRestaurant from "../hooks/useRestaurant";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import usePosition from "../hooks/usePosition";
 import { getDistance } from 'geolib'
+import { useAuthContext } from "../contexts/AuthContext";
+import UploadPhotos from "../components/UploadPhotos";
 
 const RestaurantPage = () => {
 
@@ -20,6 +21,7 @@ const RestaurantPage = () => {
 	const { data } = useRestaurant(id)
 	const position = usePosition()
 
+	const { currentUser } = useAuthContext()
 
 	useEffect(() => {
 
@@ -93,9 +95,23 @@ const RestaurantPage = () => {
 				</Col>
 			</Row>
 			<Row>
-				<Col md={{ span: 6, offset: 3 }}></Col>
+				<Col md={{ span: 3 }} className="text-center">
+					{currentUser &&
+
+						<>
+
+							<UploadPhotos restaurant_id={id} />
+
+
+							{/* <div className={`${!showUpload ? 'd-none' : ''}`}>
+							<UploadImageDropzone />
+							<hr className="my-3" />
+						</div> */}
+						</>
+					}
+				</Col>
 			</Row>
-		</Container>
+		</Container >
 	);
 };
 
