@@ -185,7 +185,7 @@ const CreateRestaurantForm = () => {
 							/>
 						</Form.Group>
 
-						<Button type="submit">Submit</Button>
+						<Button type="submit" className="mb-3 mx-auto">Submit</Button>
 					</Form>
 				</Card.Body>
 			</Card>

@@ -19,7 +19,6 @@ const EditRestaurantPage = () => {
         <Container className="py-3 center-y">
             <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <h1>{id}</h1>
                     {data &&
                         <EditRestaurantForm restaurant={data} />
                     }
