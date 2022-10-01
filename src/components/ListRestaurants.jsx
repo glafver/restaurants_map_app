@@ -38,10 +38,10 @@ const ListRestaurants = ({ restaurants }) => {
         <Card.Img variant="top" src={RestaurantImage} />
         <Card.Body>
           <Card.Title className='restaurant-card-title'>{restaurant.name}</Card.Title>
-          <Card.Text>
+          <div>
           <p className='card-restaurant-info'><span className='restaurant-info-bold'>Adress: </span>{restaurant.adress}</p>
           <p className='card-restaurant-info'><span className='restaurant-info-bold'>Cuisine: </span>{restaurant.cuisine}</p>
-          </Card.Text>
+          </div>
         </Card.Body>
        {linearDistance && <Card.Footer >
           Distance: {distances[index]} m
