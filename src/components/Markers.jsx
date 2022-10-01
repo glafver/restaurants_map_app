@@ -42,9 +42,9 @@ const Markers = ({ restaurants}) => {
 	return (
 		<ListGroup>
 			{restaurants.map((restaurant, index) => (
-			<Marker position={restaurant.geolocation} key={index} onClick={() => handleActiveMarker(index)}>
+			<Marker position={restaurant.geolocation} key={index} onClick={() => handleActiveMarker(index)} onLoad={()=> distanceInMeters(restaurant.geolocation)}>
 			{activeMarker === index ? (
-            <InfoWindowF onLoad={() => distanceInMeters(restaurant.geolocation)} onCloseClick={() => handleInfoWindow()}>
+            <InfoWindowF onCloseClick={() => handleInfoWindow()}>
               <div className='restaurant-info-window'>
 				<p className='restaurant-info'><span className='restaurant-info-bold'>Name: </span>{restaurant.name ? restaurant.name : ''}</p>
 				<p className='restaurant-info'><span className='restaurant-info-bold'>Adress: </span>{restaurant.adress ? restaurant.adress : ''}</p>

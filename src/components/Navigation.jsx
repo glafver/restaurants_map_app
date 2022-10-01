@@ -10,14 +10,14 @@ const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext()
 
 	return (
-		<Navbar bg="dark" variant="dark" expand="md">
+		<Navbar variant="dark" expand="md" className='navbar'>
 			<Container>
-				<Navbar.Brand as={Link} to="/">
+				<Navbar.Brand as={Link} to="/" className='nav-brand'>
 					Tasty Malmö
 				</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
+				<Navbar.Collapse id="basic-navbar-nav" className='nav-links'>
 					<Nav className="ms-auto">
 						<Nav.Link as={NavLink} to="/restaurants">Restaurants</Nav.Link>
 						{!currentUser && !isAdmin &&
@@ -56,7 +56,7 @@ const Navigation = () => {
 							/> <span>{userName}</span></>}>
 								<NavLink to="/users" className="dropdown-item">Users</NavLink>
 								<NavDropdown.Divider />
-								<NavLink to="/edit_restaurants" className="dropdown-item">Edit restaurants</NavLink>
+								<NavLink to="/edit_restaurants" className="dropdown-item ">Edit restaurants</NavLink>
 								<NavLink to="/create_restaurant" className="dropdown-item">Create restaurant</NavLink>
 								<NavLink to="/suggestions" className="dropdown-item">Suggestions</NavLink>
 								<NavDropdown.Divider />

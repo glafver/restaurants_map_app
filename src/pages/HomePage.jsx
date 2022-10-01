@@ -1,16 +1,14 @@
-import Container from 'react-bootstrap/Container'
-import { useAuthContext } from '../contexts/AuthContext'
-import Map from '../components/Map'
+import Logo from '../assets/images/Logo.png'
+import { Link } from 'react-router-dom'
+
 
 const HomePage = () => {
 
-	const { isAdmin } = useAuthContext()
-
 	return (
-		<Container className="py-3">
-			<h1>Welcome {isAdmin && 'admin'}!</h1>
-			<Map />
-		</Container>
+		<div className="homepage">
+			<img src={Logo} alt="logo" className='logo'/><br/>
+			<Link className='link-to-map' to={'/map'}>Show restaurants near me</Link>
+		</div>
 	)
 }
 

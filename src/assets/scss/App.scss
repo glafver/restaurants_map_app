@@ -1,6 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'react-toastify/scss/main';
 @import 'toastify';
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Rubik+Dirt&display=swap');
 
 .custom-map-control-button {
   background-color: #fff;
@@ -53,4 +54,69 @@
   font-size: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.restaurants-list {
+  display: block;
+  height: 600px;
+  padding-right: 0;
+}
+
+.restaurant-card {
+  cursor: pointer;
+  background-color: rgb(31, 31, 31);
+  border: 0;
+  color: rgb(235, 221, 211);
+  font-family: 'Crimson Text', serif;
+  border-radius: 0;
+}
+.restaurant-card-title{
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-size: 22px;
+}
+
+.navbar {
+  background-color: rgb(14, 67, 48);
+}
+
+.nav-brand {
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 25px;
+  color: rgb(235, 221, 211);
+}
+.nav-links {
+  font-family: 'Crimson Text', serif;
+  color: white;
+  font-size: 20px;
+}
+
+.card-restaurant-info {
+  margin-bottom: 0;
+}
+
+.homepage {
+  width: 100%;
+  height: 600px;
+  background-color: rgb(17, 45, 32);
+  text-align: center;
+}
+
+.logo {
+  padding-top: 70px;
+  padding-bottom: 20px;
+  width: 20%;
+}
+
+.link-to-map {
+  text-transform: uppercase;
+  color: rgb(235, 221, 211);
+  text-decoration: none;
+  font-family: 'Crimson Text', serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.link-to-map:hover {
+  color: rgb(235, 221, 211);
 }
