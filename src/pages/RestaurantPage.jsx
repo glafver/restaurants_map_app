@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RestaurantMap from "../components/RestaurantMap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -10,11 +10,32 @@ import useRestaurant from "../hooks/useRestaurant";
 import { Table } from "react-bootstrap";
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import usePosition from "../hooks/usePosition";
+// import { getDistance } from 'geolib'
 
 const RestaurantPage = () => {
 
+	const [linearDistance, setLinearDistance] = useState(null);
 	const { id } = useParams()
 	const { data } = useRestaurant(id)
+	const position = usePosition()
+
+
+	useEffect(() => {
+
+		if (position.latitude && data.geolocation.lat) {
+			// let distance = getDistance(
+			// 	{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
+			// 	{ latitude: position.latitude, longitude: position.latitude }
+			// )
+
+			const pos1 = new google.maps.LatLng(data.geolocation.lat, data.geolocation.lat);
+			const pos2 = new google.maps.LatLng(position.latitude, position.latitude);
+			const distance = google.maps.geometry.spherical.computeDistanceBetween(pos1, pos2);
+			// console.log(distance)
+			setLinearDistance(distance.toFixed(2))
+		}
+	}, [data.geolocation])
 
 	return (
 		<Container className="py-3 center-y">
@@ -30,6 +51,10 @@ const RestaurantPage = () => {
 									<tr>
 										<td><b>Address:</b></td>
 										<td>{data.adress}</td>
+									</tr>
+									<tr>
+										<td><b>Distance:</b></td>
+										<td>{linearDistance} m</td>
 									</tr>
 									<tr>
 										<td><b>Type:</b></td>

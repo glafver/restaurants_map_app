@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import UserIcon from '../assets/icons/user.png'
 import RestaurantIcon from '../assets/icons/restaurant.png'
@@ -7,8 +7,9 @@ import RestaurantIcon from '../assets/icons/restaurant.png'
 const RestaurantMap = ({ restaurantGeolocation }) => {
   const [libraries] = useState(['places', 'geometry']);
   const [currentZoom, setCurrentZoom] = useState(12);
-  const position = usePosition();
+
   const [myPosition, setMyPosition] = useState();
+  const position = usePosition();
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
