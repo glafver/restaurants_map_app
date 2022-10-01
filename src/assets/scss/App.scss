@@ -68,7 +68,8 @@
   border: 0;
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
-    border-radius: 0;
+  border-radius: 0;
+  padding-bottom: 10px;
 }
 .restaurant-card-title{
   font-family: 'Cormorant Garamond', serif;
@@ -94,9 +95,16 @@
   color: rgb(254, 192, 84) !important;
 }
 .card-restaurant-info {
-  margin-bottom: 0;
+  margin-bottom: 2px;
 }
-
+.card-body {
+  padding-bottom: 0;
+}
+.card-footer {
+  border-top: 0;
+  padding-top: 0;
+  background-color: rgb(31, 31, 31);
+}
 .homepage {
   width: 100%;
   height: 600px;
@@ -117,3 +125,8 @@
 .link-to-map:hover {
   color: rgb(254, 192, 84);
 }
+
+.card-icons {
+  padding-right: 5px;
+}
+
