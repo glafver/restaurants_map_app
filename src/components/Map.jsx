@@ -7,9 +7,10 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
 import { db } from '../firebase'
 import Markers from './Markers';
+import useRestaurants from '../hooks/useRestaurants';
 
 
-const Map = () => {
+const Map = ({ restaurants }) => {
   const [currentPosition, setCurrentPosition] = useState();
   const [currentZoom, setCurrentZoom] = useState(12);
   const position = usePosition();
@@ -18,14 +19,16 @@ const Map = () => {
   const [myPosition, setMyPosition] = useState();
   const [isMyLocation, setIsMyLocation] = useState(false);
 
-  const queryRef = query(
-    collection(db, 'restaurants'),
-    orderBy('geolocation')
-  )
-  const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
-    idField: 'id',
-    subscribe: true,
-  })
+  // const queryRef = query(
+  //   collection(db, 'restaurants'),
+  //   orderBy('geolocation')
+  // )
+  // const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
+  //   idField: 'id',
+  //   subscribe: true,
+  // })
+
+  // const restaurants = useRestaurants()
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -35,8 +38,9 @@ const Map = () => {
 
   const containerStyle = {
     width: '100%',
-    height: '600px'
+    height: '600px',
   };
+  
 
   const onSearchLoad = ref => setSearchBox(ref);
 
@@ -48,7 +52,6 @@ const Map = () => {
       setCurrentZoom(12)
     })
   }
-
 
   const locationButton = document.createElement("button");
   locationButton.textContent = "Go to Your Location";
@@ -90,7 +93,7 @@ const Map = () => {
 
         {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
 
-        {!isLoading && <Markers restaurants={restaurants} />}
+        {restaurants && <Markers restaurants={restaurants} />}
 
         <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
           <input

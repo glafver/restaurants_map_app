@@ -25,7 +25,6 @@ const EditRestaurantForm = ({ restaurant }) => {
     const onEdit = async (data) => {
 
         if (addressValue) {
-            console.log(addressValue)
             let geoCode = await geocodeByAddress(addressValue.label)
             data.geolocation = await getLatLng(geoCode[0])
         }
@@ -100,7 +99,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                                 className=""
                                 {...register("cuisine")}
                             >
-                                <option></option>
+                                <option>{restaurant.cuisine}</option>
                                 <option value="Swedish">Swedish</option>
                                 <option value="Italian">Italian</option>
                                 <option value="French">French</option>
@@ -125,7 +124,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                                 className=""
                                 {...register("type")}
                             >
-                                <option></option>
+                                <option>{restaurant.type}</option>
                                 <option value="Fine dining">Fine dining</option>
                                 <option value="Fast food">Fast-food restaurant</option>
                                 <option value="Cafe">Café</option>
