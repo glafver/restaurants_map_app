@@ -39,21 +39,22 @@ const RestaurantsFilter = () => {
                     <Form.Group>
                         <Form.Select {...register("cuisine")}>
                             <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
-                            <option value="swedish">Swedish</option>
-                            <option value="italian">Italian</option>
-                            <option value="french">French</option>
-                            <option value="polish">Polish</option>
-                            <option value="russian">Russian</option>
-                            <option value="serbian">Serbian</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="thai">Thai</option>
-                            <option value="indian">Indian</option>
-                            <option value="vietnamese">Vietnamese</option>
-                            <option value="american">American</option>
-                            <option value="arabic">Arabic</option>
-                            <option value="european">European</option>
-                            <option value="other">Other</option>
+
+                            <option value="Swedish">Swedish</option>
+                            <option value="Italian">Italian</option>
+                            <option value="French">French</option>
+                            <option value="Polish">Polish</option>
+                            <option value="Russian">Russian</option>
+                            <option value="Serbian">Serbian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Thai">Thai</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="American">American</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="European">European</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
 
                     </Form.Group>
@@ -61,10 +62,10 @@ const RestaurantsFilter = () => {
                     <Form.Group >
                         <Form.Select {...register("type")}>
                             <option value="">{searchParams.get('type') || 'Filter by type'}</option>
-                            <option value="fine_dining">Fine dining</option>
-                            <option value="fast_food">Fast-food restaurant</option>
-                            <option value="cafe">Café</option>
-                            <option value="other">Other</option>
+                            <option value="Fine dining">Fine dining</option>
+                            <option value="Fast food">Fast-food restaurant</option>
+                            <option value="Cafe">Café</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
                     </Form.Group>
 
