@@ -39,11 +39,11 @@ const RestaurantPage = () => {
 	}, [data.geolocation])
 
 	return (
-
+		<div className="restaurant-page-container">
 		<Container className="py-3 center-y">
 			<Row>
-				<Col md={{ span: 6 }}>
-					<Card>
+				<Col sm={6}>
+					<Card className="restaurant-page-card">
 						<Card.Body>
 							<Card.Title className="text-center">{data.name}</Card.Title>
 
@@ -95,7 +95,7 @@ const RestaurantPage = () => {
 						</Card.Body>
 					</Card>
 				</Col>
-				<Col md={{ span: 6 }}>
+				<Col sm={6}>
 					<RestaurantMap restaurantGeolocation={data.geolocation} />
 				</Col>
 			</Row>
@@ -108,6 +108,7 @@ const RestaurantPage = () => {
 				</Col>
 			</Row>
 		</Container >
+		</div>
 	);
 };
 
