@@ -60,7 +60,7 @@ const RestaurantPage = () => {
 									</tr>
 									<tr>
 										<td><b>Type:</b></td>
-										<td>{data.type.replace(/_/g, ' ')}</td>
+										<td>{data.type}</td>
 									</tr>
 									<tr>
 										<td><b>Cuisine:</b></td>
@@ -83,13 +83,13 @@ const RestaurantPage = () => {
 
 							<div className="d-flex flex-row justify-content-center mb-3">
 								{data.fb &&
-									<Link className="text-dark" to={data.fb} >
+									<a className="text-dark" href={data.fb} >
 										<FaFacebook className="mx-2" />
-									</Link>}
+									</a>}
 								{data.insta &&
-									<Link className="text-dark" to={data.insta} >
+									<a className="text-dark"  href={data.insta} >
 										<FaInstagram className="mx-2" />
-									</Link>}
+									</a>}
 							</div>
 
 						</Card.Body>
