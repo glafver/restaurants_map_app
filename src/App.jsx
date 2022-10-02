@@ -21,7 +21,7 @@ import SuggestedRestaurantsPage from './pages/SuggestedRestaurantsPage'
 import SuggestedRestaurantPage from './pages/SuggestedRestaurantPage'
 import EditRestaurantsPage from './pages/EditRestaurantsPage'
 import EditRestaurantPage from './pages/EditRestaurantPage'
-import ListAndMap from './pages/ListAndMap'
+
 
 function App() {
 	return (
@@ -31,7 +31,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="*" element={<NotFound />} />
-				<Route path="/map" element={<ListAndMap />} />
+
 				{/* opened routes */}
 				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/login" element={<LoginPage />} />

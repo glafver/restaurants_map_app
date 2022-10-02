@@ -9,7 +9,6 @@ import { db } from '../firebase'
 const EditRestaurantsPage = () => {
 
     const data = useRestaurants()
-    console.log('data', data)
 
     const deleteRestaurant = async (row) => {
         const docRef = doc(db, 'restaurants', row.data[row.row.index].id)

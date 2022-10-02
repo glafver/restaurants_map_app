@@ -60,7 +60,7 @@ const Markers = ({ restaurants }) => {
 			{restaurants.map((restaurant, index) => (
 				<Marker position={restaurant.geolocation} key={index} onClick={() => handleActiveMarker(index)} icon={RestaurantMarker}>
 					{activeMarker === index ? (
-						<InfoWindowF onCloseClick={() => handleInfoWindow()}>
+						<InfoWindowF onCloseClick={() => handleInfoWindow()} className='info-windows-container'>
 							<div className='restaurant-info-window'>
 								<p className='restaurant-title'>{restaurant.name ? restaurant.name : ''}</p>
 								<p className='restaurant-info'><FontAwesomeIcon className='card-icons' icon={faLocationDot} />{restaurant.adress ? restaurant.adress : ''}</p>
