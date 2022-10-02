@@ -3,7 +3,6 @@ import { Marker} from '@react-google-maps/api';
 import { useState } from 'react'
 import { InfoWindowF } from '@react-google-maps/api';
 import { Link } from 'react-router-dom';
-// import usePosition from '../hooks/usePosition'
 import { getDistance } from 'geolib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute, faBook } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +11,6 @@ import RestaurantMarker from '../assets/icons/restaurant-marker.png'
 
 const Markers = ({ restaurants}) => {
 	const [activeMarker, setActiveMarker] = useState(null);
-	// const position = usePosition();
 	const [linearDistance, setLinearDistance] = useState(false);
 	const [distances] = useState([]);
 
@@ -23,14 +21,7 @@ const Markers = ({ restaurants}) => {
 	const destinantionLink = googleLink + destinationToURL;
 	window.open(destinantionLink, '_blank')
 	}
-
-	// const distanceInMeters = (dist) => {
-	// const pos1 = new google.maps.LatLng(dist.lat, dist.lng);
-	// const pos2 = new google.maps.LatLng(position.latitude, position.longitude);
-	// const distance = google.maps.geometry.spherical.computeDistanceBetween(pos1, pos2);
-	// setLinearDistance(distance.toFixed(2))
-	// }
-  
+	
 	const handleActiveMarker = (marker) => {
 	  if (marker === activeMarker) {
 		return;
@@ -73,12 +64,7 @@ const Markers = ({ restaurants}) => {
 				<p className='restaurant-info'><FontAwesomeIcon className='card-icons' icon={faCircleInfo} /><Link className='nav-color' to={`/restaurants/${restaurant.id}`}>More info</Link> </p>
 
 				{linearDistance && <p className='restaurant-info'> <FontAwesomeIcon className='card-icons' icon={faRoute} /> {distances[index]} m </p>}
-				<Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link><br></br>
-				{restaurant.phone && <p className='restaurant-info'><span className='restaurant-info-bold'>Phone: </span>{restaurant.phone}</p>}
-				{restaurant.email && <p className='restaurant-info'><span className='restaurant-info-bold'>E-mail: </span>{restaurant.email}</p>}
-				{restaurant.website && <p className='restaurant-info'><span className='restaurant-info-bold'>Website: </span>{restaurant.website}</p>}
-				{restaurant.facebook && <p className='restaurant-info'><span className='restaurant-info-bold'>Facebook: </span>{restaurant.facebook}</p>}
-				{restaurant.instagram && <p className='restaurant-info'><span className='restaurant-info-bold'>Instagram: </span>{restaurant.instagram}</p>}
+				<Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link><br/>
 				</div>
             </InfoWindowF>
           ) : null}

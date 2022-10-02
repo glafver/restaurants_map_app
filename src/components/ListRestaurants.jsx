@@ -40,7 +40,6 @@ const ListRestaurants = ({ restaurants }) => {
         <Card.Body className='card-body'>
           <Card.Title className='restaurant-card-title'>{restaurant.name}</Card.Title>
           <div>
-         
           <p className='card-restaurant-info'> <FontAwesomeIcon className='card-icons' icon={faLocationDot} /> {restaurant.adress}</p>
           <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faUtensils} /> {restaurant.cuisine}</p>
           <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faCircleInfo} /><Link className='nav-color' to={`/restaurants/${restaurant.id}`}>More info</Link> </p>
