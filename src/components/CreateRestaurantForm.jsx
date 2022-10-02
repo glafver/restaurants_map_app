@@ -134,8 +134,7 @@ const CreateRestaurantForm = () => {
 								className=""
 								{...register("type", {
 									required: "Please choose type of place."
-								})}
-							>
+								})}>
 								<option></option>
 								<option value="fine dining">Fine dining</option>
 								<option value="fast food">Fast-food restaurant</option>
@@ -163,7 +162,7 @@ const CreateRestaurantForm = () => {
 						</Form.Group>
 
 						<Form.Group controlId="web_site" className="mb-3">
-							<Form.Label>Web site</Form.Label>
+							<Form.Label>Website</Form.Label>
 							<Form.Control
 								type="text"
 								{...register("web_site")}

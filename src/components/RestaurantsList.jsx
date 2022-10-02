@@ -20,7 +20,7 @@ const RestaurantsList = () => {
                                 <Card.Text>
                                     {restaurant.description}
                                 </Card.Text>
-                                <Button variant="secondary" as={Link} to={`/restaurants/${restaurant.id}`}>More about restaurant...</Button>
+                                <Button className="mb-4" variant="secondary" as={Link} to={`/restaurants/${restaurant.id}`}>More about restaurant...</Button>
                             </Card.Body>
                         </Card>
                     </Col>

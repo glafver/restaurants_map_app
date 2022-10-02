@@ -39,6 +39,7 @@ const RestaurantPage = () => {
 	}, [data.geolocation])
 
 	return (
+
 		<Container className="py-3 center-y">
 			<Row>
 				<Col md={{ span: 6 }}>
@@ -80,7 +81,7 @@ const RestaurantPage = () => {
 								</tbody>
 							</Table>
 
-							<div className="d-flex flex-row justify-content-center">
+							<div className="d-flex flex-row justify-content-center mb-3">
 								{data.fb &&
 									<Link className="text-dark" to={data.fb} >
 										<FaFacebook className="mx-2" />

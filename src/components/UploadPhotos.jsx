@@ -50,7 +50,7 @@ const UploadPhotos = ({ restaurant_id }) => {
 				</Button>
 
 				{/* Upload Progress Bar */}
-				{uploadPhotos.progress !== null || uploadPhotos.progress == 100 && (
+				{uploadPhotos.progress !== null && (
 					<ProgressBar
 						variant='success'
 						animated
@@ -61,6 +61,7 @@ const UploadPhotos = ({ restaurant_id }) => {
 
 				{info && <Alert variant='danger'>{info}</Alert>}
 				{uploadPhotos.isError && <Alert variant='danger'>Failed to upload files</Alert>}
+				{uploadPhotos.isUploading && <Alert variant="warning">Your photos are uploading</Alert>}
 				{uploadPhotos.isSuccess && !isAdmin && <Alert variant="success">Your photos uploaded and will be rewied by admin</Alert>}
 				{uploadPhotos.isSuccess && isAdmin && <Alert variant="success">Your photos uploaded</Alert>}
 			</div>
