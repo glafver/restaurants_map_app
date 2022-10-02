@@ -44,6 +44,7 @@ const ListRestaurants = ({ restaurants }) => {
           <p className='card-restaurant-info'> <FontAwesomeIcon className='card-icons' icon={faLocationDot} /> {restaurant.adress}</p>
           <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faUtensils} /> {restaurant.cuisine}</p>
           <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faCircleInfo} /><Link className='nav-color' to={`/restaurants/${restaurant.id}`}>More info</Link> </p>
+          <Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link>
           </div>
         </Card.Body>
        {linearDistance && <Card.Footer className='card-footer'>

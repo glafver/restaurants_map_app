@@ -8,6 +8,7 @@ import { getDistance } from 'geolib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute, faBook } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react';
+import RestaurantMarker from '../assets/icons/restaurant-marker.png'
 
 const Markers = ({ restaurants}) => {
 	const [activeMarker, setActiveMarker] = useState(null);
@@ -61,7 +62,7 @@ const Markers = ({ restaurants}) => {
 	return (
 		<ListGroup>
 			{restaurants.map((restaurant, index) => (
-			<Marker position={restaurant.geolocation} key={index} onClick={() => handleActiveMarker(index)}>
+			<Marker position={restaurant.geolocation} key={index} onClick={() => handleActiveMarker(index)} icon={RestaurantMarker}>
 			{activeMarker === index ? (
             <InfoWindowF onCloseClick={() => handleInfoWindow()}>
               <div className='restaurant-info-window'>

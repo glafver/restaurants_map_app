@@ -40,18 +40,19 @@
 
 .restaurant-info-window {
   font-family: 'Cormorant Garamond', serif;
-  background-color: rgb(50, 86, 73);
+  background-color: rgb(52, 51, 51);
   color: rgb(254, 192, 84);
 	padding: 15px
 }
 .gm-style .gm-style-iw-c{
 padding: 0 !important;
+border-radius: 0 !important;
 }
 .gm-style-iw-d {
   overflow: hidden !important;
 }
 .gm-style-iw-tc::after {
-  background: rgb(50, 86, 73) !important;
+  background-color: rgb(52, 51, 51) !important;
 }
 .direction-link {
   font-size: 18px;
