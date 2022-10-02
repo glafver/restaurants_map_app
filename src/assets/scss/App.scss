@@ -34,8 +34,8 @@
   outline: none;
   text-overflow: ellipses;
   position: absolute;
-  top: 60px;
-  right: 130px;
+  top: 5px;
+  right: 140px;
 }
 
 .restaurant-info-window {
@@ -160,7 +160,9 @@ border-radius: 0 !important;
   background-color: rgb(201, 132, 4);
 }
 
-
+.gm-svpc, .gm-style-mtc {
+  display: none;
+}
 @media only screen and (min-width: 992px) {
   /* For desktop: */
 
