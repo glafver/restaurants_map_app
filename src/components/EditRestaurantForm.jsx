@@ -53,7 +53,7 @@ const EditRestaurantForm = ({ restaurant }) => {
         <>
             <Card>
                 <Card.Body>
-                    <Card.Title className="mb-3">Edit a restaurant</Card.Title>
+                    <Card.Title >Edit a restaurant</Card.Title>
 
                     <Form onSubmit={handleSubmit(onEdit)} noValidate>
                         <Form.Group controlId="name" className="mb-3">
@@ -178,7 +178,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                             />
                         </Form.Group>
 
-                        <Button type="submit" className="mb-3 mx-auto">Submit</Button>
+                        <Button type="submit" >Submit</Button>
                     </Form>
                 </Card.Body>
             </Card>

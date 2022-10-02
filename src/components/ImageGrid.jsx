@@ -1,21 +1,18 @@
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+
 
 const ImageGrid = ({ photos }) => {
 
-	const columnsCountBreakPoints = { 350: 1, 750: 2, 900: 3 };
-
 	return (
 		<>
-			{photos &&
-				<ResponsiveMasonry columnsCountBreakPoints={columnsCountBreakPoints} className="m-4">
-					<Masonry gutter='10px'>
-						{photos.map((photo) => (
-							<img src={photo.url} key={photo.id} />
-						))}
-					</Masonry>
-				</ResponsiveMasonry>
-			}
+			<div className="d-flex col-12 flex-wrap mt-5">
+				{photos && photos.map((photo) => (
+					<div className="col-lg-2 col-md-3 col-xs-6 " key={photo.id}>
+						<div className="m-2" style={{ paddingBottom: '100%', backgroundImage: `url(${photo.url})`, backgroundSize: 'cover' }}></div>
+					</div>
+				))
+				}
 
+			</div>
 		</>
 	)
 }
