@@ -8,9 +8,17 @@ const RestaurantsList = ({ restaurants }) => {
 
     const position = usePosition()
 
+    const getDirection = (geo) => {
+        const googleLink = 'https://www.google.com/maps/dir/?api=1&destination=';
+        const position = `${geo.lat},${geo.lng}`;
+        const destinationToURL = encodeURIComponent(position);
+        const destinantionLink = googleLink + destinationToURL;
+        window.open(destinantionLink, '_blank')
+    }
+
     useEffect(() => {
 
-        if (restaurants && position) {
+        if (restaurants && position.latitude) {
             restaurants.forEach(data => {
                 let distance = getDistance(
                     { latitude: data.geolocation.lat, longitude: data.geolocation.lat },
@@ -39,6 +47,8 @@ const RestaurantsList = ({ restaurants }) => {
                                     {restaurant.distance}
 
                                 </Card.Text>
+                                <Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link>
+                                <br />
                                 <Button className="mb-4" variant="secondary" as={Link} to={`/restaurants/${restaurant.id}`}>More about restaurant...</Button>
                             </Card.Body>
                         </Card>
