@@ -26,6 +26,7 @@ const RestaurantPage = () => {
 
 	const { currentUser } = useAuthContext()
 
+
 	useEffect(() => {
 
 		if (position.latitude && data.geolocation.lat) {
@@ -58,7 +59,7 @@ const RestaurantPage = () => {
 									</tr>
 									<tr>
 										<td><b>Type:</b></td>
-										<td>{data.type}</td>
+										<td>{data.type.replace(/_/g, ' ')}</td>
 									</tr>
 									<tr>
 										<td><b>Cuisine:</b></td>

@@ -137,8 +137,8 @@ const CreateRestaurantForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="fine_dining">Fine dining</option>
-								<option value="fast_food">Fast-food restaurant</option>
+								<option value="fine dining">Fine dining</option>
+								<option value="fast food">Fast-food restaurant</option>
 								<option value="cafe">Café</option>
 								<option value="other">Other</option>
 							</Form.Select>
@@ -156,7 +156,7 @@ const CreateRestaurantForm = () => {
 						<Form.Group controlId="e_mail" className="mb-3">
 							<Form.Label>E-mail</Form.Label>
 							<Form.Control
-								defaultValue={restaurant.e_mail}
+							
 								type="text"
 								{...register("e_mail")}
 							/>
