@@ -3,18 +3,12 @@ import { useMemo } from "react"
 import { Button, ButtonGroup, Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import SortableTable from "../components/SortableTable"
-import { doc, deleteDoc } from 'firebase/firestore'
-import { db } from '../firebase'
+import useRestaurant from "../hooks/useRestaurant"
 
 const EditRestaurantsPage = () => {
 
     const data = useRestaurants()
-    console.log('data', data)
-
-    const deleteRestaurant = async (row) => {
-        const docRef = doc(db, 'restaurants', row.data[row.row.index].id)
-        await deleteDoc(docRef)
-    }
+    const { deleteRestaurant } = useRestaurant()
 
     const columns = useMemo(() => {
         return [
@@ -51,7 +45,7 @@ const EditRestaurantsPage = () => {
                     (row) => {
                         return <ButtonGroup>
                             < Button variant="warning" as={Link} to={`/edit_restaurants/${row.data[row.row.index].id}`} > Edit </Button>
-                            < Button variant="danger" onClick={() => deleteRestaurant(row)} > Delete </Button>
+                            < Button variant="danger" onClick={() => deleteRestaurant(row.data[row.row.index].id)} > Delete </Button>
                         </ButtonGroup>
                     }
             }

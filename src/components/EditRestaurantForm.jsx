@@ -7,7 +7,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from 'react-toastify'
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import 'react-phone-number-input/style.css'
 
@@ -100,22 +100,22 @@ const EditRestaurantForm = ({ restaurant }) => {
                                 className=""
                                 {...register("cuisine")}
                             >
-                                <option>{restaurant.cuisine}</option>
-                                <option value="swedish">Swedish</option>
-                                <option value="italian">Italian</option>
-                                <option value="french">French</option>
-                                <option value="polish">Polish</option>
-                                <option value="russian">Russian</option>
-                                <option value="serbian">Serbian</option>
-                                <option value="japanese">Japanese</option>
-                                <option value="chinese">Chinese</option>
-                                <option value="thai">Thai</option>
-                                <option value="indian">Indian</option>
-                                <option value="vietnamese">Vietnamese</option>
-                                <option value="american">American</option>
-                                <option value="arabic">Arabic</option>
-                                <option value="european">European</option>
-                                <option value="other">Other</option>
+                                <option></option>
+                                <option value="Swedish">Swedish</option>
+                                <option value="Italian">Italian</option>
+                                <option value="French">French</option>
+                                <option value="Polish">Polish</option>
+                                <option value="Russian">Russian</option>
+                                <option value="Serbian">Serbian</option>
+                                <option value="Japanese">Japanese</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Thai">Thai</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Vietnamese">Vietnamese</option>
+                                <option value="American">American</option>
+                                <option value="Arabic">Arabic</option>
+                                <option value="European">European</option>
+                                <option value="Other">Other</option>
                             </Form.Select>
                         </Form.Group>
 
@@ -125,11 +125,11 @@ const EditRestaurantForm = ({ restaurant }) => {
                                 className=""
                                 {...register("type")}
                             >
-                                <option>{restaurant.type}</option>
-                                <option value="fine_dining">Fine dining</option>
-                                <option value="fast_food">Fast-food restaurant</option>
-                                <option value="cafe">Café</option>
-                                <option value="other">Other</option>
+                                <option></option>
+                                <option value="Fine dining">Fine dining</option>
+                                <option value="Fast food">Fast-food restaurant</option>
+                                <option value="Cafe">Café</option>
+                                <option value="Other">Other</option>
                             </Form.Select>
                         </Form.Group>
 

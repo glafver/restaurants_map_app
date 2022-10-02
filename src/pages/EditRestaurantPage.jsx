@@ -12,7 +12,8 @@ const EditRestaurantPage = () => {
 
     const { id } = useParams()
 
-    const { data } = useRestaurant(id)
+    const { getRestaurant } = useRestaurant()
+    const { data } = getRestaurant(id)
     const { data: photos } = useEditPhotos(id)
 
     return (
