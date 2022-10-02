@@ -1,12 +1,18 @@
-import { Card, Row, Col, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import usePosition from '../hooks/usePosition'
-import getDistance from 'geolib/es/getPreciseDistance'
-import { useEffect } from 'react'
+import { Card, Row, Col, Button, Image } from 'react-bootstrap'
+// import { Link } from 'react-router-dom'
+// import usePosition from '../hooks/usePosition'
+// import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import { useState, useEffect } from 'react'
+import RestaurantImage from '../assets/images/restaurant_example.jpeg'
+import { getDistance } from 'geolib';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUtensils, faLocationDot, faCircleInfo, faRoute } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 const RestaurantsList = ({ restaurants }) => {
 
-    const position = usePosition()
+    // const position = usePosition()
 
     const getDirection = (geo) => {
         const googleLink = 'https://www.google.com/maps/dir/?api=1&destination=';
@@ -16,48 +22,33 @@ const RestaurantsList = ({ restaurants }) => {
         window.open(destinantionLink, '_blank')
     }
 
-    useEffect(() => {
-
-        if (restaurants && position.latitude) {
-            restaurants.forEach(data => {
-                let distance = getDistance(
-                    { latitude: data.geolocation.lat, longitude: data.geolocation.lat },
-                    { latitude: position.latitude, longitude: position.latitude }
-                )
-                data.distance = distance
-            });
-        }
-
-    }, [restaurants, position])
-
     return (
 
         <>
             <Row className="overflow-auto" style={{ height: "600px" }}>
-                {restaurants && restaurants.map(restaurant => (
-                    <Col className='col-12' key={restaurant.id}>
-                        <Card className="mb-4">
-                            <Card.Body>
-                                <Card.Title>{restaurant.name}</Card.Title>
-                                <Card.Text>
-                                    {restaurant.description}
+                {restaurants && restaurants.map((restaurant, index) => (
 
-                                </Card.Text>
-                                <Card.Text>
-                                    {restaurant.distance}
-
-                                </Card.Text>
-                                <Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link>
-                                <br />
-                                <Button className="mb-4" variant="secondary" as={Link} to={`/restaurants/${restaurant.id}`}>More about restaurant...</Button>
+                    <div className='col-12 d-flex' key={index}>
+                        <Card className='restaurant-card col-6 mb-2'>
+                            {/* <Card.Img variant="top" src={RestaurantImage} /> */}
+                            <Card.Body className='card-body'>
+                                <Card.Title className='restaurant-card-title'>{restaurant.name}</Card.Title>
+                                <div>
+                                    <p className='card-restaurant-info'> <FontAwesomeIcon className='card-icons' icon={faLocationDot} /> {restaurant.adress}</p>
+                                    <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faUtensils} /> {restaurant.cuisine}</p>
+                                    <p className='card-restaurant-info'><FontAwesomeIcon className='card-icons' icon={faCircleInfo} /><Link className='nav-color' to={`/restaurants/${restaurant.id}`}>More info</Link> </p>
+                                    <Link className='nav-color direction-link' onClick={() => getDirection(restaurant.geolocation)}>Get direction</Link>
+                                </div>
                             </Card.Body>
+                            <Card.Footer className='card-footer'>
+                                <FontAwesomeIcon className='card-icons' icon={faRoute} /> {restaurant.distance} m
+                            </Card.Footer>
                         </Card>
-                    </Col>
+                        <Image src={RestaurantImage} className='card-image fluid col-6 mb-2' ></Image>
+                    </div>
+
                 ))}
             </Row>
-
-
-
         </>
 
     )

@@ -7,8 +7,8 @@ const HomePage = () => {
 
 	return (
 		<div className="homepage">
-			<img src={Logo} alt="logo" className='logo'/><br/>
-			<Link to={'/map'}><img className='link-to-map'  src={LinkToRestaurants} alt='link'/></Link>
+			<img src={Logo} alt="logo" className='logo' /><br />
+			<Link to={'/restaurants'}><img className='link-to-map' src={LinkToRestaurants} alt='link' /></Link>
 		</div>
 	)
 }

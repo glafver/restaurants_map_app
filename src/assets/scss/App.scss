@@ -42,18 +42,22 @@
   font-family: 'Cormorant Garamond', serif;
   background-color: rgb(52, 51, 51);
   color: rgb(254, 192, 84);
-	padding: 15px
+  padding: 15px
 }
-.gm-style .gm-style-iw-c{
-padding: 0 !important;
-border-radius: 0 !important;
+
+.gm-style .gm-style-iw-c {
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
+
 .gm-style-iw-d {
   overflow: hidden !important;
 }
+
 .gm-style-iw-tc::after {
   background-color: rgb(52, 51, 51) !important;
 }
+
 .direction-link {
   font-size: 18px;
   margin-bottom: 5px;
@@ -64,15 +68,18 @@ border-radius: 0 !important;
   height: 40px !important;
   opacity: none !important;
 }
+
 .restaurant-title {
   margin-bottom: 5px;
   font-size: 25px;
   font-style: italic;
 }
+
 .restaurant-info {
   margin-bottom: 5px;
   font-size: 16px;
 }
+
 .restaurant-info-bold {
   font-weight: 500;
 }
@@ -96,9 +103,10 @@ border-radius: 0 !important;
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
   border-radius: 0;
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
 }
-.restaurant-card-title{
+
+.restaurant-card-title {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 22px;
@@ -107,13 +115,16 @@ border-radius: 0 !important;
 .navbar {
   background-color: rgb(14, 67, 48);
 }
+
 .brand-title {
   width: 60%;
 }
+
 .nav-links {
   font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
 }
+
 .nav-color {
   color: rgb(254, 192, 84) !important;
 }
@@ -121,17 +132,20 @@ border-radius: 0 !important;
 .dropdown-toggle::after {
   color: rgb(254, 192, 84) !important;
 }
+
 .card-restaurant-info {
   margin-bottom: 2px;
 }
-.card-body {
-  padding-bottom: 0;
-}
+
+// .card-body {
+//   padding-bottom: 0;
+// }
 .card-footer {
   border-top: 0;
   padding-top: 0;
   background-color: rgb(31, 31, 31);
 }
+
 .homepage {
   width: 100%;
   height: 600px;
@@ -146,7 +160,7 @@ border-radius: 0 !important;
 }
 
 .link-to-map {
- width: 30%;
+  width: 30%;
 }
 
 .link-to-map:hover {
@@ -156,6 +170,11 @@ border-radius: 0 !important;
 .card-icons {
   padding-right: 5px;
 }
-.restaurant-page-container{
+
+.restaurant-page-container {
   background-color: rgb(201, 132, 4);
+}
+
+.card-image {
+  object-fit: cover;
 }
