@@ -35,7 +35,7 @@ const Map = () => {
 
   const containerStyle = {
     width: '100%',
-    height: '600px'
+    height: '600px',
   };
 
   const onSearchLoad = ref => setSearchBox(ref);
@@ -86,13 +86,14 @@ const Map = () => {
         center={currentPosition ? currentPosition : { lat: 55.606, lng: 13.021 }}
         zoom={currentZoom}
         onLoad={map => handleMapOnLoad(map)}
+        className='google-map'
       >
 
         {isMyLocation && <Marker position={myPosition} icon={MarkerIcon} />}
 
         {!isLoading && <Markers restaurants={restaurants} />}
 
-        <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged}>
+        <StandaloneSearchBox onLoad={onSearchLoad} onPlacesChanged={onPlacesChanged} className='search-box-container'>
           <input
             type='text'
             placeholder='Search location'
