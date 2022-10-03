@@ -76,8 +76,8 @@ const RestaurantsFilter = () => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Button className='col-6 m-2 align-self-center' type="submit">Apply filters</Button>
-                    <Button className='col-6 m-2 align-self-center' onClick={() => resetFilters()}>Reset filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center' type="submit">Apply filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center' onClick={() => resetFilters()}>Reset filters</Button>
                 </Form>
 
             </div>
