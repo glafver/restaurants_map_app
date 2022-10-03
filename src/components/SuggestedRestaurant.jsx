@@ -190,7 +190,7 @@ const SuggestedRestaurant = () => {
 
 
 					<ButtonGroup className="d-flex">
-						<Button type="submit">Accept</Button>
+						<Button className="custom-button" type="submit">Accept</Button>
 						<Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
 					</ButtonGroup>
 				</Form>

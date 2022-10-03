@@ -118,7 +118,7 @@ const UpdateProfilePage = () => {
 									<Form.Control type="password" ref={passwordConfirmRef} autoComplete="new-password" />
 								</Form.Group>
 
-								<Button disabled={loading} type="submit">Update</Button>
+								<Button className="custom-button" disabled={loading} type="submit">Update</Button>
 							</Form>
 						</Card.Body>
 					</Card>
