@@ -26,7 +26,7 @@ const EditRestaurantsPage = () => {
             },
             {
                 Header: 'Type',
-                accessor: 'type'
+                accessor: 'type',
             },
             {
                 Header: 'Cuisine',
@@ -54,7 +54,7 @@ const EditRestaurantsPage = () => {
     }, [])
 
     return (
-        <Container className="py-3">
+        <Container className="py-3 table-responsive">
             {data && <SortableTable columns={columns} data={data} />}
         </Container>
     )

@@ -5,7 +5,6 @@ import { Card, Row, Col, Button, Image } from 'react-bootstrap'
 import CardGroup from 'react-bootstrap/CardGroup';
 import { useState, useEffect } from 'react'
 import RestaurantImage from '../assets/images/restaurant_example.jpeg'
-import { getDistance } from 'geolib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
