@@ -1,5 +1,5 @@
 import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { collection, query } from 'firebase/firestore'
+import { collection, query, orderBy } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useSearchParams } from 'react-router-dom'
 import usePosition from './usePosition'
@@ -16,7 +16,7 @@ const useRestaurants = () => {
 		sort: searchParams.get('sort')
 	}
 
-	let queryRef = query(collection(db, 'restaurants'))
+	let queryRef = query(collection(db, 'restaurants'), orderBy("name", "asc"))
 
 	const restaurantQuery = useFirestoreQueryData(['restaurants'], queryRef, {
 		idField: 'id',
@@ -59,12 +59,10 @@ const useRestaurants = () => {
 			if (params.sort && position.latitude) {
 				if (params.sort === 'asc') {
 					// restaurants.sort((a, b) => a.distance.localeCompare(b.distance))
-					console.log('first')
 					restaurants.sort((a, b) => a.distance - b.distance)
 				}
 				if (params.sort === 'desc') {
 					// restaurants.sort((a, b) => b.distance.localeCompare(a.distance))
-					console.log('second')
 					restaurants.sort((a, b) => b.distance - a.distance)
 				}
 			}
