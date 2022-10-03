@@ -3,6 +3,10 @@
 @import 'toastify';
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
 
+body {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 .custom-map-control-button {
   background-color: #fff;
   border: 0;
@@ -169,21 +173,63 @@
 .card-icons {
   padding-right: 5px;
 }
-
-.restaurant-page-container {
-  background-color: rgb(244, 212, 184);
+.restaurant-page-container{
+  background-color: rgb(236, 227, 218);
+  min-height: 600px;
 }
 
 .restaurant-page-card {
   border-radius: 0;
+  border: 0;
+  box-shadow: rgba(100, 100, 111, 0.2) 2px 9px 31px 2px;
+  background-color: rgb(236, 227, 218);
+  font-size: 20px;
+  padding-right: 0;
+  padding-left: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.restaurant-page-card-body{
+  padding: 5px;
+}
+.restuarant-name{
+  font-size: 35px;
+  color: rgb(87, 55, 0);
+  font-style: italic;
+}
+.restaurant-title-underline{
+  color: rgb(87, 55, 0);
+  height: 3px;
+  width: 230px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.restaurant-photo{
+  width: 100%;
+  max-height: 450px;
+}
+.col-photo-restaurant {
+  text-align: center;
+  margin: auto;
+}
+.media-icons {
+  font-size: 25px;
+  color:  rgb(87, 55, 0);
+}
+.table {
+  margin-bottom: 5px;
 }
 
 .card-image {
   object-fit: cover;
 }
 
-.gm-svpc,
-.gm-style-mtc {
+.table > :not(caption) > * > * {
+  border: 0;
+  padding-bottom: 0;
+}
+.gm-svpc, .gm-style-mtc {
   display: none;
 }
 
