@@ -14,8 +14,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import { useNavigate, useParams } from 'react-router-dom'
 
 const SuggestedRestaurant = ({ restaurant }) => {
-	const { id } = useParams()
-	const navigate = useNavigate()
+    const { id } = useParams()
+    const navigate = useNavigate()
 
     const [addressValue, setAddressValue] = useState('')
 
@@ -48,30 +48,30 @@ const SuggestedRestaurant = ({ restaurant }) => {
             e_mail: data.e_mail
         }
 
-      
-        await addDoc(collection(db, "restaurants"), {
-			...restaurant,
-		})
 
-		const suggestionRef = doc(db, 'suggestions', id)
-		await deleteDoc(suggestionRef)
+        await addDoc(collection(db, "restaurants"), {
+            ...restaurant,
+        })
+
+        const suggestionRef = doc(db, 'suggestions', id)
+        await deleteDoc(suggestionRef)
 
         toast.success("Restaurant updated!")
 
-		navigate('/restaurants', { replace: true })
+        navigate('/restaurants', { replace: true })
     }
 
 
 
-	const deleteSuggestion = async () => {
-		const suggestionRef = doc(db, 'suggestions', restaurant.id)
-		await deleteDoc(suggestionRef)
+    const deleteSuggestion = async () => {
+        const suggestionRef = doc(db, 'suggestions', restaurant.id)
+        await deleteDoc(suggestionRef)
 
-		toast.success('Discarded')
+        toast.success('Discarded')
 
-		// redirect user to todos list
-		navigate('/restaurants', { replace: true })
-	}
+        // redirect user to todos list
+        navigate('/restaurants', { replace: true })
+    }
 
 
     return (
@@ -202,32 +202,14 @@ const SuggestedRestaurant = ({ restaurant }) => {
                                 {...register("insta")}
                             />
                         </Form.Group>
-						<ButtonGroup className="d-flex"><Button type="submit" className="mb-3 mx-auto">Submit</Button>
-						<Button variant="danger" className="mb-3 mx-auto" onClick={deleteSuggestion}>Discard</Button></ButtonGroup>
-                        
+                        <ButtonGroup className="d-flex"><Button type="submit" className="mb-3 mx-auto">Submit</Button>
+                            <Button variant="danger" className="mb-3 mx-auto" onClick={deleteSuggestion}>Discard</Button></ButtonGroup>
+
                     </Form>
                 </Card.Body>
             </Card>
-
-					<Form.Group controlId="insta" className="mb-3">
-						<Form.Label>Instagram</Form.Label>
-						<Form.Control
-							value={suggestion.insta}
-							type="text"
-							{...register("insta")}
-						/>
-					</Form.Group>
-
-
-
-					<ButtonGroup className="d-flex">
-						<Button className="custom-button" type="submit">Accept</Button>
-						<Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
-					</ButtonGroup>
-				</Form>
-			</Card.Body>
-		</Card>
-	);
+        </>
+    );
 };
 
 export default SuggestedRestaurant;
