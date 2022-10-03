@@ -202,8 +202,13 @@ const SuggestedRestaurant = ({ restaurant }) => {
                                 {...register("insta")}
                             />
                         </Form.Group>
-                        <ButtonGroup className="d-flex"><Button type="submit" className="mb-3 mx-auto">Submit</Button>
-                            <Button variant="danger" className="mb-3 mx-auto" onClick={deleteSuggestion}>Discard</Button></ButtonGroup>
+                        <ButtonGroup className="d-flex">
+
+                            <Button className="custom-button" type="submit">Accept</Button>
+
+                            <Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
+
+                        </ButtonGroup>
 
                     </Form>
                 </Card.Body>
