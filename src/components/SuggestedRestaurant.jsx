@@ -209,8 +209,30 @@ const SuggestedRestaurant = ({ restaurant }) => {
                 </Card.Body>
             </Card>
 
+<<<<<<< HEAD
         </>
     );
+=======
+					<Form.Group controlId="insta" className="mb-3">
+						<Form.Label>Instagram</Form.Label>
+						<Form.Control
+							value={suggestion.insta}
+							type="text"
+							{...register("insta")}
+						/>
+					</Form.Group>
+
+
+
+					<ButtonGroup className="d-flex">
+						<Button className="custom-button" type="submit">Accept</Button>
+						<Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
+					</ButtonGroup>
+				</Form>
+			</Card.Body>
+		</Card>
+	);
+>>>>>>> 5e57f2b27803b64b9f92f709306c0182db101625
 };
 
 export default SuggestedRestaurant;

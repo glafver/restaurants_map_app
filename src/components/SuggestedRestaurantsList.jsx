@@ -22,11 +22,12 @@ const SuggestedRestaurantsList = () => {
                                 <Card.Text>
                                     {suggestion.description}
                                 </Card.Text>
-								<Button variant="secondary" as={Link} to={`/suggestions/${suggestion.id}`} >Review</Button>
+								<Button className="custom-button" as={Link} to={`/suggestions/${suggestion.id}`} >Review</Button>
                             </Card.Body>
                         </Card>
                     </Col>
                 ))}
+                {!data && <p>There is no suggestions yet.</p>}
             </Row>
 
         </>

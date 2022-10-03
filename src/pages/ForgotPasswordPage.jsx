@@ -52,7 +52,7 @@ const ForgotPasswordPage = () => {
 									<Form.Control type="email" ref={emailRef} required />
 								</Form.Group>
 
-								<Button disabled={loading} type="submit">Send password reset email</Button>
+								<Button className="custom-button" disabled={loading} type="submit">Send password reset email</Button>
 							</Form>
 
 						</Card.Body>

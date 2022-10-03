@@ -44,7 +44,7 @@ const EditRestaurantsPage = () => {
                 Cell:
                     (row) => {
                         return <ButtonGroup>
-                            < Button variant="warning" as={Link} to={`/edit_restaurants/${row.data[row.row.index].id}`} > Edit </Button>
+                            < Button className="custom-button" as={Link} to={`/edit_restaurants/${row.data[row.row.index].id}`} > Edit </Button>
                             < Button variant="danger" onClick={() => deleteRestaurant(row.data[row.row.index].id)} > Delete </Button>
                         </ButtonGroup>
                     }

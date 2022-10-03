@@ -49,7 +49,7 @@ const UsersPage = () => {
                 },
                 Cell: tableProps => (
                     !tableProps.row.original.isAdmin ?
-                        < Button onClick={() => { makeAdmin(tableProps) }} > Make Admin </Button>
+                        < Button className="custom-button" onClick={() => { makeAdmin(tableProps) }} > Make Admin </Button>
                         : <i>(admin)</i>
                 )
             }

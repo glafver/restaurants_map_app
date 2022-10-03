@@ -49,7 +49,7 @@ const LoginPage = () => {
 									<Form.Control type="password" ref={passwordRef} required />
 								</Form.Group>
 
-								<Button disabled={loading} type="submit">Log In</Button>
+								<Button className="custom-button" disabled={loading} type="submit">Log In</Button>
 							</Form>
 							<div className="text-center mt-3">
 								<Link to="/forgot-password">Forgot Password?</Link>

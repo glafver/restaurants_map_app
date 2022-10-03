@@ -152,7 +152,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                         </Form.Group>
 
                         <Form.Group controlId="web_site" className="mb-3">
-                            <Form.Label>Web site</Form.Label>
+                            <Form.Label>Website</Form.Label>
                             <Form.Control
                                 defaultValue={restaurant.web_site}
                                 type="text"
@@ -178,7 +178,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                             />
                         </Form.Group>
 
-                        <Button type="submit" >Submit</Button>
+                        <Button className="custom-button" type="submit" >Submit</Button>
                     </Form>
                 </Card.Body>
             </Card>

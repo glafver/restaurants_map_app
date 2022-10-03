@@ -28,7 +28,7 @@ const EditRestaurantImageGrid = ({ photos }) => {
 
 						{!photo.approved &&
 							<Button
-								variant="success"
+							className="custom-button"
 								size="sm"
 								onClick={() => approve(photo.id)}
 							>

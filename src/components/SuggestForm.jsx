@@ -154,7 +154,7 @@ const SuggestForm = () => {
 						</Form.Group>
 
 						<Form.Group controlId="web_site" className="mb-3">
-							<Form.Label>Web site</Form.Label>
+							<Form.Label>Website</Form.Label>
 							<Form.Control
 								type="text"
 								{...register("web_site")}
@@ -177,7 +177,7 @@ const SuggestForm = () => {
 							/>
 						</Form.Group>
 
-						<Button type="submit">Submit</Button>
+						<Button type="submit" className="custom-button">Submit</Button>
 					</Form>
 				</Card.Body>
 			</Card>
