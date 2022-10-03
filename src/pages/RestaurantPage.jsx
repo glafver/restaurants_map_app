@@ -9,7 +9,6 @@ import UploadPhotos from "../components/UploadPhotos";
 import ImageGrid from "../components/ImageGrid";
 import usePhotos from "../hooks/usePhotos";
 import RestaurantCard from "../components/RestaurantCard";
-import LoadingSpinner from "../components/LoadingSpinner";
 
 const RestaurantPage = () => {
 
@@ -23,7 +22,7 @@ const RestaurantPage = () => {
 
 	return (
 		<>
-			<Container className="py-3 center-y">
+			<Container className="py-3 center-y restaurant-page-container">
 				<Row>
 					<Col md={{ span: 6 }}>
 						<RestaurantCard data={data} />

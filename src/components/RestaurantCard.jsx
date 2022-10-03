@@ -22,7 +22,7 @@ const RestaurantCard = ({ data }) => {
 
     return (
         <>
-            <Card>
+            <Card className="restaurant-page-card">
                 <Card.Body>
                     <Card.Title className="text-center">{data.name}</Card.Title>
                     <Table>

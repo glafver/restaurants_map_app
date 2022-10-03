@@ -1,6 +1,5 @@
 import useDeletePhoto from '../hooks/useDeletePhoto'
 import useApprovePhoto from '../hooks/useApprovePhoto'
-import ModalImage from 'react-modal-image'
 import { Button } from 'react-bootstrap'
 
 const EditRestaurantImageGrid = ({ photos }) => {
@@ -10,15 +9,10 @@ const EditRestaurantImageGrid = ({ photos }) => {
 
 	return (
 
-		<div className="d-flex col-12 flex-wrap mt-5">
+		<div className="d-flex col-12 flex-wrap mt-5 justify-content-center">
 			{photos && photos.map((photo) => (
 				<div className="col-lg-2 col-md-3 col-xs-6 " key={photo.id}>
 					<div className="m-2" style={{ paddingBottom: '100%', backgroundImage: `url(${photo.url})`, backgroundSize: 'cover' }}>
-						{/* <ModalImage
-							small={photo.url}
-							large={photo.url}
-							className='d-none'
-						/> */}
 					</div>
 					<div className="mx-2 mb-5">
 						<Button

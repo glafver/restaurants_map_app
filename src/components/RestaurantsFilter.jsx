@@ -70,9 +70,9 @@ const RestaurantsFilter = () => {
 
                     <Form.Group >
                         <Form.Select {...register('sort')}>
-                            <option value="">{'Sort by name'}</option>
-                            <option value="acs">🔼</option>
-                            <option value="dec">🔽</option>
+                            <option value="">{'Sort by distance'}</option>
+                            <option value="asc">Nearest first</option>
+                            <option value="desc">Farest first</option>
                         </Form.Select>
                     </Form.Group>
 

@@ -3,7 +3,6 @@ import { collection, query } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useSearchParams } from 'react-router-dom'
 import usePosition from './usePosition'
-import { useEffect } from 'react'
 import getDistance from 'geolib/es/getPreciseDistance'
 
 const useRestaurants = () => {
@@ -57,12 +56,16 @@ const useRestaurants = () => {
 				})
 			}
 
-			if (params.sort) {
+			if (params.sort && position.latitude) {
 				if (params.sort === 'asc') {
-					restaurants.sort((a, b) => a.name.localeCompare(b.name))
+					// restaurants.sort((a, b) => a.distance.localeCompare(b.distance))
+					console.log('first')
+					restaurants.sort((a, b) => a.distance - b.distance)
 				}
-				if (params.sort === 'dec') {
-					restaurants.sort((a, b) => b.name.localeCompare(a.name))
+				if (params.sort === 'desc') {
+					// restaurants.sort((a, b) => b.distance.localeCompare(a.distance))
+					console.log('second')
+					restaurants.sort((a, b) => b.distance - a.distance)
 				}
 			}
 
