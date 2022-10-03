@@ -41,7 +41,8 @@ const RestaurantsList = ({ restaurants }) => {
                                 </div>
                             </Card.Body>
                             <Card.Footer className='card-footer'>
-                                <FontAwesomeIcon className='card-icons' icon={faRoute} /> {restaurant.distance} m
+                                {restaurant.distance ? <> <FontAwesomeIcon className='card-icons' icon={faRoute} /> {restaurant.distance} m</>
+                                    : ""}
                             </Card.Footer>
                         </Card>
                         <Image src={RestaurantImage} className='card-image fluid col-6 mb-2' ></Image>
