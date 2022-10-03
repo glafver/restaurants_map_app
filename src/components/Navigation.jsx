@@ -12,14 +12,14 @@ const Navigation = () => {
 
 	return (
 		<Navbar variant="dark" expand="md" className='navbar'>
-			<Container>
-				<Navbar.Brand as={Link} to="/" className='nav-brand'>
+			<Container className='justify-content-end '>
+				<Navbar.Brand as={Link} to="/" className='nav-brand col-9 col-md-6'>
 					<img className="brand-title" src={Title} alt="brand-title" />
 				</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav" className='nav-links'>
-					<Nav className="ms-auto">
+					<Nav className="ms-auto align-items-end">
 						<Nav.Link className="nav-color" as={NavLink} to="/restaurants">Restaurants</Nav.Link>
 						{!currentUser && !isAdmin &&
 							<>
