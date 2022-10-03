@@ -36,11 +36,11 @@ const EditRestaurantForm = ({ restaurant }) => {
             description: data.description || restaurant.description,
             cuisine: data.cuisine || restaurant.cuisine,
             type: data.type || restaurant.type,
-            web_site: data.web_site,
-            insta: data.insta,
-            fb: data.fb,
-            tel: data.tel,
-            e_mail: data.e_mail
+            web_site: data.web_site  || restaurant.web_site,
+            insta: data.insta  || restaurant.insta,
+            fb: data.fb ||restaurant.fb,
+            tel: data.tel || restaurant.tel,
+            e_mail: data.e_mail || restaurant.e_mail
         }
 
         const docRef = doc(db, 'restaurants', restaurant.id)

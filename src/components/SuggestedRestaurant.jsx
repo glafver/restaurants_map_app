@@ -42,7 +42,7 @@ const SuggestedRestaurant = ({ restaurant }) => {
             cuisine: data.cuisine || restaurant.cuisine,
             type: data.type || restaurant.type,
             web_site: data.web_site  || restaurant.web_site,
-            insta: data.insta  || restaurant.type,
+            insta: data.insta  || restaurant.insta,
             fb: data.fb ||restaurant.fb,
             tel: data.tel || restaurant.tel,
             e_mail: data.e_mail || restaurant.e_mail
