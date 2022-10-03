@@ -25,10 +25,10 @@ const RestaurantsList = ({ restaurants }) => {
     return (
 
         <>
-            <Row className="overflow-auto" style={{ height: "600px" }}>
+            <Row className="overflow-auto ps-3" style={{ height: "600px" }}>
                 {restaurants && restaurants.map((restaurant, index) => (
 
-                    <div className='col-12 d-flex' key={index}>
+                    <div className='col-12 d-flex p-0' key={index}>
                         <Card className='restaurant-card col-6 mb-2'>
                             {/* <Card.Img variant="top" src={RestaurantImage} /> */}
                             <Card.Body className='card-body'>
