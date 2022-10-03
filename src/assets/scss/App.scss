@@ -106,13 +106,13 @@ body {
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
   border-radius: 0;
-  // padding-bottom: 10px;
 }
 
 .restaurant-card-title {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 22px;
+  font-weight: 600;
 }
 
 .navbar {
@@ -140,9 +140,7 @@ body {
   margin-bottom: 2px;
 }
 
-// .card-body {
-//   padding-bottom: 0;
-// }
+
 .card-footer {
   border-top: 0;
   padding-top: 0;
@@ -176,6 +174,7 @@ body {
 .restaurant-page-container{
   background-color: rgb(236, 227, 218);
   min-height: 600px;
+  padding-bottom: 50px;
 }
 
 .restaurant-page-card {
@@ -199,7 +198,7 @@ body {
 }
 .restaurant-title-underline{
   color: rgb(87, 55, 0);
-  height: 3px;
+  height: 4px;
   width: 230px;
   margin: auto;
   margin-top: 5px;
@@ -207,7 +206,7 @@ body {
 }
 .restaurant-photo{
   width: 100%;
-  max-height: 450px;
+  max-height: 400px;
 }
 .col-photo-restaurant {
   text-align: center;
@@ -231,6 +230,21 @@ body {
 }
 .gm-svpc, .gm-style-mtc {
   display: none;
+}
+
+.upload-photos-button{
+  background-color: rgb(52, 51, 51);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-shadow: 
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+    font-size: 20px;
+}
+
+.upload-photos-button:hover {
+  background-color: rgb(14, 67, 48) !important;
 }
 
 @media only screen and (min-width: 992px) {

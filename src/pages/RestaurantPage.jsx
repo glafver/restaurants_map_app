@@ -31,7 +31,7 @@ const RestaurantPage = () => {
 				setFirstPhoto(photos[0].url)
 			}
 		}
-	}, [])
+	}, [photos])
 
 	return (
 		<div className="restaurant-page-container">
