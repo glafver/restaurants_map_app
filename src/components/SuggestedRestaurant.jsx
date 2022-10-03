@@ -50,7 +50,7 @@ const SuggestedRestaurant = ({ restaurant }) => {
 
 
         await addDoc(collection(db, "restaurants"), {
-            ...restaurant,
+            ...newData,
         })
 
         const suggestionRef = doc(db, 'suggestions', id)
@@ -75,7 +75,7 @@ const SuggestedRestaurant = ({ restaurant }) => {
 
 
     return (
-        <>
+        <> 
             <Card>
                 <Card.Body>
                     <Card.Title className="mb-3">Edit a restaurant</Card.Title>
