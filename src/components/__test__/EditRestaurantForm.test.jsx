@@ -8,11 +8,11 @@ it("the table is not empty", () => {
 
 	render(<EditRestaurantForm restaurant={restaurant} />)
 
-	// const inputElements = screen.getByLabelText(/ name */)
-	const restaurantName = screen.getByRole('textbox', { name: /name/i })
-	console.log(restaurantName)
+	const inputElement = screen.getByLabelText(/name */i)
+	// const restaurantName = screen.getByRole('textbox', { name: /name/i })
+	console.log(inputElement)
 
-	expect(inputElements.value).not.toBe('')
+	expect(inputElement.value).not.toBe('')
 })
 
 
