@@ -3,200 +3,214 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import { useNavigate, useParams } from 'react-router-dom'
-import useGetSuggestion from "../hooks/useGetSuggestion"
+import { toast } from 'react-toastify'
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { useState } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import 'react-phone-number-input/style.css'
+import ButtonGroup from "react-bootstrap/ButtonGroup"
+import { useNavigate, useParams } from 'react-router-dom'
 
-const SuggestedRestaurant = () => {
+const SuggestedRestaurant = ({ restaurant }) => {
 	const { id } = useParams()
-	const { data: suggestion, loading } = useGetSuggestion(id)
 	const navigate = useNavigate()
-	const [addressValue, setAddressValue] = useState(null)
 
-	const {
-		control,
-		formState: { errors },
-		handleSubmit,
-		register,
-	} = useForm();
+    const [addressValue, setAddressValue] = useState('')
 
-	const onSuggestion = async (newData) => {
-		await addDoc(collection(db, "restaurants"), {
-			...newData,
-		});
+    const {
+        handleSubmit,
+        register,
+        control
 
-		toast.success("New Restaurant added!");
-	};
+    } = useForm();
+
+    const onEdit = async (data) => {
+
+        if (addressValue) {
+            console.log(addressValue)
+            let geoCode = await geocodeByAddress(addressValue.label)
+            data.geolocation = await getLatLng(geoCode[0])
+        }
+
+        let newData = {
+            name: data.name || restaurant.name,
+            adress: addressValue.label || restaurant.adress,
+            geolocation: data.geolocation || restaurant.geolocation,
+            description: data.description || restaurant.description,
+            cuisine: data.cuisine || restaurant.cuisine,
+            type: data.type || restaurant.type,
+            web_site: data.web_site,
+            insta: data.insta,
+            fb: data.fb,
+            tel: data.tel,
+            e_mail: data.e_mail
+        }
+
+      
+        await addDoc(collection(db, "restaurants"), {
+			...restaurant,
+		})
+
+		const suggestionRef = doc(db, 'suggestions', id)
+		await deleteDoc(suggestionRef)
+
+        toast.success("Restaurant updated!")
+
+		navigate('/restaurants', { replace: true })
+    }
+
+
 
 	const deleteSuggestion = async () => {
-		const ref = doc(db, 'suggestions', id)
-		await deleteDoc(ref)
+		const suggestionRef = doc(db, 'suggestions', restaurant.id)
+		await deleteDoc(suggestionRef)
 
 		toast.success('Discarded')
 
 		// redirect user to todos list
-		navigate('/', { replace: true })
+		navigate('/restaurants', { replace: true })
 	}
 
 
+    return (
+        <>
+            <Card>
+                <Card.Body>
+                    <Card.Title className="mb-3">Edit a restaurant</Card.Title>
 
-	console.log("TELEFONEN", suggestion.tel)
+                    <Form onSubmit={handleSubmit(onEdit)} noValidate>
+                        <Form.Group controlId="name" className="mb-3">
+                            <Form.Label>Name *</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.name}
+                                type="text"
+                                {...register("name")}
+                            />
+                        </Form.Group>
 
+                        {/* Geolocation field */}
 
-	return (
-		<Card>
-			<Card.Body>
-				<Card.Title className="mb-3">{suggestion.name}</Card.Title>
-				<Form onSubmit={handleSubmit(onSuggestion)} noValidate>
-					<Form.Group controlId="name" className="mb-3">
-						<Form.Label>Name</Form.Label>
-						<Form.Control
-							type="text"
-							value={suggestion.name}
-							{...register("name", {
-								required: "Please enter the name of the Restaurant.",
-								minLength: {
-									value: 3,
-									message: "A Restaurant needs at least 3 characters",
-								},
-							})}
-						/>
-					</Form.Group>
-					<Form.Group controlId="adress" className="mb-3">
-						<Form.Label>Adress</Form.Label>
-						<Form.Control
-							type="text"
-							value={suggestion.adress}
-							{...register("adress", {
-								required: "Please enter the adress of the Restaurant",
-							})}
-						/>
-					</Form.Group>
-					<Form.Group className="mb-3" controlId="city">
-						<Form.Label>City</Form.Label>
-						<Form.Control
-							{...register("city", {
-								required: "Please enter the City Location",
-							})}
-							value={suggestion.adress}
-							type="text"
-							required
-						/>
-						{errors.title && <div>{errors.title.message}</div>}
-					</Form.Group>
+                        <Form.Group controlId="geolocation" className="mb-3">
+                            <Form.Label>Address *</Form.Label>
+                            <GooglePlacesAutocomplete
+                                apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                                selectProps={{
+                                    value: addressValue,
+                                    placeholder: restaurant.adress,
+                                    name: "address",
+                                    onChange: setAddressValue,
+                                    onLoadFailed: (error) => { console.log(error) }
+                                }}
+                            />
 
-					<Form.Group controlId="description" className="mb-3">
-						<Form.Label>Description</Form.Label>
-						<Form.Control
-							className="pb-5"
-							type="text"
-							value={suggestion.description}
-							{...register("description", {
-								required: "This field cant be empty",
-							})}
-							placeholder="Tell us about the Restaurant"
-						/>
-					</Form.Group>
-					<Form.Group controlId="cuisine" className="mb-3">
-						<Form.Label>Cuisine</Form.Label>
-						<Form.Control
-							className=""
-							{...register("cuisine", {
-								required: "Req field",
-							})}
-							type="text"
-							value={suggestion.cuisine}
-							required
-						/>
-						{errors.title && <div>{errors.title.message}</div>}
-					</Form.Group>
-
-					<Form.Label>Type</Form.Label>
-					<Form.Group controlId="type" className="mb-3">
-						<Form.Select
-							className=""
-							value={suggestion.type}
-							{...register("type", {
-								required: "This field cant be empty",
-							})}
-						>
-							<option value="Café">Café</option>
-							<option value="Restaurant">Restaurant</option>
-							<option value="Fast-food restaurant">Fast-food restaurant</option>
-							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>
-						</Form.Select>
-					</Form.Group>
-
-					<Form.Label>Offers</Form.Label>
-					<Form.Group controlId="offers" className="mb-3">
-						<Form.Select
-							className=""
-							value={suggestion.offers}
-							{...register("offers", {
-								required: "This field cant be empty",
-							})}
-						>
-							<option value="Café">Café</option>
-							<option value="Restaurant">Restaurant</option>
-							<option value="Fast-food restaurant">Fast-food restaurant</option>
-							<option value="Kiosk/Grill">Kiosk/Grill</option>
-							<option value="Foodtruck">Foodtruck</option>
-						</Form.Select>
-					</Form.Group>
-
-					<Form.Group controlId="tel" className="mb-3" >
-						<Form.Label>Telephone</Form.Label>
-						<PhoneInputWithCountry
-							name="tel"
-							control={control}
-							rules={{ required: false }}
-
-						/>
-					</Form.Group>
-
-					<Form.Group controlId="web_site" className="mb-3">
-						<Form.Label>Web site</Form.Label>
-						<Form.Control
-							value={suggestion.web_site}
-							type="text"
-							{...register("web_site")}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId="fb" className="mb-3">
-						<Form.Label>Facebook</Form.Label>
-						<Form.Control
-							value={suggestion.fb}
-							type="text"
-							{...register("fb")}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId="insta" className="mb-3">
-						<Form.Label>Instagram</Form.Label>
-						<Form.Control
-							value={suggestion.insta}
-							type="text"
-							{...register("insta")}
-						/>
-					</Form.Group>
+                        </Form.Group>
 
 
+                        <Form.Group controlId="description" className="mb-3">
+                            <Form.Label>Description *</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.description}
+                                className="pb-5"
+                                type="text"
+                                {...register("description")}
+                            />
+                        </Form.Group>
 
-					<ButtonGroup className="d-flex">
-						<Button type="submit">Accept</Button>
-						<Button variant="danger" onClick={deleteSuggestion}>Discard</Button>
-					</ButtonGroup>
-				</Form>
-			</Card.Body>
-		</Card>
-	);
+                        <Form.Group controlId="cuisine" className="mb-3">
+                            <Form.Label>Cuisine *</Form.Label>
+                            <Form.Select
+                                className=""
+                                {...register("cuisine")}
+                            >
+                                <option>{restaurant.cuisine}</option>
+                                <option value="swedish">Swedish</option>
+                                <option value="italian">Italian</option>
+                                <option value="french">French</option>
+                                <option value="polish">Polish</option>
+                                <option value="russian">Russian</option>
+                                <option value="serbian">Serbian</option>
+                                <option value="japanese">Japanese</option>
+                                <option value="chinese">Chinese</option>
+                                <option value="thai">Thai</option>
+                                <option value="indian">Indian</option>
+                                <option value="vietnamese">Vietnamese</option>
+                                <option value="american">American</option>
+                                <option value="arabic">Arabic</option>
+                                <option value="european">European</option>
+                                <option value="other">Other</option>
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group controlId="type" className="mb-3">
+                            <Form.Label>Type *</Form.Label>
+                            <Form.Select
+                                className=""
+                                {...register("type")}
+                            >
+                                <option>{restaurant.type}</option>
+                                <option value="fine_dining">Fine dining</option>
+                                <option value="fast_food">Fast-food restaurant</option>
+                                <option value="cafe">Café</option>
+                                <option value="other">Other</option>
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group controlId="tel" className="mb-3">
+                            <Form.Label>Telephone</Form.Label>
+                            <PhoneInputWithCountry
+                                control={control}
+                                placeholder={restaurant.tel}
+                                name="tel"
+                                rules={{ required: false }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="e_mail" className="mb-3">
+                            <Form.Label>E-mail</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.e_mail}
+                                type="text"
+                                {...register("e_mail")}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="web_site" className="mb-3">
+                            <Form.Label>Web site</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.web_site}
+                                type="text"
+                                {...register("web_site")}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="fb" className="mb-3">
+                            <Form.Label>Facebook</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.fb}
+                                type="text"
+                                {...register("fb")}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="insta" className="mb-3">
+                            <Form.Label>Instagram</Form.Label>
+                            <Form.Control
+                                defaultValue={restaurant.insta}
+                                type="text"
+                                {...register("insta")}
+                            />
+                        </Form.Group>
+						<ButtonGroup className="d-flex"><Button type="submit" className="mb-3 mx-auto">Submit</Button>
+						<Button variant="danger" className="mb-3 mx-auto" onClick={deleteSuggestion}>Discard</Button></ButtonGroup>
+                        
+                    </Form>
+                </Card.Body>
+            </Card>
+
+        </>
+    );
 };
 
 export default SuggestedRestaurant;
