@@ -40,7 +40,7 @@ const Map = ({ restaurants }) => {
     width: '100%',
     height: '600px',
   };
-  
+
 
   const onSearchLoad = ref => setSearchBox(ref);
 
