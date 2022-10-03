@@ -15,9 +15,9 @@ const RestaurantsPage = () => {
 
 			<>
 				<RestaurantsFilter />
-				<Row className="">
-					<Col className="col-6 pe-0"><RestaurantsList restaurants={restaurants} /></Col>
-					<Col className="col-6 ps-0"><Map restaurants={restaurants} ></Map></Col>
+				<Row className="flex-column flex-column-reverse flex-md-row">
+					<Col className="col-12 col-md-6 pe-md-0"><RestaurantsList restaurants={restaurants} /></Col>
+					<Col className="col-12 col-md-6 my-3 my-md-0 ps-md-0"><Map restaurants={restaurants} ></Map></Col>
 				</Row>
 			</>
 

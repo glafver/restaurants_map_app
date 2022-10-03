@@ -25,11 +25,10 @@ const RestaurantsList = ({ restaurants }) => {
     return (
 
         <>
-            <Row className="overflow-auto ps-3" style={{ height: "600px" }}>
+            <Row className="overflow-auto p-3 pt-md-0 ps-md-3s" style={{ height: "600px" }}>
                 {restaurants && restaurants.map((restaurant, index) => (
-
-                    <div className='col-12 d-flex p-0' key={index}>
-                        <Card className='restaurant-card col-6 mb-2'>
+                    <div className='col-12 d-flex flex-column flex-md-row p-0' key={index}>
+                        <Card className='restaurant-card col-12 col-md-6 mb-md-2'>
                             {/* <Card.Img variant="top" src={RestaurantImage} /> */}
                             <Card.Body className='card-body'>
                                 <Card.Title className='restaurant-card-title'>{restaurant.name}</Card.Title>
@@ -45,7 +44,7 @@ const RestaurantsList = ({ restaurants }) => {
                                     : ""}
                             </Card.Footer>
                         </Card>
-                        <Image src={RestaurantImage} className='card-image fluid col-6 mb-2' ></Image>
+                        <Image src={RestaurantImage} className='card-image fluid col-12 col-md-6 mb-2' ></Image>
                     </div>
 
                 ))}

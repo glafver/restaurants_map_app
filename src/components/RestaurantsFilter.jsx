@@ -35,8 +35,8 @@ const RestaurantsFilter = () => {
     return (
         <>
             <div className='border rounded mb-3'>
-                <Form onSubmit={handleSubmit(filterData)} className='d-flex justify-content-around my-4'>
-                    <Form.Group>
+                <Form onSubmit={handleSubmit(filterData)} className='d-flex flex-column flex-md-row justify-content-around my-md-4'>
+                    <Form.Group className='m-2'>
                         <Form.Select {...register("cuisine")}>
                             <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
                             <option value="Swedish">Swedish</option>
@@ -58,7 +58,7 @@ const RestaurantsFilter = () => {
 
                     </Form.Group>
 
-                    <Form.Group >
+                    <Form.Group className='m-2'>
                         <Form.Select {...register("type")}>
                             <option value="">{searchParams.get('type') || 'Filter by type'}</option>
                             <option value="Fine dining">Fine dining</option>
@@ -68,7 +68,7 @@ const RestaurantsFilter = () => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group >
+                    <Form.Group className='m-2'>
                         <Form.Select {...register('sort')}>
                             <option value="">{'Sort by distance'}</option>
                             <option value="asc">Nearest first</option>
@@ -76,8 +76,8 @@ const RestaurantsFilter = () => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Button type="submit">Apply filters</Button>
-                    <Button onClick={() => resetFilters()}>Reset filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center' type="submit">Apply filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center' onClick={() => resetFilters()}>Reset filters</Button>
                 </Form>
 
             </div>
