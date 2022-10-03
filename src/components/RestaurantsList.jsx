@@ -1,18 +1,11 @@
-import { Card, Row, Col, Button, Image } from 'react-bootstrap'
-// import { Link } from 'react-router-dom'
-// import usePosition from '../hooks/usePosition'
-// import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import { useState, useEffect } from 'react'
+import { Card, Row, Image } from 'react-bootstrap'
 import RestaurantImage from '../assets/images/restaurant_example.jpeg'
-import { getDistance } from 'geolib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 const RestaurantsList = ({ restaurants }) => {
 
-    // const position = usePosition()
 
     const getDirection = (geo) => {
         const googleLink = 'https://www.google.com/maps/dir/?api=1&destination=';
