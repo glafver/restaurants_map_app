@@ -34,50 +34,50 @@ const RestaurantsFilter = () => {
 
     return (
         <>
-            <div className='border rounded mb-3'>
-                <Form onSubmit={handleSubmit(filterData)} className='d-flex justify-content-around my-4'>
-                    <Form.Group>
-                        <Form.Select {...register("cuisine")}>
+            <div className='filters-container'>
+                <Form onSubmit={handleSubmit(filterData)} className='d-flex flex-column flex-md-row justify-content-around'>
+                    <Form.Group className='m-2'>
+                        <Form.Select className='filter-form-group' {...register("cuisine")}>
                             <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
-                            <option value="swedish">Swedish</option>
-                            <option value="italian">Italian</option>
-                            <option value="french">French</option>
-                            <option value="polish">Polish</option>
-                            <option value="russian">Russian</option>
-                            <option value="serbian">Serbian</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="thai">Thai</option>
-                            <option value="indian">Indian</option>
-                            <option value="vietnamese">Vietnamese</option>
-                            <option value="american">American</option>
-                            <option value="arabic">Arabic</option>
-                            <option value="european">European</option>
-                            <option value="other">Other</option>
+                            <option value="Swedish">Swedish</option>
+                            <option value="Italian">Italian</option>
+                            <option value="French">French</option>
+                            <option value="Polish">Polish</option>
+                            <option value="Russian">Russian</option>
+                            <option value="Serbian">Serbian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Thai">Thai</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="American">American</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="European">European</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
 
                     </Form.Group>
 
-                    <Form.Group >
-                        <Form.Select {...register("type")}>
+                    <Form.Group className='m-2'>
+                        <Form.Select className='filter-form-group' {...register("type")}>
                             <option value="">{searchParams.get('type') || 'Filter by type'}</option>
-                            <option value="fine_dining">Fine dining</option>
-                            <option value="fast_food">Fast-food restaurant</option>
-                            <option value="cafe">Café</option>
-                            <option value="other">Other</option>
+                            <option value="Fine dining">Fine dining</option>
+                            <option value="Fast food">Fast-food restaurant</option>
+                            <option value="Cafe">Café</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group >
-                        <Form.Select {...register('sort')}>
-                            <option value="">{'Sort by name'}</option>
-                            <option value="acs">🔼</option>
-                            <option value="dec">🔽</option>
+                    <Form.Group className='m-2'>
+                        <Form.Select className='filter-form-group' {...register('sort')}>
+                            <option value="">{'Sort by distance'}</option>
+                            <option value="asc">Nearest first</option>
+                            <option value="desc">Farest first</option>
                         </Form.Select>
                     </Form.Group>
 
-                    <Button type="submit">Apply filters</Button>
-                    <Button onClick={() => resetFilters()}>Reset filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center filter-button' type="submit">Apply filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center filter-button' onClick={() => resetFilters()}>Reset filters</Button>
                 </Form>
 
             </div>

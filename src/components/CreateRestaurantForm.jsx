@@ -155,7 +155,7 @@ const CreateRestaurantForm = () => {
 						<Form.Group controlId="e_mail" className="mb-3">
 							<Form.Label>E-mail</Form.Label>
 							<Form.Control
-							
+
 								type="text"
 								{...register("e_mail")}
 							/>

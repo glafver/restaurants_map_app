@@ -1,17 +1,46 @@
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import EditRestaurantImageCard from './EditRestaurantImageCard'
+import useDeletePhoto from '../hooks/useDeletePhoto'
+import useApprovePhoto from '../hooks/useApprovePhoto'
+import { Button } from 'react-bootstrap'
 
 const EditRestaurantImageGrid = ({ photos }) => {
 
+	const { deleting, deletePhoto } = useDeletePhoto()
+	const { approve } = useApprovePhoto()
+
 	return (
-		<Row xs={1} sm={2} md={3} lg={4} className='my-4'>
-			{photos && photos.map(photo => (
-				<Col key={photo.id} className="d-flex mb-4">
-					<EditRestaurantImageCard photo={photo} />
-				</Col>
-			))}
-		</Row>
+
+		<div className="d-flex col-12 flex-wrap mt-5 justify-content-center">
+			{photos && photos.map((photo) => (
+				<div className="col-lg-2 col-md-3 col-xs-6 " key={photo.id}>
+					<div className="m-2" style={{ paddingBottom: '100%', backgroundImage: `url(${photo.url})`, backgroundSize: 'cover' }}>
+					</div>
+					<div className="mx-2 mb-5">
+						<Button
+							disabled={deleting}
+							variant="danger"
+							size="sm"
+							onClick={() => deletePhoto(photo)}
+							className='me-2'
+						>
+							Delete
+						</Button>
+
+
+						{!photo.approved &&
+							<Button
+								variant="success"
+								size="sm"
+								onClick={() => approve(photo.id)}
+							>
+								Approve
+							</Button>
+						}
+					</div>
+				</div>
+
+			))
+			}
+		</div>
 	)
 }
 
