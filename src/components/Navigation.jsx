@@ -5,6 +5,7 @@ import { NavDropdown, Image } from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
 import Title from '../assets/images/TastyMalmo.png'
+// import BrandLogo from '../assets/images/Logo.png'
 
 const Navigation = () => {
 
@@ -14,6 +15,7 @@ const Navigation = () => {
 		<Navbar variant="dark" expand="md" className='navbar'>
 			<Container>
 				<Navbar.Brand as={Link} to="/" className='nav-brand'>
+				    {/* <img className="brand-logo" src={BrandLogo} alt="brand-logo" width={} /> */}
 					<img className="brand-title" src={Title} alt="brand-title" />
 				</Navbar.Brand>
 

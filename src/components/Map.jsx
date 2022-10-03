@@ -19,16 +19,6 @@ const Map = ({ restaurants }) => {
   const [myPosition, setMyPosition] = useState();
   const [isMyLocation, setIsMyLocation] = useState(false);
 
-  // const queryRef = query(
-  //   collection(db, 'restaurants'),
-  //   orderBy('geolocation')
-  // )
-  // const { data: restaurants, isLoading } = useFirestoreQueryData(['restaurants'], queryRef, {
-  //   idField: 'id',
-  //   subscribe: true,
-  // })
-
-  // const restaurants = useRestaurants()
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -38,7 +28,7 @@ const Map = ({ restaurants }) => {
 
   const containerStyle = {
     width: '100%',
-    height: '600px',
+    height: '525px',
   };
 
 

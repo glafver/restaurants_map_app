@@ -37,7 +37,7 @@ const RestaurantsFilter = () => {
             <div className='filters-container'>
                 <Form onSubmit={handleSubmit(filterData)} className='d-flex flex-column flex-md-row justify-content-around'>
                     <Form.Group className='m-2'>
-                        <Form.Select {...register("cuisine")}>
+                        <Form.Select className='filter-form-group' {...register("cuisine")}>
                             <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
                             <option value="Swedish">Swedish</option>
                             <option value="Italian">Italian</option>
@@ -59,7 +59,7 @@ const RestaurantsFilter = () => {
                     </Form.Group>
 
                     <Form.Group className='m-2'>
-                        <Form.Select {...register("type")}>
+                        <Form.Select className='filter-form-group' {...register("type")}>
                             <option value="">{searchParams.get('type') || 'Filter by type'}</option>
                             <option value="Fine dining">Fine dining</option>
                             <option value="Fast food">Fast-food restaurant</option>
@@ -69,15 +69,15 @@ const RestaurantsFilter = () => {
                     </Form.Group>
 
                     <Form.Group className='m-2'>
-                        <Form.Select {...register('sort')}>
+                        <Form.Select className='filter-form-group' {...register('sort')}>
                             <option value="">{'Sort by distance'}</option>
                             <option value="asc">Nearest first</option>
                             <option value="desc">Farest first</option>
                         </Form.Select>
                     </Form.Group>
 
-                    <Button className='col-6 col-md-2 m-2 align-self-center' type="submit">Apply filters</Button>
-                    <Button className='col-6 col-md-2 m-2 align-self-center' onClick={() => resetFilters()}>Reset filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center filter-button' type="submit">Apply filters</Button>
+                    <Button className='col-6 col-md-2 m-2 align-self-center filter-button' onClick={() => resetFilters()}>Reset filters</Button>
                 </Form>
 
             </div>

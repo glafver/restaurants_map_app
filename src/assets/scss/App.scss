@@ -103,7 +103,7 @@ body {
   cursor: pointer;
   background-color: rgb(31, 31, 31);
   border: 0;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
   border-radius: 0;
@@ -121,7 +121,7 @@ body {
 }
 
 .brand-title {
-  width: 60%;
+  width: 65%;
 }
 
 .nav-links {
@@ -177,6 +177,9 @@ body {
   min-height: 600px;
   padding-bottom: 50px;
 }
+.restaurants-list-container{
+  margin-top: 5px;
+}
 
 .restaurant-page-card {
   border-radius: 0;
@@ -223,7 +226,7 @@ body {
 
 .card-image {
   object-fit: cover;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
 }
 
 .table > :not(caption) > * > * {
@@ -244,15 +247,29 @@ body {
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
     font-size: 20px;
 }
-
-.upload-photos-button:hover {
-  background-color: rgb(14, 67, 48) !important;
+.filter-button {
+  background-color: rgb(210, 149, 44);
+  color: black;
+  border: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+}
+.upload-photos-button:hover, .filter-button:hover {
+  background-color: rgb(254, 192, 84) !important;
+  color: black !important;
 }
 .filters-container{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background-color: rgb(236, 227, 218);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: rgb(17, 45, 32);
   margin: 0;
+  margin-bottom: 5px;
+}
+.filter-form-group {
+  background-color: rgb(210, 149, 44);
+  border: 0;
+  border-radius: 2px;
 }
 @media only screen and (min-width: 992px) {
   /* For desktop: */
@@ -275,5 +292,10 @@ body {
     top: 10px;
     right: 55px;
   }
-
+  .filters-container{ 
+    margin-bottom: 0;
+  }
+  .restaurants-list-container{
+    margin-top: 0;
+  }
 }

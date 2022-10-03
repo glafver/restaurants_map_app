@@ -25,7 +25,7 @@ const RestaurantsList = ({ restaurants }) => {
     return (
 
         <>
-            <Row className="overflow-auto" style={{ height: "600px" }}>
+            <Row className="overflow-auto" style={{ height: "525px" }}>
                 {restaurants && restaurants.map((restaurant, index) => (
                     <div className='col-12 d-flex flex-column flex-md-row' key={index}>
                         <Card className='restaurant-card col-12 col-md-6'>
