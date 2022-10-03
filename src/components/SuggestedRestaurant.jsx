@@ -209,10 +209,6 @@ const SuggestedRestaurant = ({ restaurant }) => {
                 </Card.Body>
             </Card>
 
-<<<<<<< HEAD
-        </>
-    );
-=======
 					<Form.Group controlId="insta" className="mb-3">
 						<Form.Label>Instagram</Form.Label>
 						<Form.Control
@@ -232,7 +228,6 @@ const SuggestedRestaurant = ({ restaurant }) => {
 			</Card.Body>
 		</Card>
 	);
->>>>>>> 5e57f2b27803b64b9f92f709306c0182db101625
 };
 
 export default SuggestedRestaurant;
