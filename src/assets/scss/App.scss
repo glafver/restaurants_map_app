@@ -103,6 +103,7 @@ body {
   cursor: pointer;
   background-color: rgb(31, 31, 31);
   border: 0;
+  border-bottom: 3px solid black;
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
   border-radius: 0;
@@ -222,6 +223,7 @@ body {
 
 .card-image {
   object-fit: cover;
+  border-bottom: 3px solid black;
 }
 
 .table > :not(caption) > * > * {
@@ -246,7 +248,12 @@ body {
 .upload-photos-button:hover {
   background-color: rgb(14, 67, 48) !important;
 }
-
+.filters-container{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(236, 227, 218);
+  margin: 0;
+}
 @media only screen and (min-width: 992px) {
   /* For desktop: */
 

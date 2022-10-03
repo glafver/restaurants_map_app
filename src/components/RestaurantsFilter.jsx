@@ -34,8 +34,8 @@ const RestaurantsFilter = () => {
 
     return (
         <>
-            <div className='border rounded mb-3'>
-                <Form onSubmit={handleSubmit(filterData)} className='d-flex flex-column flex-md-row justify-content-around my-md-4'>
+            <div className='filters-container'>
+                <Form onSubmit={handleSubmit(filterData)} className='d-flex flex-column flex-md-row justify-content-around'>
                     <Form.Group className='m-2'>
                         <Form.Select {...register("cuisine")}>
                             <option value="">{searchParams.get('cuisine') || 'Filter by cuisine'}</option>
