@@ -7,7 +7,7 @@ const ImageGrid = ({ photos }) => {
 	return (
 		<>
 			{photos &&
-				<ResponsiveMasonry columnsCountBreakPoints={columnsCountBreakPoints} className="m-4">
+				<ResponsiveMasonry columnsCountBreakPoints={columnsCountBreakPoints} className="m-3">
 					<Masonry gutter='10px'>
 						{photos.map((photo) => (
 							<img src={photo.url} key={photo.id} />
