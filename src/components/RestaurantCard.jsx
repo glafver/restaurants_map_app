@@ -26,7 +26,7 @@ const RestaurantCard = ({ data }) => {
 						<Card.Body className='restaurant-page-card-body'>
 							<Card.Title className="text-center restuarant-name">{data.name}<hr className="restaurant-title-underline"></hr></Card.Title>
 						
-							<Table>
+							<Table className='restaurant-card-table'>
 								<tbody>
 									<tr>
 										<td><b>Address:</b></td>

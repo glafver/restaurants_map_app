@@ -240,10 +240,14 @@ body {
   border-bottom: 2px solid black;
 }
 
-.table> :not(caption)>*>* {
+.restaurant-card-table> :not(caption)>*>* {
   border: 0;
   padding-bottom: 0;
 }
+.sortable-table> :not(caption)>*>* {
+  border-bottom: 1px solid rgb(255, 176, 39);
+}
+
 
 .gm-svpc,
 .gm-style-mtc {
