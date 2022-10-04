@@ -106,3 +106,4 @@ it("check if inputs in the forms works correctly", async () => {
 	expect(comboboxCuisine).toHaveValue("Polish")
 	// expect(inputAddress.value).toBe('Lund, Sweden')
 })
+
