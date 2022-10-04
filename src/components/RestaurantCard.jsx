@@ -3,78 +3,82 @@ import { Table, Card } from "react-bootstrap";
 import { useEffect } from 'react';
 import usePosition from '../hooks/usePosition';
 import { getDistance } from 'geolib'
-
+import { useState } from 'react';
 
 const RestaurantCard = ({ data }) => {
+	const [distance, setDistance] = useState()
 
-    const position = usePosition()
+	const position = usePosition()
 
-    useEffect(() => {
+	useEffect(() => {
 
-        if (position.latitude && data.geolocation.lat) {
-            let distance = getDistance(
-                { latitude: data.geolocation.lat, longitude: data.geolocation.lat },
-                { latitude: position.latitude, longitude: position.latitude }
-            )
-            data.distance = distance
-        }
-    }, [data.geolocation])
+		if (position.latitude && data.geolocation.lat) {
 
-    return (
-        <>
-            			<Card className="restaurant-page-card">
-						<Card.Body className='restaurant-page-card-body'>
-							<Card.Title className="text-center restuarant-name">{data.name}<hr className="restaurant-title-underline"></hr></Card.Title>
-						
-							<Table className='restaurant-card-table'>
-								<tbody>
-									<tr>
-										<td><b>Address:</b></td>
-										<td>{data.adress}</td>
-									</tr>
-									<tr>
-										<td><b>Distance:</b></td>
-										<td>{data.distance} m</td>
-									</tr>
-									<tr>
-										<td><b>Type:</b></td>
-										<td>{data.type}</td>
-									</tr>
-									<tr>
-										<td><b>Cuisine:</b></td>
-										<td>{data.cuisine}</td>
-									</tr>
-									<tr>
-										<td><b>Description:</b></td>
-										<td>{data.description}</td>
-									</tr>
-									<tr>
-										<td><b>Telephone:</b></td>
-										<td>{data.tel}</td>
-									</tr>
-									<tr>
-										<td><b>Website:</b></td>
-										<td>{data.web_site}</td>
-									</tr>
-								</tbody>
-							</Table>
+			let distance = getDistance(
+				{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
+				{ latitude: position.latitude, longitude: position.latitude }
+			)
+			setDistance(distance)
+			data.distance = distance
+			console.log(data)
+		}
+	}, [data])
 
-							<div className="d-flex flex-row justify-content-center mb-3">
-								{data.fb &&
-									<a className="text-dark media-icons" href={data.fb} >
-										<FaFacebook className="mx-2 media-icons" />
-									</a>}
-								{data.insta &&
-									<a className="text-dark media-icons"  href={data.insta} >
-										<FaInstagram className="mx-2 media-icons" />
-									</a>}
-							</div>
+	return (
+		<>
+			<Card className="restaurant-page-card">
+				<Card.Body className='restaurant-page-card-body'>
+					<Card.Title className="text-center restuarant-name">{data.name}<hr className="restaurant-title-underline"></hr></Card.Title>
 
-						</Card.Body>
-					</Card>
-        </>
+					<Table className='restaurant-card-table'>
+						<tbody>
+							<tr>
+								<td><b>Address:</b></td>
+								<td>{data.adress}</td>
+							</tr>
+							<tr>
+								<td><b>Distance:</b></td>
+								<td>{distance} m</td>
+							</tr>
+							<tr>
+								<td><b>Type:</b></td>
+								<td>{data.type}</td>
+							</tr>
+							<tr>
+								<td><b>Cuisine:</b></td>
+								<td>{data.cuisine}</td>
+							</tr>
+							<tr>
+								<td><b>Description:</b></td>
+								<td>{data.description}</td>
+							</tr>
+							<tr>
+								<td><b>Telephone:</b></td>
+								<td>{data.tel}</td>
+							</tr>
+							<tr>
+								<td><b>Website:</b></td>
+								<td>{data.web_site}</td>
+							</tr>
+						</tbody>
+					</Table>
 
-    )
+					<div className="d-flex flex-row justify-content-center mb-3">
+						{data.fb &&
+							<a className="text-dark media-icons" href={data.fb} >
+								<FaFacebook className="mx-2 media-icons" />
+							</a>}
+						{data.insta &&
+							<a className="text-dark media-icons" href={data.insta} >
+								<FaInstagram className="mx-2 media-icons" />
+							</a>}
+					</div>
+
+				</Card.Body>
+			</Card>
+		</>
+
+	)
 }
 
 export default RestaurantCard

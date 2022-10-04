@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, useJsApiLoader, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
-import MarkerIcon from '../assets/icons/marker.png'
+import MarkerIcon from '../assets/icons/user.png'
 import LoadingSpinner from '../components/LoadingSpinner'
-import { collection, orderBy, query } from 'firebase/firestore'
-import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { db } from '../firebase'
 import Markers from './Markers';
-import useRestaurants from '../hooks/useRestaurants';
 
 
 const Map = ({ restaurants }) => {
