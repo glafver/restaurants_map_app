@@ -9,9 +9,12 @@ import UploadPhotos from "../components/UploadPhotos";
 import ImageGrid from "../components/ImageGrid";
 import usePhotos from "../hooks/usePhotos";
 import RestaurantCard from "../components/RestaurantCard";
-import PlaceholderPhoto from '../assets/images/placeholder_image.jpeg'
+import PlaceholderPhoto from '../assets/images/placeholder_image.jpeg';
+
 
 const RestaurantPage = () => {
+
+
 
 	const { id } = useParams()
 	const { getRestaurant } = useRestaurant()
