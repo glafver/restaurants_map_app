@@ -18,28 +18,32 @@ const EditRestaurantForm = ({ restaurant }) => {
     const {
         handleSubmit,
         register,
-        control,
-        formState: {
-            dirtyFields
-        },
-    } = useForm({ defaultValues: { ...restaurant } });
+        control
+    } = useForm();
 
     const onEdit = async (data) => {
 
         if (addressValue) {
             let geoCode = await geocodeByAddress(addressValue.label)
-            restaurant.geolocation = await getLatLng(geoCode[0])
-            restaurant.adress = addressValue.label
+            data.geolocation = await getLatLng(geoCode[0])
         }
 
-        if (dirtyFields) {
-            Object.keys(dirtyFields).forEach(field => {
-                restaurant[field] = data[field]
-            })
+        let newData = {
+            name: data.name || restaurant.name,
+            adress: addressValue.label || restaurant.adress,
+            geolocation: data.geolocation || restaurant.geolocation,
+            description: data.description || restaurant.description,
+            cuisine: data.cuisine || restaurant.cuisine,
+            type: data.type || restaurant.type,
+            web_site: data.web_site || restaurant.web_site,
+            insta: data.insta || restaurant.insta,
+            fb: data.fb || restaurant.fb,
+            tel: data.tel || restaurant.tel,
+            e_mail: data.e_mail || restaurant.e_mail
         }
 
         const docRef = doc(db, 'restaurants', restaurant.id)
-        await updateDoc(docRef, restaurant)
+        await updateDoc(docRef, newData)
 
         toast.success("Restaurant updated!")
     }

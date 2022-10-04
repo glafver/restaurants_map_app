@@ -36,8 +36,6 @@ const SuggestForm = () => {
 		let geoCode = await geocodeByAddress(addressValue.label)
 		data.geolocation = await getLatLng(geoCode[0])
 
-		console.log(data)
-
 		await addDoc(collection(db, "suggestions"), {
 			...data,
 		});
