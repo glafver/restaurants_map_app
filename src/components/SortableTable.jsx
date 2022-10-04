@@ -39,7 +39,7 @@ const SortableTable = ({ columns, data }) => {
 					return (
 						<tr {...row.getRowProps()}>
 							{row.cells.map(cell => (
-								<td {...cell.getCellProps()}>
+								<td class="align-middle" {...cell.getCellProps()}>
 									{cell.render('Cell')}
 								</td>
 							))}
