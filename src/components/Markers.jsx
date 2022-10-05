@@ -8,14 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute, faBook } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react';
 import RestaurantMarker from '../assets/icons/restaurant-marker.png'
-import usePosition from '../hooks/usePosition';
 
 const Markers = ({ restaurants }) => {
 	const [activeMarker, setActiveMarker] = useState(null);
 	const [linearDistance, setLinearDistance] = useState(false);
 	const [distances] = useState([]);
 
-	const position = usePosition()
 
 	const getDirection = (geo) => {
 		const googleLink = 'https://www.google.com/maps/dir/?api=1&destination=';

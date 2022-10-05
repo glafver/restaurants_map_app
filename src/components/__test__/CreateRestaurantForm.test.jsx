@@ -86,7 +86,7 @@ it("check if inputs in the forms works correctly", async () => {
 	const comboboxCuisine = screen.getByRole('combobox', {name: /cuisine/i})
 	const comboboxType = screen.getByRole('combobox', {name: /type/i})
 
-	const btnAddNewRestaurant = screen.getByRole('button', { name: /submit/i })
+	// const btnAddNewRestaurant = screen.getByRole('button', { name: /submit/i })
 
 	// interact
 	await userEvent.type(inputName, 'Wiktoria')
@@ -106,4 +106,5 @@ it("check if inputs in the forms works correctly", async () => {
 	expect(comboboxCuisine).toHaveValue("Polish")
 	// expect(inputAddress.value).toBe('Lund, Sweden')
 })
+
 
