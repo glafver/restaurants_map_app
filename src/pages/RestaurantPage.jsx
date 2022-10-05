@@ -11,10 +11,7 @@ import usePhotos from "../hooks/usePhotos";
 import RestaurantCard from "../components/RestaurantCard";
 import PlaceholderPhoto from '../assets/images/placeholder_image.jpeg';
 
-
 const RestaurantPage = () => {
-
-
 
 	const { id } = useParams()
 	const { getRestaurant } = useRestaurant()
@@ -27,6 +24,7 @@ const RestaurantPage = () => {
 	return (
 		<>
 			{photos &&
+
 				< div className="restaurant-page-container" >
 					<Container className="py-3 center-y">
 						<Row className='mb-3'>
