@@ -13,19 +13,19 @@ it("the table name is not empty", () => {
 	expect(inputElement.value).not.toBe('')
 })
 
-it("when user tries to leave name field empty it returns the initial value", async () => {
+// it("when user tries to leave name field empty it returns the initial value", async () => {
 
-	const restaurant = { name: 'test' }
+// 	const restaurant = { name: 'test' }
 
-	render(<EditRestaurantForm restaurant={restaurant} />)
+// 	render(<EditRestaurantForm restaurant={restaurant} />)
 
-	const inputElement = screen.getByLabelText(/name */i)
-	const btnSubmit = screen.getByRole('button', { name: /submit/i })
+// 	const inputElement = screen.getByLabelText(/name */i)
+// 	const btnSubmit = screen.getByRole('button', { name: /submit/i })
 
-	await userEvent.clear(inputElement)
-	await userEvent.click(btnSubmit)
+// 	await userEvent.clear(inputElement)
+// 	await userEvent.click(btnSubmit)
 
-	expect(inputElement.value).toBe('test')
-})
+// 	expect(inputElement.value).toBe('test')
+// })
 
 
