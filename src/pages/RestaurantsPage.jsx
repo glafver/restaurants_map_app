@@ -14,9 +14,9 @@ const RestaurantsPage = () => {
 		<div className="restaurants-page-container">
 			<>
 				<RestaurantsFilter />
-				<Row className="flex-column flex-column-reverse flex-md-row">
-					<Col className="col-12 col-md-4 pe-0 m-0 restaurants-list-container"><RestaurantsList restaurants={restaurants} /></Col>
-					<Col className="col-12 col-md-8 ps-0"><Map restaurants={restaurants} ></Map></Col>
+				<Row className="flex-column flex-column-reverse flex-md-row m-0" style={{ maxWidth: '100vw' }}>
+					<Col className="col-12 col-md-4 ps-0 m-0 restaurants-list-container"><RestaurantsList restaurants={restaurants} /></Col>
+					<Col className="col-12 col-md-8 px-0"><Map restaurants={restaurants} ></Map></Col>
 				</Row>
 			</>
 		</div>

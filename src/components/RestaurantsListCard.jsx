@@ -36,7 +36,7 @@ const RestaurantsListCard = ({ restaurant }) => {
                 </Card.Footer>
             </Card>
 
-            <div className='restaurant-card col-12 col-md-6' style={{ backgroundImage: photos && photos.length ? `url(${photos[0].url})` : `url(${RestaurantImage})`, backgroundSize: 'cover' }}>
+            <div className='restaurant-card col-12 col-md-6' style={{ backgroundImage: photos && photos.length ? `url(${photos[0].url})` : `url(${RestaurantImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             </div>
         </div>
     )
