@@ -19,7 +19,6 @@ const EditRestaurantForm = ({ restaurant }) => {
         handleSubmit,
         register,
         control
-
     } = useForm();
 
     const onEdit = async (data) => {
@@ -36,11 +35,11 @@ const EditRestaurantForm = ({ restaurant }) => {
             description: data.description || restaurant.description,
             cuisine: data.cuisine || restaurant.cuisine,
             type: data.type || restaurant.type,
-            web_site: data.web_site,
-            insta: data.insta,
-            fb: data.fb,
-            tel: data.tel,
-            e_mail: data.e_mail
+            web_site: data.web_site || restaurant.web_site,
+            insta: data.insta || restaurant.insta,
+            fb: data.fb || restaurant.fb,
+            tel: data.tel || restaurant.tel,
+            e_mail: data.e_mail || restaurant.e_mail
         }
 
         const docRef = doc(db, 'restaurants', restaurant.id)
@@ -61,8 +60,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                             <Form.Control
                                 defaultValue={restaurant.name}
                                 type="text"
-                                {...register("name")}
-                            />
+                                {...register("name")} />
                         </Form.Group>
 
                         {/* Geolocation field */}
@@ -70,18 +68,20 @@ const EditRestaurantForm = ({ restaurant }) => {
                         <Form.Group controlId="geolocation" className="mb-3">
                             <Form.Label>Address *</Form.Label>
                             <GooglePlacesAutocomplete
+                                defaultValue={restaurant.adress}
                                 apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                                 selectProps={{
+                                    defaultInputValue: restaurant.adress,
                                     value: addressValue,
                                     placeholder: restaurant.adress,
                                     name: "address",
                                     onChange: setAddressValue,
                                     onLoadFailed: (error) => { console.log(error) }
                                 }}
+
                             />
 
                         </Form.Group>
-
 
                         <Form.Group controlId="description" className="mb-3">
                             <Form.Label>Description *</Form.Label>
@@ -156,6 +156,7 @@ const EditRestaurantForm = ({ restaurant }) => {
                             <Form.Control
                                 defaultValue={restaurant.web_site}
                                 type="text"
+
                                 {...register("web_site")}
                             />
                         </Form.Group>

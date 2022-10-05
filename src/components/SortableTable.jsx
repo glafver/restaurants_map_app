@@ -11,7 +11,7 @@ const SortableTable = ({ columns, data }) => {
 	} = useTable({ columns, data }, useSortBy)
 
 	return (
-		<Table className='' hover {...getTableProps()}>
+		<Table className='sortable-table' hover {...getTableProps()}>
 			<thead>
 				{headerGroups.map(headerGroup => (
 					<tr {...headerGroup.getHeaderGroupProps()}>
@@ -39,7 +39,7 @@ const SortableTable = ({ columns, data }) => {
 					return (
 						<tr {...row.getRowProps()}>
 							{row.cells.map(cell => (
-								<td {...cell.getCellProps()}>
+								<td className="align-middle" {...cell.getCellProps()}>
 									{cell.render('Cell')}
 								</td>
 							))}

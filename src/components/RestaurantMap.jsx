@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import usePosition from '../hooks/usePosition'
 import UserIcon from '../assets/icons/user.png'
-// import RestaurantIcon from '../assets/icons/restaurant.png'
 import RestaurantIcon from '../assets/icons/restaurant-marker.png'
 
 const RestaurantMap = ({ restaurantGeolocation }) => {

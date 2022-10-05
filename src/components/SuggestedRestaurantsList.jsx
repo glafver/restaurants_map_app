@@ -12,8 +12,8 @@ const SuggestedRestaurantsList = () => {
 
     return (
 
-        <>
-            <Row>
+        <> 
+            <Row>{!data && (<h1>There are no suggestion</h1>)}
                 {data && data.map(suggestion => (
                     <Col lg={3} md={4} sm={6} key={suggestion.id}>
                         <Card className="mb-4">
@@ -27,7 +27,7 @@ const SuggestedRestaurantsList = () => {
                         </Card>
                     </Col>
                 ))}
-                {!data && <p>There is no suggestions yet.</p>}
+                
             </Row>
 
         </>

@@ -36,8 +36,6 @@ const SuggestForm = () => {
 		let geoCode = await geocodeByAddress(addressValue.label)
 		data.geolocation = await getLatLng(geoCode[0])
 
-		console.log(data)
-
 		await addDoc(collection(db, "suggestions"), {
 			...data,
 		});
@@ -109,21 +107,20 @@ const SuggestForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="swedish">Swedish</option>
-								<option value="italian">Italian</option>
-								<option value="french">French</option>
-								<option value="polish">Polish</option>
-								<option value="russian">Russian</option>
-								<option value="serbian">Serbian</option>
-								<option value="japanese">Japanese</option>
-								<option value="chinese">Chinese</option>
-								<option value="thai">Thai</option>
-								<option value="indian">Indian</option>
-								<option value="vietnamese">Vietnamese</option>
-								<option value="american">American</option>
-								<option value="arabic">Arabic</option>
-								<option value="european">European</option>
-								<option value="other">Other</option>
+								<option value="Italian">Italian</option>
+								<option value="French">French</option>
+								<option value="Polish">Polish</option>
+								<option value="Russian">Russian</option>
+								<option value="Serbian">Serbian</option>
+								<option value="Japanese">Japanese</option>
+								<option value="Chinese">Chinese</option>
+								<option value="Thai">Thai</option>
+								<option value="Indian">Indian</option>
+								<option value="Vietnamese">Vietnamese</option>
+								<option value="American">American</option>
+								<option value="Arabic">Arabic</option>
+								<option value="European">European</option>
+								<option value="Other">Other</option>
 							</Form.Select>
 							{errors.cuisine && <div>{errors.cuisine.message}</div>}
 						</Form.Group>
@@ -137,10 +134,10 @@ const SuggestForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="fine_dining">Fine dining</option>
-								<option value="fast_food">Fast-food restaurant</option>
-								<option value="cafe">Café</option>
-								<option value="other">Other</option>
+								<option value="Fine dining">Fine dining</option>
+								<option value="Fast food">Fast-food restaurant</option>
+								<option value="Cafe">Café</option>
+								<option value="Other">Other</option>
 							</Form.Select>
 							{errors.type && <div>{errors.type.message}</div>}
 						</Form.Group>
@@ -151,6 +148,14 @@ const SuggestForm = () => {
 								name="tel"
 								control={control}
 								rules={{ required: false }} />
+						</Form.Group>
+
+						<Form.Group controlId="e_mail" className="mb-3">
+							<Form.Label>E-mail</Form.Label>
+							<Form.Control
+								type="text"
+								{...register("e_mail")}
+							/>
 						</Form.Group>
 
 						<Form.Group controlId="web_site" className="mb-3">
