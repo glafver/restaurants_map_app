@@ -104,7 +104,7 @@ body {
   cursor: pointer;
   background-color: rgb(31, 31, 31);
   border: 0;
-  border-bottom: 2px solid black;
+  // border-bottom: 2px solid black;
   color: rgb(254, 192, 84);
   font-family: 'Cormorant Garamond', serif;
   border-radius: 0;
@@ -138,9 +138,16 @@ body {
   color: rgb(254, 192, 84) !important;
 }
 
-.card-restaurant-info {
-  margin-bottom: 2px;
+.card-restaurant-wrapper {
+  // margin-bottom: 2px;
+  // background-color: rgb(31, 31, 31);
+  border-bottom: solid 2px black;
+  box-sizing: border-box;
 }
+
+// .card-restaurant-info {
+// margin-bottom: 2px;
+// }
 
 
 .card-footer {
@@ -244,6 +251,7 @@ body {
   border: 0;
   padding-bottom: 0;
 }
+
 .sortable-table> :not(caption)>*>* {
   border-bottom: 1px solid rgb(255, 176, 39);
 }
