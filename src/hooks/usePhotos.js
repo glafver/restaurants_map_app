@@ -6,6 +6,7 @@ const usePhotos = (id) => {
 
 	const collectionRef = collection(db, 'restaurants_images')
 
+	// where() + orderBy() don't want to work together
 	const queryRef = query(collectionRef, where('restaurant_id', '==', id), where('approved', '==', true))
 
 	const photosQuery = useFirestoreQueryData(['restaurants_images', { restaurant: id }], queryRef, {

@@ -4,13 +4,16 @@ import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { Image } from 'react-bootstrap';
+import useEditPhotos from '../hooks/useEditPhotos';
 
-const EditRestaurantImageGrid = ({ photos }) => {
+const EditRestaurantImageGrid = ({ id }) => {
 	const [lgShow, setLgShow] = useState(false);
 	const [url, setUrl] = useState('')
 
 	const { deleting, deletePhoto } = useDeletePhoto()
 	const { approve } = useApprovePhoto()
+
+	const { data: photos } = useEditPhotos(id)
 
 	return (
 

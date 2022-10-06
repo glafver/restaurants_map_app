@@ -16,22 +16,8 @@ const useRestaurants = () => {
 		sort: searchParams.get('sort')
 	}
 
-	const collectionRef = collection(db, 'restaurants')
-	let restaurantsQuery
-
-	if (params.cuisine && params.type) {
-		const queryRef =
-			restaurantsQuery = useFirestoreQueryData(['memes', { cuisine: params.cuisine, type: params.type }], queryRef, {
-				idField: 'id',
-				subscribe: true,
-			})
-
-	}
-
-
-
-
-
+	// Unfortunately, it was not possible to combine where() and orderBy() in any way, 
+	// they simply did not want to work together and response with any data (but they worked perfectly separaately), so I had to write work around.
 
 	let queryRef = query(collection(db, 'restaurants'), orderBy("name", "asc"))
 
@@ -76,11 +62,9 @@ const useRestaurants = () => {
 
 			if (params.sort && position.latitude) {
 				if (params.sort === 'asc') {
-					// restaurants.sort((a, b) => a.distance.localeCompare(b.distance))
 					restaurants.sort((a, b) => a.distance - b.distance)
 				}
 				if (params.sort === 'desc') {
-					// restaurants.sort((a, b) => b.distance.localeCompare(a.distance))
 					restaurants.sort((a, b) => b.distance - a.distance)
 				}
 			}
