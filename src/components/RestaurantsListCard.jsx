@@ -1,4 +1,4 @@
-import RestaurantImage from '../assets/images/img-placeholder.png'
+import RestaurantImage from '../assets/images/placeholder_image.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';

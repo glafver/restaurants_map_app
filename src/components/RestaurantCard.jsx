@@ -14,13 +14,11 @@ const RestaurantCard = ({ data }) => {
 		}
 
 		if (position.latitude && data.geolocation.lat) {
-			// console.log(position.latitude, data)
 			let distance = getDistance(
 				{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
 				{ latitude: position.latitude, longitude: position.latitude }
 			)
 			data.distance = distance
-			// console.log(data.distance, distance)
 		}
 	}, [data, position])
 
