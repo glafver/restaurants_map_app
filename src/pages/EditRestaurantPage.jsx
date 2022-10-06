@@ -14,18 +14,20 @@ const EditRestaurantPage = () => {
 
     const { getRestaurant } = useRestaurant()
     const { data } = getRestaurant(id)
-    const { data: photos } = useEditPhotos(id)
 
     return (
         <Container className="py-3 center-y">
             <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    {data &&
-                        <EditRestaurantForm restaurant={data} />
-                    }
-                </Col>
-                {photos &&
-                    <EditRestaurantImageGrid photos={photos} />
+                {data &&
+                    <>
+                        <Col md={{ span: 6, offset: 3 }}>
+
+                            <EditRestaurantForm restaurant={data} />
+
+                        </Col>
+
+                        <EditRestaurantImageGrid id={id} />
+                    </>
                 }
             </Row>
         </Container>
