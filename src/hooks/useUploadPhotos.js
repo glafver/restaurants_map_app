@@ -1,51 +1,54 @@
-import { useState } from 'react'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
-import { v4 as uuidv4 } from 'uuid'
-import { useAuthContext } from '../contexts/AuthContext'
-import { db, storage } from '../firebase'
+import { useState } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
+import { useAuthContext } from "../contexts/AuthContext";
+import { db, storage } from "../firebase";
 
 const useUploadPhotos = () => {
-	const [error, setError] = useState(null)
-	const [isError, setIsError] = useState(null)
-	const [isSuccess, setIsSuccess] = useState(null)
-	const [isUploading, setIsUploading] = useState(null)
-	const [progress, setProgress] = useState(null)
+	const [error, setError] = useState(null);
+	const [isError, setIsError] = useState(null);
+	const [isSuccess, setIsSuccess] = useState(null);
+	const [isUploading, setIsUploading] = useState(null);
+	const [progress, setProgress] = useState(null);
 
-	const { currentUser, isAdmin } = useAuthContext()
+	const { currentUser, isAdmin } = useAuthContext();
 
 	const upload = async (image, restaurant_id) => {
-
-		setError(null)
-		setIsError(null)
-		setIsSuccess(null)
-		setIsUploading(true)
+		setError(null);
+		setIsError(null);
+		setIsSuccess(null);
+		setIsUploading(true);
 
 		try {
+			const uuid = uuidv4();
 
-			const uuid = uuidv4()
+			const ext = image.name.substring(image.name.lastIndexOf(".") + 1);
 
-			const ext = image.name.substring(image.name.lastIndexOf('.') + 1)
+			const storageFilename = `${uuid}.${ext}`;
 
-			const storageFilename = `${uuid}.${ext}`
+			const storageRef = ref(
+				storage,
+				`restaurants/${restaurant_id}/${storageFilename}`
+			);
 
-			const storageRef = ref(storage, `restaurants/${restaurant_id}/${storageFilename}`)
+			const uploadTask = uploadBytesResumable(storageRef, image);
 
-			const uploadTask = uploadBytesResumable(storageRef, image)
-
-			uploadTask.on('state_changed', (uploadTaskSnapshot) => {
+			uploadTask.on("state_changed", (uploadTaskSnapshot) => {
 				setProgress(
 					Math.round(
-						(uploadTaskSnapshot.bytesTransferred / uploadTaskSnapshot.totalBytes) * 1000
+						(uploadTaskSnapshot.bytesTransferred /
+							uploadTaskSnapshot.totalBytes) *
+							1000
 					) / 10
-				)
-			})
+				);
+			});
 
-			await uploadTask.then()
+			await uploadTask.then();
 
-			const url = await getDownloadURL(storageRef)
+			const url = await getDownloadURL(storageRef);
 
-			const collectionRef = collection(db, 'restaurants_images')
+			const collectionRef = collection(db, "restaurants_images");
 
 			await addDoc(collectionRef, {
 				created: serverTimestamp(),
@@ -57,18 +60,16 @@ const useUploadPhotos = () => {
 				size: image.size,
 				user: currentUser.uid,
 				url,
-			})
-			setProgress(null)
-			setIsSuccess(true)
-
+			});
+			setProgress(null);
+			setIsSuccess(true);
 		} catch (e) {
-			setError(e)
-			setIsError(true)
-
+			setError(e);
+			setIsError(true);
 		} finally {
-			setIsUploading(false)
+			setIsUploading(false);
 		}
-	}
+	};
 
 	return {
 		error,
@@ -77,7 +78,7 @@ const useUploadPhotos = () => {
 		isUploading,
 		progress,
 		upload,
-	}
-}
+	};
+};
 
-export default useUploadPhotos
+export default useUploadPhotos;

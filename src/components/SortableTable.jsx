@@ -1,31 +1,20 @@
-import { useTable, useSortBy } from 'react-table'
-import Table from 'react-bootstrap/Table'
+import { useTable, useSortBy } from "react-table";
+import Table from "react-bootstrap/Table";
 
 const SortableTable = ({ columns, data }) => {
-	const {
-		getTableProps,
-		getTableBodyProps,
-		headerGroups,
-		rows,
-		prepareRow,
-	} = useTable({ columns, data }, useSortBy)
+	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+		useTable({ columns, data }, useSortBy);
 
 	return (
-		<Table className='sortable-table' hover {...getTableProps()}>
+		<Table className="sortable-table" hover {...getTableProps()}>
 			<thead>
-				{headerGroups.map(headerGroup => (
+				{headerGroups.map((headerGroup) => (
 					<tr {...headerGroup.getHeaderGroupProps()}>
-						{headerGroup.headers.map(column => (
+						{headerGroup.headers.map((column) => (
 							<th {...column.getHeaderProps(column.getSortByToggleProps())}>
-								{column.render('Header')}
-								{' '}
+								{column.render("Header")}{" "}
 								<span>
-									{column.isSorted
-										? column.isSortedDesc
-											? '🔽'
-											: '🔼'
-										: ''
-									}
+									{column.isSorted ? (column.isSortedDesc ? "🔽" : "🔼") : ""}
 								</span>
 							</th>
 						))}
@@ -34,21 +23,21 @@ const SortableTable = ({ columns, data }) => {
 			</thead>
 
 			<tbody {...getTableBodyProps()}>
-				{rows.map(row => {
-					prepareRow(row)
+				{rows.map((row) => {
+					prepareRow(row);
 					return (
 						<tr {...row.getRowProps()}>
-							{row.cells.map(cell => (
+							{row.cells.map((cell) => (
 								<td className="align-middle" {...cell.getCellProps()}>
-									{cell.render('Cell')}
+									{cell.render("Cell")}
 								</td>
 							))}
 						</tr>
-					)
+					);
 				})}
 			</tbody>
 		</Table>
-	)
-}
+	);
+};
 
-export default SortableTable
+export default SortableTable;

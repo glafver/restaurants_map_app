@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import { useAuthContext } from '../contexts/AuthContext'
+import React, { useEffect } from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const LogoutPage = () => {
-	const navigate = useNavigate()
-	const { logout } = useAuthContext()
+	const navigate = useNavigate();
+	const { logout } = useAuthContext();
 
 	useEffect(() => {
 		const logoutUser = async () => {
-			await logout()
-			navigate('/')
-		}
-		logoutUser()
-	}, [])
+			await logout();
+			navigate("/");
+		};
+		logoutUser();
+	}, []);
 
 	return (
 		<Container className="py-3 center-y">
@@ -27,7 +27,7 @@ const LogoutPage = () => {
 				</Col>
 			</Row>
 		</Container>
-	)
-}
+	);
+};
 
-export default LogoutPage
+export default LogoutPage;

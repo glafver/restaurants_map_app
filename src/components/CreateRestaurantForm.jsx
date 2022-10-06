@@ -5,53 +5,53 @@ import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
-import { toast } from 'react-toastify'
-import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { toast } from "react-toastify";
+import GooglePlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng,
+} from "react-google-places-autocomplete";
 import { useState, useEffect } from "react";
-import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
-import 'react-phone-number-input/style.css'
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
+import "react-phone-number-input/style.css";
 import { Autocomplete } from "@react-google-maps/api";
 
 const CreateRestaurantForm = () => {
-
-	const [addressValue, setAddressValue] = useState(null)
-	const [addressError, setAddressError] = useState(null)
+	const [addressValue, setAddressValue] = useState(null);
+	const [addressError, setAddressError] = useState(null);
 
 	const {
 		formState: { errors },
 		handleSubmit,
 		register,
 		control,
-		reset
+		reset,
 	} = useForm();
 
 	const onCreate = async (data) => {
-
 		if (!addressValue) {
-			document.querySelectorAll('[id^=react-select-]')[0].focus()
-			setAddressError('Please choose the address.')
-			return
+			document.querySelectorAll("[id^=react-select-]")[0].focus();
+			setAddressError("Please choose the address.");
+			return;
 		}
 
-		data.adress = addressValue.label
-		let geoCode = await geocodeByAddress(addressValue.label)
-		data.geolocation = await getLatLng(geoCode[0])
+		data.adress = addressValue.label;
+		let geoCode = await geocodeByAddress(addressValue.label);
+		data.geolocation = await getLatLng(geoCode[0]);
 
-		console.log(data)
+		console.log(data);
 
 		await addDoc(collection(db, "restaurants"), {
 			...data,
 		});
 
-		toast.success("Restaurant added!")
-		setAddressValue(null)
-		reset()
+		toast.success("Restaurant added!");
+		setAddressValue(null);
+		reset();
 	};
 
 	useEffect(() => {
-		setAddressError(null)
-	}, [addressValue])
-
+		setAddressError(null);
+	}, [addressValue]);
 
 	return (
 		<>
@@ -60,13 +60,12 @@ const CreateRestaurantForm = () => {
 					<Card.Title className="mb-3">Create a new restaurant</Card.Title>
 
 					<Form onSubmit={handleSubmit(onCreate)} noValidate>
-
 						<Form.Group controlId="name" className="mb-3">
 							<Form.Label>Name *</Form.Label>
 							<Form.Control
 								type="text"
 								{...register("name", {
-									required: "Please enter the name of the Restaurant."
+									required: "Please enter the name of the Restaurant.",
 								})}
 							/>
 							{errors.name && <div>{errors.name.message}</div>}
@@ -79,10 +78,12 @@ const CreateRestaurantForm = () => {
 								apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
 								selectProps={{
 									value: addressValue,
-									placeholder: 'Search address',
+									placeholder: "Search address",
 									name: "address",
 									onChange: setAddressValue,
-									onLoadFailed: (error) => { console.log(error) }
+									onLoadFailed: (error) => {
+										console.log(error);
+									},
 								}}
 							/>
 							{addressError && <div>{addressError}</div>}
@@ -94,7 +95,7 @@ const CreateRestaurantForm = () => {
 								className="pb-5"
 								type="text"
 								{...register("description", {
-									required: "Please fill in the description."
+									required: "Please fill in the description.",
 								})}
 							/>
 							{errors.description && <div>{errors.description.message}</div>}
@@ -106,7 +107,7 @@ const CreateRestaurantForm = () => {
 							<Form.Select
 								className=""
 								{...register("cuisine", {
-									required: "Please choose cuisine."
+									required: "Please choose cuisine.",
 								})}
 							>
 								<option></option>
@@ -134,8 +135,9 @@ const CreateRestaurantForm = () => {
 							<Form.Select
 								className=""
 								{...register("type", {
-									required: "Please choose type of place."
-								})}>
+									required: "Please choose type of place.",
+								})}
+							>
 								<option></option>
 								<option value="Fine dining">Fine dining</option>
 								<option value="Fast food">Fast-food restaurant</option>
@@ -150,47 +152,36 @@ const CreateRestaurantForm = () => {
 							<PhoneInputWithCountry
 								name="tel"
 								control={control}
-								rules={{ required: false }} />
+								rules={{ required: false }}
+							/>
 						</Form.Group>
 
 						<Form.Group controlId="e_mail" className="mb-3">
 							<Form.Label>E-mail</Form.Label>
-							<Form.Control
-
-								type="text"
-								{...register("e_mail")}
-							/>
+							<Form.Control type="text" {...register("e_mail")} />
 						</Form.Group>
 
 						<Form.Group controlId="web_site" className="mb-3">
 							<Form.Label>Website</Form.Label>
-							<Form.Control
-								type="text"
-								{...register("web_site")}
-							/>
+							<Form.Control type="text" {...register("web_site")} />
 						</Form.Group>
 
 						<Form.Group controlId="fb" className="mb-3">
 							<Form.Label>Facebook</Form.Label>
-							<Form.Control
-								type="text"
-								{...register("fb")}
-							/>
+							<Form.Control type="text" {...register("fb")} />
 						</Form.Group>
 
 						<Form.Group controlId="insta" className="mb-3">
 							<Form.Label>Instagram</Form.Label>
-							<Form.Control
-								type="text"
-								{...register("insta")}
-							/>
+							<Form.Control type="text" {...register("insta")} />
 						</Form.Group>
 
-						<Button className="custom-button" type="submit">Submit</Button>
+						<Button className="custom-button" type="submit">
+							Submit
+						</Button>
 					</Form>
 				</Card.Body>
 			</Card>
-
 		</>
 	);
 };

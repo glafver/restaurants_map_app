@@ -1,17 +1,16 @@
-import { useFirestoreQueryData } from '@react-query-firebase/firestore'
-import { collection, query } from 'firebase/firestore'
-import { db } from '../firebase'
+import { useFirestoreQueryData } from "@react-query-firebase/firestore";
+import { collection, query } from "firebase/firestore";
+import { db } from "../firebase";
 
 const useUsers = () => {
+	const queryRef = query(collection(db, "users"));
 
-	const queryRef = query(collection(db, 'users'))
-
-	const usersQuery = useFirestoreQueryData(['users'], queryRef, {
-		idField: 'id',
+	const usersQuery = useFirestoreQueryData(["users"], queryRef, {
+		idField: "id",
 		subscribe: true,
-	})
+	});
 
-	return usersQuery
-}
+	return usersQuery;
+};
 
-export default useUsers
+export default useUsers;

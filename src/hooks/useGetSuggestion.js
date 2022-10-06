@@ -1,7 +1,7 @@
-import useStreamDocument from "./useStreamDocument"
+import useStreamDocument from "./useStreamDocument";
 
 const useGetSuggestion = (id) => {
-	return useStreamDocument('suggestions', id)
-}
+	return useStreamDocument("suggestions", id);
+};
 
-export default useGetSuggestion
+export default useGetSuggestion;

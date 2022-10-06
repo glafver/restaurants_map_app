@@ -1,23 +1,23 @@
-import useStreamDocument from "./useStreamDocument"
-import { doc, deleteDoc } from 'firebase/firestore'
-import { db } from '../firebase'
+import useStreamDocument from "./useStreamDocument";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const useRestaurant = () => {
-    // return useStreamDocument('restaurants', id)
+	// return useStreamDocument('restaurants', id)
 
-    const getRestaurant = (id) => {
-        return useStreamDocument('restaurants', id)
-    }
+	const getRestaurant = (id) => {
+		return useStreamDocument("restaurants", id);
+	};
 
-    const deleteRestaurant = async (id) => {
-        const docRef = doc(db, 'restaurants', id)
-        await deleteDoc(docRef)
-    }
+	const deleteRestaurant = async (id) => {
+		const docRef = doc(db, "restaurants", id);
+		await deleteDoc(docRef);
+	};
 
-    return {
-        getRestaurant,
-        deleteRestaurant
-    }
-}
+	return {
+		getRestaurant,
+		deleteRestaurant,
+	};
+};
 
-export default useRestaurant
+export default useRestaurant;

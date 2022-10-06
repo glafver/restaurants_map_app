@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuthContext } from '../contexts/AuthContext'
-import SignupForm from '../components/SignupForm'
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
+import SignupForm from "../components/SignupForm";
 
 const SignupPage = () => {
+	const [formValues, setFormValues] = useState();
 
-	const [formValues, setFormValues] = useState()
-
-	const { signup } = useAuthContext()
-	const navigate = useNavigate()
+	const { signup } = useAuthContext();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!formValues) {
-			return
+			return;
 		}
-		signup(formValues.email, formValues.password, formValues.name, formValues.photo)
-		navigate('/')
-	}, [formValues])
-
+		signup(
+			formValues.email,
+			formValues.password,
+			formValues.name,
+			formValues.photo
+		);
+		navigate("/");
+	}, [formValues]);
 
 	return (
 		<Container className="py-3 center-y">
@@ -28,10 +31,7 @@ const SignupPage = () => {
 						<Card.Body>
 							<Card.Title className="mb-3">Sign Up</Card.Title>
 
-							<SignupForm
-								setFormValues={setFormValues}
-							></SignupForm>
-
+							<SignupForm setFormValues={setFormValues}></SignupForm>
 						</Card.Body>
 					</Card>
 
@@ -41,7 +41,7 @@ const SignupPage = () => {
 				</Col>
 			</Row>
 		</Container>
-	)
-}
+	);
+};
 
-export default SignupPage
+export default SignupPage;
