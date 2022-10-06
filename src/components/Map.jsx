@@ -24,7 +24,7 @@ const Map = ({ restaurants }) => {
 
   const containerStyle = {
     width: '100%',
-    height: '620px'
+    height: '600px'
   };
 
 

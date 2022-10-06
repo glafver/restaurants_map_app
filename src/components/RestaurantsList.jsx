@@ -6,7 +6,7 @@ const RestaurantsList = ({ restaurants }) => {
     return (
 
         <>
-            <Row className="overflow-auto" style={{ height : '620px'}}>
+            <Row className="overflow-auto" style={{ height : '600px'}}>
                 {restaurants && restaurants.map((restaurant, index) => (
                     <RestaurantsListCard key={index} restaurant={restaurant}></RestaurantsListCard>
                 ))}
