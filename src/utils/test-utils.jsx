@@ -1,7 +1,16 @@
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import queryClient from "../main"
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			staleTime: 1000 * 60 * 2,
+			cacheTime: 1000 * 60 * 60 * 4
+		}
+	}
+})
 
 export const renderWithBrowserRouter = (component) => {
 	return render(
@@ -10,7 +19,7 @@ export const renderWithBrowserRouter = (component) => {
 				{component}
 			</BrowserRouter>
 		</QueryClientProvider>
-		
+
 	)
 }
 
