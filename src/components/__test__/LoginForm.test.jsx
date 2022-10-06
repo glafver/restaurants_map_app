@@ -1,21 +1,39 @@
 // import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LoginPage from '../../pages/LoginPage'
-import { renderWithBrowserRouter, screen } from '../../utils/test-utils'
+import { renderWithBrowserRouter } from '../../utils/test-utils'
 import { server } from '../../mocks/server'
+import ReactDOM from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
+import { screen } from '@testing-library/react'
 
-// 🏎 Boot API mocking
+let container;
+
 beforeAll(() => server.listen())
 
-// 🧨 Reset handlers (not need in our app though)
-afterEach(() => server.resetHandlers())
+beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+});
 
-// 🧹 Clean up after ourselves
+// afterEach(() => server.resetHandlers())
+
+afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
+    server.resetHandlers();
+});
+
 afterAll(() => server.close())
 
 test("renders input field initially empty", () => {
 
-    renderWithBrowserRouter(<LoginPage />)
+    const { debug } = renderWithBrowserRouter(<LoginPage />)
+
+    debug()
+
+
+    // renderWithBrowserRouter(<LoginPage />)
 
     // find
     // const inputElement = screen.getByRole('textbox')

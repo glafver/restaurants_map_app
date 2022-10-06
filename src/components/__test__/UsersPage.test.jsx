@@ -14,11 +14,11 @@ afterAll(() => server.close())
 
 test('renders the input fields ', () => {
 
-    const { debug } = renderWithBrowserRouter(<UsersPage />)
+    // const { debug } = renderWithBrowserRouter(<UsersPage />)
 
-    console.log('first')
+    // console.log('first')
 
-    debug()
+    // debug()
 
     // const makeAdminBtn = screen.getByRole('button', { name: /make admin/i })
 

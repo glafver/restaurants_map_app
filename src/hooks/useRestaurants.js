@@ -17,6 +17,8 @@ const useRestaurants = () => {
 		sort: searchParams.get('sort')
 	}
 
+
+
 	let queryRef = query(collection(db, 'restaurants'), orderBy("name", "asc"))
 
 	const restaurantQuery = useFirestoreQueryData(['restaurants'], queryRef, {
