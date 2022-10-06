@@ -10,6 +10,7 @@ import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-goo
 import { useState, useEffect } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import 'react-phone-number-input/style.css'
+import { Autocomplete } from "@react-google-maps/api";
 
 const CreateRestaurantForm = () => {
 

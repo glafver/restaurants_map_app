@@ -3,9 +3,19 @@
 @import 'toastify';
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
 
+$gold-color: rgb(254, 192, 84);
+$lightbeige-background-color: rgb(236, 227, 218);
+$font-family: 'Cormorant Garamond', serif;
+$dark-background-color: rgb(52, 51, 51);
+$more-dark-background-color: rgb(31, 31, 31);
+
+html {
+  height: 100%;
+}
 body {
   font-family: 'Cormorant Garamond', serif;
   background-color: rgb(236, 227, 218);
+  height: 100%;
 }
 
 .custom-map-control-button {
@@ -13,7 +23,7 @@ body {
   border: 0;
   border-radius: 2px;
   box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
+  margin-bottom: 25px;
   padding: 0 0.5em;
   font: 400 18px Roboto, Arial, sans-serif;
   overflow: hidden;
@@ -42,9 +52,9 @@ body {
 }
 
 .restaurant-info-window {
-  font-family: 'Cormorant Garamond', serif;
-  background-color: rgb(52, 51, 51);
-  color: rgb(254, 192, 84);
+  font-family: $font-family;
+  background-color: $dark-background-color;
+  color: $gold-color;
   padding: 15px;
 
 }
@@ -59,7 +69,7 @@ body {
 }
 
 .gm-style-iw-tc::after {
-  background-color: rgb(52, 51, 51) !important;
+  background-color: $dark-background-color !important;
 }
 
 .direction-link {
@@ -94,24 +104,16 @@ body {
   margin-bottom: 5px;
 }
 
-.restaurants-list {
-  display: block;
-  height: 600px;
-  padding-right: 0;
-}
-
 .restaurant-card {
   cursor: pointer;
-  background-color: rgb(31, 31, 31);
+  background-color: $more-dark-background-color;
   border: 0;
-  // border-bottom: 2px solid black;
-  color: rgb(254, 192, 84);
-  font-family: 'Cormorant Garamond', serif;
+  border-bottom: 2px solid black;
+  color: $gold-color;
   border-radius: 0;
 }
 
 .restaurant-card-title {
-  font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 22px;
   font-weight: 600;
@@ -122,43 +124,36 @@ body {
 }
 
 .brand-title {
-  width: 45%;
+  width: 65%;
 }
 
 .nav-links {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 20px;
 }
 
 .nav-color {
-  color: rgb(254, 192, 84) !important;
+  color: $gold-color !important;
 }
 
 .dropdown-toggle::after {
-  color: rgb(254, 192, 84) !important;
+  color: $gold-color !important;
 }
 
 .card-restaurant-wrapper {
-  // margin-bottom: 2px;
-  // background-color: rgb(31, 31, 31);
   border-bottom: solid 2px black;
   box-sizing: border-box;
 }
-
-// .card-restaurant-info {
-// margin-bottom: 2px;
-// }
 
 
 .card-footer {
   border-top: 0;
   padding-top: 0;
-  background-color: rgb(31, 31, 31);
+  background-color: $more-dark-background-color;
 }
 
 .homepage {
   width: 100%;
-  height: 800px;
+  height: 700px;
   background-color: rgb(17, 45, 32);
   text-align: center;
 }
@@ -166,15 +161,15 @@ body {
 .logo {
   padding-top: 70px;
   padding-bottom: 20px;
-  width: 80%;
+  width: 50%;
 }
 
 .link-to-map {
-  width: 80%;
+  width: 50%;
 }
 
 .link-to-map:hover {
-  color: rgb(254, 192, 84);
+  color: $gold-color;
 }
 
 .card-icons {
@@ -182,7 +177,7 @@ body {
 }
 
 .restaurant-page-container {
-  background-color: rgb(236, 227, 218);
+  background-color: $lightbeige-background-color;
   min-height: 600px;
   padding-bottom: 50px;
 }
@@ -195,7 +190,7 @@ body {
   border-radius: 0;
   border: 0;
   box-shadow: rgba(100, 100, 111, 0.2) 2px 9px 31px 2px;
-  background-color: rgb(236, 227, 218);
+  background-color: $lightbeige-background-color;
   font-size: 20px;
   padding-right: 0;
   padding-left: 0;
@@ -263,7 +258,7 @@ body {
 }
 
 .upload-photos-button {
-  background-color: rgb(52, 51, 51);
+  background-color: $dark-background-color;
   border: 0;
   padding-left: 40px;
   padding-right: 40px;
@@ -274,7 +269,7 @@ body {
 }
 
 .filter-button {
-  background-color: rgb(210, 149, 44);
+  background-color: rgb(209, 133, 2);
   color: black;
   border: 0;
   padding-left: 5px;
@@ -283,7 +278,7 @@ body {
 }
 
 .custom-button {
-  background-color: rgb(52, 51, 51);
+  background-color: $dark-background-color;
   border: 0;
   padding-left: 20px;
   padding-right: 20px;
@@ -296,7 +291,7 @@ body {
 .upload-photos-button:hover,
 .filter-button:hover,
 .custom-button:hover {
-  background-color: rgb(254, 192, 84) !important;
+  background-color: $gold-color !important;
   color: black !important;
 }
 
@@ -312,6 +307,8 @@ body {
   background-color: rgb(210, 149, 44);
   border: 0;
   border-radius: 2px;
+  width: 50%;
+  margin:auto;
 }
 
 @media only screen and (min-width: 992px) {
@@ -328,7 +325,7 @@ body {
   }
 
   .homepage {
-    height: 600px;
+    height: 800px;
   }
 
   .search-box {
@@ -342,5 +339,11 @@ body {
 
   .restaurants-list-container {
     margin-top: 0;
+  }
+  .brand-title {
+    width: 45%;
+  }
+  .filter-form-group {
+    width: 100%;
   }
 }

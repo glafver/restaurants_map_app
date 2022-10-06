@@ -1,4 +1,1 @@
-Beskrivning
-Ni ska skapa en app som ska fungera som en matguide när man är hangry men inte vet var man ska käka eller när man bara måste ha en kaffe/fika (som efter den här genomgången).
-Man ska kunna se restauranger/caféer ifrån olika kategorier runt omkring sin position.
-Uppgiften ska utföras i grupper om tre, där ni ska jobba med två klasskamrater ni ej tidigare gjort ett projekt med.
+An application where users can see restaurants in Malmö on the map and in the list. Users can click on the marker on the map and see some short information about the restaurant and can also do the same in the list with restaurants. Users can click on the link 'More info" and redirect to restaurant page and see full information about the restaurant. Users can see their own position on the map. Users can see distance in meters from their position to every restaurants. Users can see route to the selected restaurant by clicking on the link. Users can also sent suggestions to admins about some restaurants. 
