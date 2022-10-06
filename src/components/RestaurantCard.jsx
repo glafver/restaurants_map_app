@@ -34,10 +34,10 @@ const RestaurantCard = ({ data }) => {
 								<td><b>Address:</b></td>
 								<td>{data.adress}</td>
 							</tr>
-							<tr>
+							{/* <tr>
 								<td><b>Distance:</b></td>
 								<td>{data.distance} m</td>
-							</tr>
+							</tr> */}
 							<tr>
 								<td><b>Type:</b></td>
 								<td>{data.type}</td>

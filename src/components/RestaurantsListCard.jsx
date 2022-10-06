@@ -2,7 +2,7 @@ import RestaurantImage from '../assets/images/placeholder_image.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils, faLocationDot, faCircleInfo, faRoute } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { Card, Image } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import usePhotos from '../hooks/usePhotos';
 
 const RestaurantsListCard = ({ restaurant }) => {

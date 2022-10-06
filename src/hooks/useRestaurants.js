@@ -4,7 +4,6 @@ import { db } from '../firebase'
 import { useSearchParams } from 'react-router-dom'
 import usePosition from './usePosition'
 import getDistance from 'geolib/es/getPreciseDistance'
-import usePhotos from './usePhotos'
 
 const useRestaurants = () => {
 
