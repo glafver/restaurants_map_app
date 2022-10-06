@@ -2,19 +2,29 @@ import { Card, Row, Col, Button } from 'react-bootstrap'
 import useGetSuggestions from '../hooks/useGetSuggestions'
 
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 const SuggestedRestaurantsList = () => {
 
     // Get data from suggestions hook
     const { data } = useGetSuggestions()
 
+    const [suggestions, setSuggestions] = useState(false)
 
+    useEffect(()=> {
+        if(data) {
+            if(data.length !== 0){
+                setSuggestions(true)
+            }
+        }
+    },[data])
+  
 
     return (
 
         <> 
-            <Row>{!data && (<h1>There are no suggestion</h1>)}
-                {data && data.map(suggestion => (
+            <Row>
+                {suggestions ? data.map(suggestion => (
                     <Col lg={3} md={4} sm={6} key={suggestion.id}>
                         <Card className="mb-4">
                             <Card.Body>
@@ -26,7 +36,7 @@ const SuggestedRestaurantsList = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                ))}
+                )) : <h1>There are no suggestions</h1>}
                 
             </Row>
 
