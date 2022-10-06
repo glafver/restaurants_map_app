@@ -17,6 +17,21 @@ const useRestaurants = () => {
 		sort: searchParams.get('sort')
 	}
 
+	const collectionRef = collection(db, 'restaurants')
+	let restaurantsQuery
+
+	if (params.cuisine && params.type) {
+		const queryRef =
+			restaurantsQuery = useFirestoreQueryData(['memes', { cuisine: params.cuisine, type: params.type }], queryRef, {
+				idField: 'id',
+				subscribe: true,
+			})
+
+	}
+
+
+
+
 
 
 	let queryRef = query(collection(db, 'restaurants'), orderBy("name", "asc"))

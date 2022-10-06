@@ -12,18 +12,18 @@ const photos = [
 
 it('shows a modal when user clicks on image and closes when clicks outside', async () => {
 
-    // render(<ImageGrid photos={photos} />)
+    render(<ImageGrid photos={photos} />)
 
-    // const image = screen.getByTestId('grid-image')
+    const image = screen.getByTestId('grid-image')
 
-    // await userEvent.click(image)
+    await userEvent.click(image)
 
-    // const modalImage = screen.getByRole('img')
+    const modalImage = screen.getByRole('img')
 
-    // const modalDialog = screen.getByRole('dialog')
+    const modalDialog = screen.getByRole('dialog')
 
-    // await userEvent.click(modalDialog)
+    await userEvent.click(modalDialog)
 
-    // expect(modalImage).not.toBeInTheDocument()
+    expect(modalImage).not.toBeInTheDocument()
 
 })
