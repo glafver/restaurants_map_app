@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../contexts/AuthContext'
+import LoginForm from '../components/LoginForm'
 
 const LoginPage = () => {
 	const emailRef = useRef()
@@ -37,20 +38,8 @@ const LoginPage = () => {
 
 							{error && (<Alert variant="danger">{error}</Alert>)}
 
-							<Form onSubmit={handleSubmit}>
-
-								<Form.Group id="email" className="mb-3">
-									<Form.Label>Email</Form.Label>
-									<Form.Control type="email" ref={emailRef} required />
-								</Form.Group>
-
-								<Form.Group id="password" className="mb-3">
-									<Form.Label>Password</Form.Label>
-									<Form.Control type="password" ref={passwordRef} required />
-								</Form.Group>
-
-								<Button className="custom-button" disabled={loading} type="submit">Log In</Button>
-							</Form>
+							<LoginForm handleSubmit={handleSubmit} emailRef={emailRef} passwordRef={passwordRef} loading={loading}/>
+							
 							<div className="text-center mt-3">
 								<Link to="/forgot-password">Forgot Password?</Link>
 							</div>
