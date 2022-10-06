@@ -16,7 +16,7 @@ const SuggestedRestaurantsList = () => {
             <Row>{!data && (<h1>There are no suggestion</h1>)}
                 {data && data.map(suggestion => (
                     <Col lg={3} md={4} sm={6} key={suggestion.id}>
-                        <Card className="mb-4">
+                        <Card className="mb-4" role="listitem">
                             <Card.Body>
                                 <Card.Title>{suggestion.name}</Card.Title>
                                 <Card.Text>
