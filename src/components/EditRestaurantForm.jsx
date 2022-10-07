@@ -49,7 +49,7 @@ const EditRestaurantForm = ({ restaurant }) => {
 		<>
 			<Card>
 				<Card.Body>
-					<Card.Title>Edit a restaurant</Card.Title>
+					<Card.Title>Edit a restaurant:</Card.Title>
 
 					<Form onSubmit={handleSubmit(onEdit)} noValidate>
 						<Form.Group controlId="name" className="mb-3">
