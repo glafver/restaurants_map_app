@@ -1,25 +1,7 @@
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { Table, Card } from "react-bootstrap";
-import { useEffect } from "react";
-import usePosition from "../hooks/usePosition";
-import { getDistance } from "geolib";
 
 const RestaurantCard = ({ data }) => {
-	const position = usePosition();
-
-	useEffect(() => {
-		if (!data) {
-			return;
-		}
-
-		if (position.latitude && data.geolocation.lat) {
-			let distance = getDistance(
-				{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
-				{ latitude: position.latitude, longitude: position.latitude }
-			);
-			data.distance = distance;
-		}
-	}, [data, position]);
 
 	return (
 		<>
@@ -38,10 +20,6 @@ const RestaurantCard = ({ data }) => {
 								</td>
 								<td>{data.adress}</td>
 							</tr>
-							{/* <tr>
-								<td><b>Distance:</b></td>
-								<td>{data.distance} m</td>
-							</tr> */}
 							<tr>
 								<td>
 									<b>Type:</b>
