@@ -1,4 +1,4 @@
-import RestaurantImage from "../assets/images/placeholder_image.jpeg";
+import RestaurantImage from "../assets/images/placeholder.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faUtensils,

@@ -6,16 +6,13 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
-import GooglePlacesAutocomplete, {
-	geocodeByAddress,
-	getLatLng,
-} from "react-google-places-autocomplete";
+import geocodeAddress from "../utils/geocode";
 import { useState, useEffect } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 
 const SuggestForm = () => {
-	const [addressValue, setAddressValue] = useState(null);
+	const [addressValue, setAddressValue] = useState("");
 	const [addressError, setAddressError] = useState(null);
 
 	const {
@@ -28,21 +25,19 @@ const SuggestForm = () => {
 
 	const onCreate = async (data) => {
 		if (!addressValue) {
-			document.querySelectorAll("[id^=react-select-]")[0].focus();
-			setAddressError("Please choose the address.");
+			setAddressError("Please enter the address.");
 			return;
 		}
 
-		data.adress = addressValue.label;
-		let geoCode = await geocodeByAddress(addressValue.label);
-		data.geolocation = await getLatLng(geoCode[0]);
+		data.adress = addressValue;
+		data.geolocation = await geocodeAddress(addressValue);
 
 		await addDoc(collection(db, "suggestions"), {
 			...data,
 		});
 
 		toast.success("Restaurant suggestion added!");
-		setAddressValue(null);
+		setAddressValue("");
 		reset();
 	};
 
@@ -71,17 +66,11 @@ const SuggestForm = () => {
 						{/* Geolocation field */}
 						<Form.Group controlId="geolocation" className="mb-3">
 							<Form.Label>Address *</Form.Label>
-							<GooglePlacesAutocomplete
-								apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-								selectProps={{
-									value: addressValue,
-									placeholder: "Search address",
-									name: "address",
-									onChange: setAddressValue,
-									onLoadFailed: (error) => {
-										console.log(error);
-									},
-								}}
+							<Form.Control
+								type="text"
+								value={addressValue}
+								placeholder="Enter address (e.g. Stortorget 1, Malmö)"
+								onChange={(e) => setAddressValue(e.target.value)}
 							/>
 							{addressError && <div>{addressError}</div>}
 						</Form.Group>

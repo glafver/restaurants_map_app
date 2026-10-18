@@ -4,7 +4,7 @@ import RestaurantsListCard from "./RestaurantsListCard";
 const RestaurantsList = ({ restaurants }) => {
 	return (
 		<>
-			<Row className="overflow-auto" style={{ height: "600px" }}>
+			<Row className="overflow-auto" style={{ height: "100%" }}>
 				{restaurants &&
 					restaurants.map((restaurant, index) => (
 						<RestaurantsListCard

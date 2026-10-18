@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import usePosition from "../hooks/usePosition";
 import UserIcon from "../assets/icons/user.png";
-import RestaurantIcon from "../assets/icons/restaurant-marker.png";
+import RestaurantIcon from "../assets/icons/location-pin.png";
 
 const RestaurantMap = ({ restaurantGeolocation }) => {
-	const [libraries] = useState(["places", "geometry"]);
 	const [currentZoom, setCurrentZoom] = useState(12);
 
 	const [myPosition, setMyPosition] = useState();
@@ -14,7 +13,6 @@ const RestaurantMap = ({ restaurantGeolocation }) => {
 	const { isLoaded } = useJsApiLoader({
 		id: "google-map-script",
 		googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-		libraries,
 	});
 
 	const containerStyle = {

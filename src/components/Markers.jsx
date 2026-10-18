@@ -13,12 +13,13 @@ import {
 	faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import RestaurantMarker from "../assets/icons/restaurant-marker.png";
+import RestaurantMarker from "../assets/icons/location-pin.png";
 
 const Markers = ({ restaurants }) => {
 	const [activeMarker, setActiveMarker] = useState(null);
 	const [linearDistance, setLinearDistance] = useState(false);
 	const [distances] = useState([]);
+	const validRestaurants = (restaurants || []).filter((r) => r && r.geolocation);
 
 	const getDirection = (geo) => {
 		const googleLink = "https://www.google.com/maps/dir/?api=1&destination=";
@@ -43,7 +44,7 @@ const Markers = ({ restaurants }) => {
 		navigator.geolocation.getCurrentPosition(success, error);
 		function success(pos) {
 			const crd = pos.coords;
-			restaurants.forEach((restaurant) => {
+			validRestaurants.forEach((restaurant) => {
 				const distance = getDistance(
 					{ latitude: crd.latitude, longitude: crd.longitude },
 					{
@@ -63,7 +64,7 @@ const Markers = ({ restaurants }) => {
 
 	return (
 		<ListGroup>
-			{restaurants.map((restaurant, index) => (
+			{validRestaurants.map((restaurant, index) => (
 				<Marker
 					position={restaurant.geolocation}
 					key={index}

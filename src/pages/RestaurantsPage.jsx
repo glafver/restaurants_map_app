@@ -13,13 +13,13 @@ const RestaurantsPage = () => {
 			<>
 				<RestaurantsFilter />
 				<Row
-					className="flex-column flex-column-reverse flex-md-row m-0"
-					style={{ maxWidth: "100vw", height: "100%" }}
+					className="flex-column flex-column-reverse flex-md-row m-0 restaurants-content-row"
+					style={{ maxWidth: "100vw" }}
 				>
 					<Col className="col-12 col-md-4 ps-0 m-0 restaurants-list-container">
 						<RestaurantsList restaurants={restaurants} />
 					</Col>
-					<Col className="col-12 col-md-8 px-0">
+					<Col className="col-12 col-md-8 px-0 map-column">
 						<Map restaurants={restaurants}></Map>
 					</Col>
 				</Row>

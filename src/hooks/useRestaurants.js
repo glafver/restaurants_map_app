@@ -30,10 +30,13 @@ const useRestaurants = () => {
 	if (restaurantQuery.data) {
 		if (position.latitude) {
 			restaurantQuery.data.forEach((data) => {
-				let distance = getDistance(
-					{ latitude: data.geolocation.lat, longitude: data.geolocation.lat },
-					{ latitude: position.latitude, longitude: position.latitude }
-				);
+				let distance = "";
+				if (data.geolocation) {
+					distance = getDistance(
+						{ latitude: data.geolocation.lat, longitude: data.geolocation.lng },
+						{ latitude: position.latitude, longitude: position.longitude }
+					);
+				}
 				data.distance = distance;
 			});
 		} else {

@@ -12,10 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
-import GooglePlacesAutocomplete, {
-	geocodeByAddress,
-	getLatLng,
-} from "react-google-places-autocomplete";
+import geocodeAddress from "../utils/geocode";
 import { useState } from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
@@ -32,14 +29,12 @@ const SuggestedRestaurant = ({ restaurant }) => {
 
 	const onEdit = async (data) => {
 		if (addressValue) {
-			console.log(addressValue);
-			let geoCode = await geocodeByAddress(addressValue.label);
-			data.geolocation = await getLatLng(geoCode[0]);
+			data.geolocation = await geocodeAddress(addressValue);
 		}
 
 		let newData = {
 			name: data.name || restaurant.name,
-			adress: addressValue.label || restaurant.adress,
+			adress: addressValue || restaurant.adress,
 			geolocation: data.geolocation || restaurant.geolocation,
 			description: data.description || restaurant.description,
 			cuisine: data.cuisine || restaurant.cuisine,
@@ -93,17 +88,10 @@ const SuggestedRestaurant = ({ restaurant }) => {
 
 						<Form.Group controlId="geolocation" className="mb-3">
 							<Form.Label>Address *</Form.Label>
-							<GooglePlacesAutocomplete
-								apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-								selectProps={{
-									value: addressValue,
-									placeholder: restaurant.adress,
-									name: "address",
-									onChange: setAddressValue,
-									onLoadFailed: (error) => {
-										console.log(error);
-									},
-								}}
+							<Form.Control
+								type="text"
+								defaultValue={restaurant.adress}
+								onChange={(e) => setAddressValue(e.target.value)}
 							/>
 						</Form.Group>
 

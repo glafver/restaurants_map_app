@@ -184,6 +184,25 @@ body {
 
 .restaurants-list-container {
 	margin-top: 5px;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.restaurants-page-container {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 70px);
+	overflow: hidden;
+}
+
+.restaurants-content-row {
+	flex: 1 1 auto;
+	min-height: 0;
+	width: 100%;
+}
+
+.map-column {
+	height: 100%;
 }
 
 .restaurant-page-card {
@@ -333,5 +352,25 @@ body {
 	}
 	.filter-form-group {
 		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.restaurants-page-container {
+		height: auto;
+		overflow: visible;
+	}
+
+	.restaurants-content-row {
+		flex: none;
+	}
+
+	.map-column {
+		height: 55vh;
+	}
+
+	.restaurants-list-container {
+		height: auto;
+		overflow-y: visible;
 	}
 }
